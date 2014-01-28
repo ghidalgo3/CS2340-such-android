@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity {
-    //Woo MainActivity, this comment is so useful!!!!
+    //Will it merge
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
