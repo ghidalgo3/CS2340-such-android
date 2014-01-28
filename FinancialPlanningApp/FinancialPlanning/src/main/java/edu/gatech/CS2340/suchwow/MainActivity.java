@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity {
-    //Woo MainActivity, this comment is so useful!!!!
+    //which is which
+    //wfwfwfw4fr4f2f2
+    //fwefwdewdw
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
