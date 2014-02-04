@@ -10,13 +10,14 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 
     private Button login, register;
-    //Result of merge!
+    private Database database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login = (Button)this.findViewById(R.id.login);
         register = (Button)this.findViewById(R.id.register);
+        database = new Database();
     }
 
 
