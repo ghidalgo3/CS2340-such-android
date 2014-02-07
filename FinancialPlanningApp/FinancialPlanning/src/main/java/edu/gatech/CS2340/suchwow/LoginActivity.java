@@ -5,7 +5,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,11 +41,11 @@ public class LoginActivity extends Activity {
     private UserLoginTask mAuthTask = null;
 
     // Values for email and password at the time of the login attempt.
-    private String mEmail;
+    private String mUsername;
     private String mPassword;
 
     // UI references.
-    private EditText mEmailView;
+    private EditText mUsernameView;
     private EditText mPasswordView;
     private View mLoginFormView;
     private View mLoginStatusView;
@@ -59,9 +58,9 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
-        mEmail = getIntent().getStringExtra(EXTRA_EMAIL); //returns null, pretty sure
-        mEmailView = (EditText) findViewById(R.id.email);
-        mEmailView.setText(mEmail); //because mEmail returns null, change nothing
+        mUsername = getIntent().getStringExtra(EXTRA_EMAIL); //returns null, pretty sure
+        mUsernameView = (EditText) findViewById(R.id.email);
+        mUsernameView.setText(mUsername); //because mUsername returns null, change nothing
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -106,11 +105,11 @@ public class LoginActivity extends Activity {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        mEmail = mEmailView.getText().toString();
+        mUsername = mUsernameView.getText().toString();
         mPassword = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -128,15 +127,15 @@ public class LoginActivity extends Activity {
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(mEmail)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+        if (TextUtils.isEmpty(mUsername)) {
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
         }
         //We're not using emails for right now
-//        } else if (!mEmail.contains("@")) {
-//            mEmailView.setError(getString(R.string.error_invalid_email));
-//            focusView = mEmailView;
+//        } else if (!mUsername.contains("@")) {
+//            mUsernameView.setError(getString(R.string.error_invalid_email));
+//            focusView = mUsernameView;
 //            cancel = true;
 //        }
 
@@ -198,44 +197,71 @@ public class LoginActivity extends Activity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            /**
+             * Operate based on return codes
+             * 0: successful call
+             * 1: invalid username
+             * 2: invalid password
+             * -1: unknown error
+             */
             try {
                 // Simulate network access.
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                return false;
+                return -1;
             }
 
 //            for (String credential : DUMMY_CREDENTIALS) {
 //                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
+//                if (pieces[0].equals(mUsername)) {
 //                    // Account exists, return true if the password matches.
 //                    return pieces[1].equals(mPassword);
 //                }
 //            }
-            return Database.globalDatabase.getUser(mEmail, mPassword) != null;
+
+            SQLiteHandler handler = new SQLiteHandler(LoginActivity.this);
+            User user;
+            try {
+                handler.getUser(mUsername, mPassword);
+                return 0;
+            }
+            catch (SQLiteHandler.InvalidUserException ex) {
+                return 1;
+            }
+            catch (SQLiteHandler.InvalidPasswordException ex) {
+                return 2;
+            }
 
             // TODO: register the new account here.
 //            return true;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final Integer returnCode) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            if (returnCode == 0) {
                 finish();
                 Intent intent = new Intent(LoginActivity.this, UserMain.class);
                 startActivity(intent);
-            } else {
+            } else if (returnCode == 1) {
+                mUsernameView.setError(getString(R.string.error_incorrect_username));
+                mUsernameView.requestFocus();
+            }
+            else if (returnCode == 2) {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+            }
+            else if (returnCode == -1) {
+                mUsernameView.setError(getString(R.string.error_unknown_cause));
+                mUsernameView.requestFocus();
             }
         }
 

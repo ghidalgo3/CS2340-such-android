@@ -13,6 +13,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FinancialDatabase";
 
+    // tables and their fields go here in format: TABLE_($NAME), ($NAME)_FIELD
     private static final String TABLE_USERS = "users";
     private static final String USERS_NAME = "name";
     private static final String USERS_PASSWORD = "password";
@@ -22,20 +23,27 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creating Tables
+    // On database creation
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // create tables
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + USERS_NAME + " TEXT PRIMARY KEY," + USERS_PASSWORD + " TEXT NOT NULL)";
         db.execSQL(CREATE_CONTACTS_TABLE);
 
-        addUser(new User("admin", "pass123"));
+        // add default user
+        ContentValues values = new ContentValues();
+        values.put(USERS_NAME, "admin"); // User name
+        values.put(USERS_PASSWORD, "pass123"); // User password
+
+        // insert username and password into table
+        db.insert(TABLE_USERS, null, values);
     }
 
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
+        // Drop older tables if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
 
         // Create tables again
@@ -44,23 +52,29 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     // SQL operations
     void addUser(User user) {
+        // get database reference
         SQLiteDatabase db = this.getWritableDatabase();
 
+        // read in username and password
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, user.getName()); // User name
         values.put(USERS_PASSWORD, user.getPassword()); // User password
 
-        // Inserting Row
+        // insert username and password into table
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
     }
 
     User getUser(String username, String password) throws InvalidUserException, InvalidPasswordException {
+        // get database
         SQLiteDatabase db = this.getReadableDatabase();
 
+        // generate query and send it off
         String whereClause = String.format("%s=?", USERS_NAME);
         Cursor cursor = db.query(TABLE_USERS, new String[]{USERS_NAME, USERS_PASSWORD}, whereClause, new String[]{username}, null, null, null);
+        cursor.moveToFirst();
 
+        // check query results
         User user = null;
         // no matching username
         if (cursor.getCount() == 0) {
@@ -76,6 +90,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 throw new InvalidPasswordException("Password is incorrect");
         }
 
+        // close out and return
         cursor.close();
         db.close();
         return user;

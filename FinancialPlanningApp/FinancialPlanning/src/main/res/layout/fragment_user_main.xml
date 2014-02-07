@@ -9,7 +9,7 @@
     tools:context="edu.gatech.CS2340.suchwow.UserMain$PlaceholderFragment">
 
     <TextView
-        android:text="@string/sucess"
+        android:text="@string/success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
