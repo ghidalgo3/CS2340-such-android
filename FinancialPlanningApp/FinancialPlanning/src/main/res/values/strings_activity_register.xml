@@ -1,0 +1,10 @@
+<resources>
+        <string name="title_activity_register">Register</string>
+
+    <!-- Strings related to register, others in login -->
+    <string name="action_register_short">Register</string>
+    <string name="success_user_created">User created! Press back to return to main screen.</string>
+    <string name="error_user_created">Error while creating user.</string>
+    <string name ="register_status_message">Registering</string>
+    <string name="register_progress_registering">Registering&#8230;</string>
+</resources>
