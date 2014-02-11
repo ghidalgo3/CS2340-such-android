@@ -1,6 +1,5 @@
 package edu.gatech.CS2340.suchwow;
 
-import android.content.Intent;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -25,10 +24,10 @@ public class LoginActivity extends Activity {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello",
-            "bar@example.com:world"
-    };
+//    private static final String[] DUMMY_CREDENTIALS = new String[]{
+//            "foo@example.com:hello",
+//            "bar@example.com:world"
+//    };
 
     /**
      * The default email to populate the email field with.
