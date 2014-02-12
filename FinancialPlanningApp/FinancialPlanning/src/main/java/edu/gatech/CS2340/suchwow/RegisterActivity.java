@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,19 +16,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
 public class RegisterActivity extends Activity {
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello",
-            "bar@example.com:world"
-    };
 
     /**
      * The default email to populate the email field with.
@@ -131,6 +127,14 @@ public class RegisterActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
+        // Check for alphanumeric using regex
+        Pattern p = Pattern.compile("[a-zA-Z0-9]+");
+        Matcher m = p.matcher(mUsername);
+        if (!m.matches()) {
+            mUsernameView.setError("Only alphanumeric characters allowed.");
+            focusView = mUsernameView;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -202,17 +206,14 @@ public class RegisterActivity extends Activity {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
             // Register a new account
             SQLiteHandler handler = new SQLiteHandler(RegisterActivity.this);
-            handler.addUser(new User(mUsername, mPassword));
+            try {
+                handler.addUser(new User(mUsername, mPassword));
+            }
+            catch (SQLiteHandler.InvalidUserException ex) {
+                return false;
+            }
             return true;
         }
 
@@ -224,8 +225,8 @@ public class RegisterActivity extends Activity {
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_user_created));
-                mPasswordView.requestFocus();
+                mUsernameView.setError(getString(R.string.error_user_created));
+                mUsernameView.requestFocus();
             }
         }
 

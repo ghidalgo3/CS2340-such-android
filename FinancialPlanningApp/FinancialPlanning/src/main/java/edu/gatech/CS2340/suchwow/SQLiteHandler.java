@@ -3,6 +3,7 @@ package edu.gatech.CS2340.suchwow;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -51,7 +52,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     // SQL operations
-    void addUser(User user) {
+    void addUser(User user) throws InvalidUserException {
         // get database reference
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -61,8 +62,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(USERS_PASSWORD, user.getPassword()); // User password
 
         // insert username and password into table
-        db.insert(TABLE_USERS, null, values);
-        db.close(); // Closing database connection
+        try {
+            db.insertOrThrow(TABLE_USERS, null, values);
+        }
+        catch (Exception ex) {
+            throw new InvalidUserException("User already exists in database");
+        }
+        finally {
+            db.close(); // Closing database connection
+        }
     }
 
     User getUser(String username, String password) throws InvalidUserException, InvalidPasswordException {
