@@ -1,9 +1,10 @@
-package edu.gatech.CS2340.suchwow.activity;
+package edu.gatech.CS2340.suchwow;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,17 +16,20 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import edu.gatech.CS2340.suchwow.SQLiteHandler;
-import edu.gatech.CS2340.suchwow.User;
-
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
+ * @author Gustavo Hidalgo
  */
-public class RegisterActivity extends Activity {
+public class LoginActivity extends Activity {
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
+//    private static final String[] DUMMY_CREDENTIALS = new String[]{
+//            "foo@example.com:hello",
+//            "bar@example.com:world"
+//    };
 
     /**
      * The default email to populate the email field with.
@@ -46,24 +50,24 @@ public class RegisterActivity extends Activity {
     private EditText mPasswordView;
     private View mLoginFormView;
     private View mLoginStatusView;
-    private TextView mRegisterStatusMessageView;
+    private TextView mLoginStatusMessageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
         // Set up the login form.
-        mUsername = getIntent().getStringExtra(EXTRA_EMAIL);
+        mUsername = getIntent().getStringExtra(EXTRA_EMAIL); //returns null, pretty sure
         mUsernameView = (EditText) findViewById(R.id.email);
-        mUsernameView.setText(mUsername);
+        mUsernameView.setText(mUsername); //because mUsername returns null, change nothing
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == R.id.login || id == EditorInfo.IME_NULL) { //if they pressed login, or enter
                     attemptLogin();
                     return true;
                 }
@@ -73,7 +77,7 @@ public class RegisterActivity extends Activity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mLoginStatusView = findViewById(R.id.login_status);
-        mRegisterStatusMessageView = (TextView) findViewById(R.id.register_status_message);
+        mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +91,7 @@ public class RegisterActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.register, menu);
+        getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 
@@ -129,14 +133,12 @@ public class RegisterActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
-        // Check for alphanumeric using regex
-        Pattern p = Pattern.compile("[a-zA-Z0-9]+");
-        Matcher m = p.matcher(mUsername);
-        if (!m.matches()) {
-            mUsernameView.setError("Only alphanumeric characters allowed.");
-            focusView = mUsernameView;
-            cancel = true;
-        }
+        //We're not using emails for right now
+//        } else if (!mUsername.contains("@")) {
+//            mUsernameView.setError(getString(R.string.error_invalid_email));
+//            focusView = mUsernameView;
+//            cancel = true;
+//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -145,10 +147,10 @@ public class RegisterActivity extends Activity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            mRegisterStatusMessageView.setText(R.string.register_progress_registering);
+            mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
             showProgress(true);
             mAuthTask = new UserLoginTask();
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute((Void) null); //this line doe lol
         }
     }
 
@@ -196,38 +198,70 @@ public class RegisterActivity extends Activity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
+
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            /*
+             * Operate based on return codes
+             * 0: successful call
+             * 1: invalid username
+             * 2: invalid password
+             * -1: unknown error
+             */
             try {
                 // Simulate network access.
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                return false;
+                return -1;
             }
 
-            // Register a new account
-            SQLiteHandler handler = new SQLiteHandler(RegisterActivity.this);
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mUsername)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
+
+            SQLiteHandler handler = new SQLiteHandler(LoginActivity.this);
+            User user;
             try {
-                handler.addUser(new User(mUsername, mPassword));
+                handler.getUser(mUsername, mPassword);
+                return 0;
             }
             catch (SQLiteHandler.InvalidUserException ex) {
-                return false;
+                return 1;
             }
-            return true;
+            catch (SQLiteHandler.InvalidPasswordException ex) {
+                return 2;
+            }
+
+            // TODO: register the new account here.
+//            return true;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final Integer returnCode) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            if (returnCode == 0) {
                 finish();
-            } else {
-                mUsernameView.setError(getString(R.string.error_user_created));
+                Intent intent = new Intent(LoginActivity.this, UserMain.class);
+                startActivity(intent);
+            } else if (returnCode == 1) {
+                mUsernameView.setError(getString(R.string.error_incorrect_username));
+                mUsernameView.requestFocus();
+            }
+            else if (returnCode == 2) {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            }
+            else if (returnCode == -1) {
+                mUsernameView.setError(getString(R.string.error_unknown_cause));
                 mUsernameView.requestFocus();
             }
         }

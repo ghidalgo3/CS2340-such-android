@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow.activity;
+package edu.gatech.CS2340.suchwow;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-
-import edu.gatech.CS2340.suchwow.LoginActivity;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -28,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void registerPressed(View view) {
-        Intent intent = new Intent(this, edu.gatech.CS2340.suchwow.activity.RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
     @Override
