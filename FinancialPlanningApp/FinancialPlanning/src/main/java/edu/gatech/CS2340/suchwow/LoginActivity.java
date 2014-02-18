@@ -131,13 +131,20 @@ public class LoginActivity extends Activity {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
+        } else if (!mEmail.contains("@")) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
         }
+<<<<<<< HEAD
         //We're not using emails for right now
 //        } else if (!mUsername.contains("@")) {
 //            mUsernameView.setError(getString(R.string.error_invalid_email));
 //            focusView = mUsernameView;
 //            cancel = true;
 //        }
+=======
+>>>>>>> parent of 8d8e143... Finished basic requirements form M4. For now, error message says password incorrect even if the user does not exist.
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -212,11 +219,12 @@ public class LoginActivity extends Activity {
              */
             try {
                 // Simulate network access.
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return -1;
             }
 
+<<<<<<< HEAD
 //            for (String credential : DUMMY_CREDENTIALS) {
 //                String[] pieces = credential.split(":");
 //                if (pieces[0].equals(mUsername)) {
@@ -236,10 +244,18 @@ public class LoginActivity extends Activity {
             }
             catch (SQLiteHandler.InvalidPasswordException ex) {
                 return 2;
+=======
+            for (String credential : DUMMY_CREDENTIALS) {
+                String[] pieces = credential.split(":");
+                if (pieces[0].equals(mEmail)) {
+                    // Account exists, return true if the password matches.
+                    return pieces[1].equals(mPassword);
+                }
+>>>>>>> parent of 8d8e143... Finished basic requirements form M4. For now, error message says password incorrect even if the user does not exist.
             }
 
             // TODO: register the new account here.
-//            return true;
+            return true;
         }
 
         @Override
@@ -249,6 +265,7 @@ public class LoginActivity extends Activity {
 
             if (returnCode == 0) {
                 finish();
+<<<<<<< HEAD
                 Intent intent = new Intent(LoginActivity.this, UserMain.class);
                 startActivity(intent);
             } else if (returnCode == 1) {
@@ -256,6 +273,9 @@ public class LoginActivity extends Activity {
                 mUsernameView.requestFocus();
             }
             else if (returnCode == 2) {
+=======
+            } else {
+>>>>>>> parent of 8d8e143... Finished basic requirements form M4. For now, error message says password incorrect even if the user does not exist.
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

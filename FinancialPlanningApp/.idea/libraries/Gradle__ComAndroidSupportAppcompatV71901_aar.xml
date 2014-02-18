@@ -2,7 +2,10 @@
   <library name="Gradle: ComAndroidSupportAppcompatV71901.aar">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/FinancialPlanning/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/classes.jar!/" />
+<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/FinancialPlanning/build/exploded-bundles/ComAndroidSupportAppcompatV71901.aar/res" />
+=======
+>>>>>>> parent of 8d8e143... Finished basic requirements form M4. For now, error message says password incorrect even if the user does not exist.
     </CLASSES>
     <JAVADOC />
     <SOURCES />

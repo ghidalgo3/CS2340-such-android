@@ -7,6 +7,9 @@
     <string name="welcome_message">Welcome!</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+<<<<<<< HEAD
     <string name="title_activity_user_main">UserMain</string><string name="success">Success!</string>
+=======
+>>>>>>> parent of 8d8e143... Finished basic requirements form M4. For now, error message says password incorrect even if the user does not exist.
 
 </resources>
