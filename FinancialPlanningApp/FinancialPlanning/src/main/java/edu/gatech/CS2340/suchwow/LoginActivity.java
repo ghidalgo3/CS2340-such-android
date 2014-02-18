@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.content.Intent;
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
+ * @author Gustavo Hidalgo
  */
 public class LoginActivity extends Activity {
     /**
@@ -203,7 +205,7 @@ public class LoginActivity extends Activity {
         protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            /**
+            /*
              * Operate based on return codes
              * 0: successful call
              * 1: invalid username
