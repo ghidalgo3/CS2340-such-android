@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,17 +7,18 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import edu.gatech.CS2340.suchwow.LoginActivity;
+
 public class MainActivity extends ActionBarActivity {
 
     private Button login, register;
-    private Database database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         login = (Button)this.findViewById(R.id.login);
         register = (Button)this.findViewById(R.id.register);
-        database = new Database();
     }
 
 
@@ -27,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void registerPressed(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, edu.gatech.CS2340.suchwow.activity.RegisterActivity.class);
         startActivity(intent);
     }
     @Override
