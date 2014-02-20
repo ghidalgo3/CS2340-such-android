@@ -237,7 +237,7 @@ public class LoginActivity extends Activity {
 
             if (returnCode == 0) {
                 finish();
-                Intent intent = new Intent(LoginActivity.this, Account.class);
+                Intent intent = new Intent(LoginActivity.this, AccountsActivity.class);
                 startActivity(intent);
             } else if (returnCode == 1) {
                 mUsernameView.setError(getString(R.string.error_incorrect_username));

@@ -1,0 +1,146 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="0dp"
+    android:paddingLeft="5dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Name"
+            android:layout_weight="1"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:layout_width="230dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/accountName"
+            android:paddingTop="5dp"
+            android:hint="Account Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Short Name"
+            android:layout_weight="1"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:layout_width="230dip"
+            android:layout_height="wrap_content"
+            android:id="@+id/accountDisplayName"
+            android:paddingTop="5dp"
+            android:hint="Short Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Account Number"
+            android:layout_weight="1"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:layout_width="230dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/accountNumber"
+            android:hint="Account Number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Balance"
+            android:layout_weight="1"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:layout_width="230dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/accountBalance"
+            android:layout_weight="0"
+            android:hint="Balance" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:paddingTop="5dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Has Interest"
+            android:layout_weight="1"
+            android:paddingTop="5dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hasInterest"
+            android:layout_weight="1"
+            android:checked="false" />
+
+        <EditText
+            android:layout_width="230dip"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_weight="0"
+            android:hint="Interest Rate"
+            android:clickable="true" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/doneButton"
+        android:layout_gravity="right"
+        android:layout_weight="0" />
+
+</LinearLayout>

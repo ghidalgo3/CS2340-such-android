@@ -11,5 +11,7 @@
     <string name="success">Success!</string>
     <string name="title_activity_accounts">Accounts</string>
     <string name="add_account">Add Account</string>
+    <string name="title_activity_new_account">New Account</string>
+    <style name="no_accounts">No accounts to display</style>
 
 </resources>

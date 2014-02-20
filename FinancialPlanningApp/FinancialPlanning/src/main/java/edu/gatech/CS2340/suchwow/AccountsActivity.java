@@ -1,25 +1,38 @@
 package edu.gatech.CS2340.suchwow;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class AccountsActivity extends ActionBarActivity {
+
+    User currentUser;
+    TextView welcomeMessage;
+    LinearLayout screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
+        screen = (LinearLayout)this.findViewById(R.id.accountsVerticalLayout);
+        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
+        currentUser = User.getCurrentUser();
+        welcomeMessage.setText("Welcome "+ currentUser.getName());
+        ArrayList<Account> accounts = currentUser.getAccounts();
+        if (accounts.isEmpty()) {
+            TextView noAccounts = new TextView(this);
+            noAccounts.setText("No accounts to display");
+            screen.addView(noAccounts);
+        } else {
+            for (Account account : accounts) {
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
+            }
         }
     }
 
@@ -37,26 +50,12 @@ public class AccountsActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.add_account) {
+            Intent newAccount = new Intent(this, NewAccountActivity.class);
+            startActivity(newAccount);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_accounts, container, false);
-            return rootView;
-        }
-    }
 
 }
