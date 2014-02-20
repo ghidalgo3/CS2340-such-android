@@ -133,12 +133,6 @@ public class LoginActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
-        //We're not using emails for right now
-//        } else if (!mUsername.contains("@")) {
-//            mUsernameView.setError(getString(R.string.error_invalid_email));
-//            focusView = mUsernameView;
-//            cancel = true;
-//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -218,18 +212,11 @@ public class LoginActivity extends Activity {
                 return -1;
             }
 
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mUsername)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-
             SQLiteHandler handler = new SQLiteHandler(LoginActivity.this);
             User user;
             try {
-                handler.getUser(mUsername, mPassword);
+                user = handler.getUser(mUsername, mPassword);
+                User.setCurrentUser(user);
                 return 0;
             }
             catch (SQLiteHandler.InvalidUserException ex) {
@@ -250,7 +237,7 @@ public class LoginActivity extends Activity {
 
             if (returnCode == 0) {
                 finish();
-                Intent intent = new Intent(LoginActivity.this, UserMain.class);
+                Intent intent = new Intent(LoginActivity.this, Account.class);
                 startActivity(intent);
             } else if (returnCode == 1) {
                 mUsernameView.setError(getString(R.string.error_incorrect_username));

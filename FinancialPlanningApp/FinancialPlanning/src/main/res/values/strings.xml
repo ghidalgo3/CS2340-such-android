@@ -7,6 +7,9 @@
     <string name="welcome_message">Welcome!</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
-    <string name="title_activity_user_main">UserMain</string><string name="success">Success!</string>
+    <string name="title_activity_user_main">UserMain</string>
+    <string name="success">Success!</string>
+    <string name="title_activity_accounts">Accounts</string>
+    <string name="add_account">Add Account</string>
 
 </resources>
