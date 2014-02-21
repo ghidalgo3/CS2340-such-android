@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AccountsActivity extends ActionBarActivity {
 
@@ -24,16 +24,19 @@ public class AccountsActivity extends ActionBarActivity {
         welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
         currentUser = User.getCurrentUser();
         welcomeMessage.setText("Welcome "+ currentUser.getName());
-        ArrayList<Account> accounts = currentUser.getAccounts();
+        List<Account> accounts = currentUser.getAccounts();
         if (accounts.isEmpty()) {
             TextView noAccounts = new TextView(this);
             noAccounts.setText("No accounts to display");
             screen.addView(noAccounts);
         } else {
             for (Account account : accounts) {
-
+                addAccountView(account);
             }
         }
+    }
+
+    private void addAccountView(Account account) {
     }
 
 

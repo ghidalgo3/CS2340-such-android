@@ -8,13 +8,14 @@ import java.util.ArrayList;
 public class User {
 
     protected static User currentUser;
-    ArrayList<Account> accounts = new ArrayList<>();
+    ArrayList<Account> accounts;
     private String name;
     private String password;
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+        accounts = new ArrayList<>();
         /*
         //There needs to be some database code here to
         //initialize the accounts from the database. I don't know how

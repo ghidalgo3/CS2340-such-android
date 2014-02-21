@@ -1,16 +1,35 @@
 package edu.gatech.CS2340.suchwow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 public class NewAccountActivity extends ActionBarActivity {
+
+
+    EditText nameView, displayNameView, accountNumberView, accountBalanceView, interestRateView;
+    CheckBox hasInterestView;
+    String name, displayName, accountNumber;
+    float accountBalance, interestRate;
+    boolean hasInterest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
+        nameView = (EditText)this.findViewById(R.id.accountName);
+        displayNameView = (EditText)this.findViewById(R.id.accountDisplayName);
+        accountNumberView = (EditText)this.findViewById(R.id.accountName);
+        accountBalanceView = (EditText)this.findViewById(R.id.accountBalance);
+        hasInterestView = (CheckBox)this.findViewById(R.id.hasInterest);
+        interestRateView = (EditText)this.findViewById(R.id.interestRate);
     }
 
 
@@ -33,6 +52,66 @@ public class NewAccountActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void donePressed(View view) {
+        Log.i("Check","Made it to done pressed!!");
+
+        nameView.setError(null);
+        displayNameView.setError(null);
+        accountNumberView.setError(null);
+        accountBalanceView.setError(null);
+        interestRateView.setError(null);
+        boolean valid = true;
+        if(nameView.getText().length() == 0) {
+            nameView.setError("Account name missing");
+            nameView.requestFocus();
+            valid = false;
+        } else if (displayNameView.getText().length() == 0) {
+            displayNameView.setError("Short name missing");
+            displayNameView.requestFocus();
+            valid = false;
+        } else if (accountNumberView.getText().length() == 0) {
+            displayNameView.setError("Display name name missing");
+            displayNameView.requestFocus();
+            valid = false;
+        } else if (accountBalanceView.getText().length() == 0) {
+            accountBalanceView.setError("Account balance missing");
+            accountBalanceView.requestFocus();
+            valid = false;
+        } else if(hasInterestView.isChecked() && interestRateView.getText().length() == 0) {
+            interestRateView.setError("Account name missing");
+            interestRateView.requestFocus();
+            valid = false;
+        }
+        if (valid) {
+            name = nameView.getText().toString();
+            displayName = displayNameView.getText().toString();
+            accountNumber = accountNumberView.getText().toString();
+            accountBalance = Float.parseFloat(accountBalanceView.getText().toString());
+            hasInterest = hasInterestView.isChecked();
+            Account newAccount;
+            newAccount = new Account(accountBalance, name);
+            newAccount.setDisplayName(displayName);
+            newAccount.setAccountNumber(accountNumber);
+            if (hasInterest) {
+                interestRate = Float.parseFloat(interestRateView.getText().toString());
+                newAccount.setInterestRate(interestRate);
+            } else {
+                newAccount.setInterestRate(-1.0f);
+            }
+            //LOOK AT US USING THAT SINGLETON DESIGN PATTERN, EXTRA CREDIT POINTS PLS
+            User currentUser = User.getCurrentUser();
+            currentUser.addAccount(newAccount);
+            Intent goBack = new Intent(this, AccountsActivity.class);
+            startActivity(goBack);
+        }
+
+
+    }
+
+
+
+
 
 
 }
