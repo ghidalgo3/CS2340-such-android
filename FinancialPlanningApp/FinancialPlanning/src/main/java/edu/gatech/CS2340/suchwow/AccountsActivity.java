@@ -3,9 +3,10 @@ package edu.gatech.CS2340.suchwow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,25 +15,25 @@ public class AccountsActivity extends ActionBarActivity {
 
     User currentUser;
     TextView welcomeMessage;
-    LinearLayout screen;
+    ListView screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
-        screen = (LinearLayout)this.findViewById(R.id.accountsVerticalLayout);
-        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
+        screen = (ListView)this.findViewById(R.id.accountsListView);
+//        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
         currentUser = User.getCurrentUser();
-        welcomeMessage.setText("Welcome "+ currentUser.getName());
+//        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
-        if (accounts.isEmpty()) {
-            TextView noAccounts = new TextView(this);
-            noAccounts.setText("No accounts to display");
-            screen.addView(noAccounts);
+        if(accounts.isEmpty()) {
+
         } else {
-            for (Account account : accounts) {
-                addAccountView(account);
-            }
+            Log.d("A", "Before account");
+//            Account a = new Account(1.0f, "MY Account");
+//            accounts.add(a);
+            Log.d("A","After account");
+            screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display, accounts));
         }
     }
 

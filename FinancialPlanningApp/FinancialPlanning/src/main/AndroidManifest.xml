@@ -35,6 +35,7 @@
         <activity
             android:name="edu.gatech.CS2340.suchwow.AccountsActivity"
             android:label="@string/title_activity_accounts" >
+
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.NewAccountActivity"
