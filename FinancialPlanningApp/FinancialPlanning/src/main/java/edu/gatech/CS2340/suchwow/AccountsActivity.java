@@ -3,7 +3,6 @@ package edu.gatech.CS2340.suchwow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -27,12 +26,8 @@ public class AccountsActivity extends ActionBarActivity {
 //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
         if(accounts.isEmpty()) {
-
+            //dispplay some message later
         } else {
-            Log.d("A", "Before account");
-//            Account a = new Account(1.0f, "MY Account");
-//            accounts.add(a);
-            Log.d("A","After account");
             screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display, accounts));
         }
     }

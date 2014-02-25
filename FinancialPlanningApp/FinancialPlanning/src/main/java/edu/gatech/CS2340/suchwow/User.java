@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class User {
 
     protected static User currentUser;
-    ArrayList<Account> accounts;
+    private ArrayList<Account> accounts;
     private String name;
     private String password;
 
