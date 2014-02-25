@@ -144,7 +144,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        user.accounts = getAccounts(user);
+        user.setAccounts(getAccounts(user));
 
         return user;
     }

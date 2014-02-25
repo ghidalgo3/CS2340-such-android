@@ -48,6 +48,10 @@ public class User {
         return accounts;
     }
 
+    protected void setAccounts(ArrayList<Account> newAccounts) {
+        accounts = newAccounts;
+    }
+
     public void addAccount(Account newAccount) {
         accounts.add(newAccount);
     }
