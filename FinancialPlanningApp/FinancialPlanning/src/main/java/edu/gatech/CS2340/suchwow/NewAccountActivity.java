@@ -89,8 +89,7 @@ public class NewAccountActivity extends ActionBarActivity {
             accountNumber = accountNumberView.getText().toString();
             accountBalance = Float.parseFloat(accountBalanceView.getText().toString());
             hasInterest = hasInterestView.isChecked();
-            Account newAccount;
-            newAccount = new Account(accountBalance, name);
+            Account newAccount = new Account(accountBalance, name);
             newAccount.setDisplayName(displayName);
             newAccount.setAccountNumber(accountNumber);
             if (hasInterest) {

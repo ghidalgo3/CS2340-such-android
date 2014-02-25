@@ -1,17 +1,23 @@
 package edu.gatech.CS2340.suchwow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Gustavo on 2/19/14.
  */
 public class Account {
+    private static Account currentAccount;
 
     private float balance, interestRate;
     private String name, displayName, accountNumber;
+    private ArrayList<Transaction> transactions;
 
 
     public Account(float bal, String name) {
         balance = bal;
         this.name = name;
+        transactions = new ArrayList<Transaction>();
     }
 
     public void setBalance(float balance) {
@@ -64,4 +70,11 @@ public class Account {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
+
+    public static void setCurrentAccount(Account current) { currentAccount = current; }
+    public static Account getCurrentAccount() { return currentAccount; }
+
+    public void addTransaction(Transaction transaction) { transactions.add(transaction); }
+    public List<Transaction> getTransactions() { return transactions; }
+
 }

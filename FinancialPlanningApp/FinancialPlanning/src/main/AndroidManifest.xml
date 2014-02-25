@@ -35,12 +35,20 @@
         <activity
             android:name="edu.gatech.CS2340.suchwow.AccountsActivity"
             android:label="@string/title_activity_accounts" >
-
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.NewAccountActivity"
             android:label="@string/title_activity_new_account"
-            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity">
+            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity" >
+        </activity>
+        <activity
+            android:name="edu.gatech.CS2340.suchwow.IndividualAccountActivity"
+            android:label="@string/title_activity_individual_account"
+            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity" >
+        </activity>
+        <activity
+            android:name="edu.gatech.CS2340.suchwow.NewTransactionActivity"
+            android:label="@string/title_activity_new_transaction" >
         </activity>
     </application>
 

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,12 +23,19 @@ public class AccountsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
         screen = (ListView)this.findViewById(R.id.accountsListView);
+        screen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Account.setCurrentAccount(User.getCurrentUser().getAccounts().get(i));
+                startActivity(new Intent(AccountsActivity.this, IndividualAccountActivity.class));
+            }
+        });
 //        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
         currentUser = User.getCurrentUser();
 //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
         if(accounts.isEmpty()) {
-            //dispplay some message later
+            //display some message later
         } else {
             screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display, accounts));
         }
@@ -55,6 +64,8 @@ public class AccountsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 }
