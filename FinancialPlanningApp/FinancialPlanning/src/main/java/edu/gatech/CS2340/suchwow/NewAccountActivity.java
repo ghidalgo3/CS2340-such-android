@@ -102,8 +102,16 @@ public class NewAccountActivity extends ActionBarActivity {
             //LOOK AT US USING THAT SINGLETON DESIGN PATTERN, EXTRA CREDIT POINTS PLS
             User currentUser = User.getCurrentUser();
             currentUser.addAccount(newAccount);
-            Intent goBack = new Intent(this, AccountsActivity.class);
-            startActivity(goBack);
+            SQLiteHandler handler = new SQLiteHandler(this);
+            try {
+                handler.addAccount(currentUser, newAccount);
+                Intent goBack = new Intent(this, AccountsActivity.class);
+                startActivity(goBack);
+            }
+            catch (SQLiteHandler.InvalidAccountException ex) {
+                nameView.setError(ex.getMessage());
+                nameView.requestFocus();
+            }
         }
 
 
