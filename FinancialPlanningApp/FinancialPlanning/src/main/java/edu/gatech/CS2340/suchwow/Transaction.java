@@ -18,6 +18,8 @@ public class Transaction {
     public float getAmmount() {
         return ammount;
     }
-    public boolean isDeposit() { return isDeposit; }
+    public boolean isDeposit() {
+        return isDeposit;
+    }
 
 }

@@ -13,7 +13,8 @@ import android.widget.EditText;
 public class NewAccountActivity extends ActionBarActivity {
 
 
-    EditText nameView, displayNameView, accountNumberView, accountBalanceView, interestRateView;
+    EditText nameView, displayNameView, accountNumberView, accountBalanceView,
+             interestRateView;
     CheckBox hasInterestView;
     String name, displayName, accountNumber;
     float accountBalance, interestRate;
@@ -35,7 +36,6 @@ public class NewAccountActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_account, menu);
         return true;
@@ -54,15 +54,14 @@ public class NewAccountActivity extends ActionBarActivity {
     }
 
     public void donePressed(View view) {
-        Log.i("Check","Made it to done pressed!!");
-
+        Log.i("Check", "Made it to done pressed!!");
         nameView.setError(null);
         displayNameView.setError(null);
         accountNumberView.setError(null);
         accountBalanceView.setError(null);
         interestRateView.setError(null);
         boolean valid = true;
-        if(nameView.getText().length() == 0) {
+        if (nameView.getText().length() == 0) {
             nameView.setError("Account name missing");
             nameView.requestFocus();
             valid = false;
@@ -78,7 +77,8 @@ public class NewAccountActivity extends ActionBarActivity {
             accountBalanceView.setError("Account balance missing");
             accountBalanceView.requestFocus();
             valid = false;
-        } else if(hasInterestView.isChecked() && interestRateView.getText().length() == 0) {
+        } else if (hasInterestView.isChecked()
+                   && interestRateView.getText().length() == 0) {
             interestRateView.setError("Account name missing");
             interestRateView.requestFocus();
             valid = false;
@@ -106,14 +106,11 @@ public class NewAccountActivity extends ActionBarActivity {
                 currentUser.addAccount(newAccount);
                 Intent goBack = new Intent(this, AccountsActivity.class);
                 startActivity(goBack);
-            }
-            catch (SQLiteHandler.InvalidAccountException ex) {
+            } catch (SQLiteHandler.InvalidAccountException ex) {
                 nameView.setError(ex.getMessage());
                 nameView.requestFocus();
             }
         }
-
-
     }
 
 

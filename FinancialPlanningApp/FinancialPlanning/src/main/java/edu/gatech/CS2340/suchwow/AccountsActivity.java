@@ -27,17 +27,19 @@ public class AccountsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Account.setCurrentAccount(User.getCurrentUser().getAccounts().get(i));
-                startActivity(new Intent(AccountsActivity.this, IndividualAccountActivity.class));
+                startActivity(new Intent(AccountsActivity.this,
+                                         IndividualAccountActivity.class));
             }
         });
-//        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
+        //        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
         currentUser = User.getCurrentUser();
-//        welcomeMessage.setText("Welcome "+ currentUser.getName());
+        //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
-        if(accounts.isEmpty()) {
+        if (accounts.isEmpty()) {
             //display some message later
         } else {
-            screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display, accounts));
+            screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
+                              accounts));
         }
     }
 

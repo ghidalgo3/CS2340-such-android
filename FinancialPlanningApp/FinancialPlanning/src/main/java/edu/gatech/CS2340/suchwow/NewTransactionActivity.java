@@ -25,7 +25,6 @@ public class NewTransactionActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_transaction, menu);
         return true;
@@ -44,7 +43,8 @@ public class NewTransactionActivity extends ActionBarActivity {
         if (valid) {
             String transactionName = nameView.getText().toString();
             float transactionAmmount = new Float(ammountView.getText().toString());
-            Transaction transaction = new Transaction(transactionName, transactionAmmount, depositView.isChecked());
+            Transaction transaction = new Transaction(transactionName, transactionAmmount,
+                    depositView.isChecked());
             Account currentAccount = Account.getCurrentAccount();
             SQLiteHandler handler = new SQLiteHandler(this);
             try {

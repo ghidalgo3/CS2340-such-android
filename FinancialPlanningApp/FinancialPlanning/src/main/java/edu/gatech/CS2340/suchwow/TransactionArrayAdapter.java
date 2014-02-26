@@ -22,7 +22,8 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     private Context context;
     private List<Transaction> data;
 
-    public TransactionArrayAdapter(Context context, int layoutResourceId, List<Transaction> data) {
+    public TransactionArrayAdapter(Context context, int layoutResourceId,
+                                   List<Transaction> data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
@@ -33,36 +34,30 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         TransactionHolder holder = null;
-
-        if(row == null)
-        {
+        if (row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
-
             holder = new TransactionHolder();
             holder.transactionName = (TextView) row.findViewById(R.id.transactionNameView);
-            holder.transactionAmmount = (TextView) row.findViewById(R.id.transactionAmmountView);
-
+            holder.transactionAmmount = (TextView) row.findViewById(
+                                            R.id.transactionAmmountView);
             row.setTag(holder);
-        }
-        else
-        {
+        } else {
             holder = (TransactionHolder) row.getTag();
         }
-
         String item1 = data.get(position).getName();
         float item2 = data.get(position).getAmmount();
-        if (!data.get(position).isDeposit())
+        if (!data.get(position).isDeposit()) {
             item2 = -item2;
+        }
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         holder.transactionName.setText(item1);
-        holder.transactionAmmount.setText((data.get(position).isDeposit() ? "+" : "-") + formatter.format(item2));
-
+        holder.transactionAmmount.setText((data.get(position).isDeposit() ? "+" : "-") +
+                                          formatter.format(item2));
         return row;
     }
 
-    static class TransactionHolder
-    {
+    static class TransactionHolder {
         TextView transactionName;
         TextView transactionAmmount;
     }

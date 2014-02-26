@@ -27,7 +27,8 @@ public class RegisterActivity extends Activity {
     /**
      * The default email to populate the email field with.
      */
-    public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+    public static final String EXTRA_EMAIL =
+        "com.example.android.authenticatordemo.extra.EMAIL";
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -48,14 +49,11 @@ public class RegisterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_register);
-
         // Set up the login form.
         mUsername = getIntent().getStringExtra(EXTRA_EMAIL);
         mUsernameView = (EditText) findViewById(R.id.email);
         mUsernameView.setText(mUsername);
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -67,12 +65,12 @@ public class RegisterActivity extends Activity {
                 return false;
             }
         });
-
         mLoginFormView = findViewById(R.id.login_form);
         mLoginStatusView = findViewById(R.id.login_status);
-        mRegisterStatusMessageView = (TextView) findViewById(R.id.register_status_message);
-
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+        mRegisterStatusMessageView = (TextView) findViewById(
+                                         R.id.register_status_message);
+        findViewById(R.id.sign_in_button).setOnClickListener(new
+        View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -97,18 +95,14 @@ public class RegisterActivity extends Activity {
         if (mAuthTask != null) {
             return;
         }
-
         // Reset errors.
         mUsernameView.setError(null);
         mPasswordView.setError(null);
-
         // Store values at the time of the login attempt.
         mUsername = mUsernameView.getText().toString();
         mPassword = mPasswordView.getText().toString();
-
         boolean cancel = false;
         View focusView = null;
-
         // Check for a valid password.
         if (TextUtils.isEmpty(mPassword)) {
             mPasswordView.setError(getString(R.string.error_field_required));
@@ -119,7 +113,6 @@ public class RegisterActivity extends Activity {
             focusView = mPasswordView;
             cancel = true;
         }
-
         // Check for a valid email address.
         if (TextUtils.isEmpty(mUsername)) {
             mUsernameView.setError(getString(R.string.error_field_required));
@@ -134,7 +127,6 @@ public class RegisterActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
-
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -158,29 +150,28 @@ public class RegisterActivity extends Activity {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
+            int shortAnimTime = getResources().getInteger(
+                                    android.R.integer.config_shortAnimTime);
             mLoginStatusView.setVisibility(View.VISIBLE);
             mLoginStatusView.animate()
-                    .setDuration(shortAnimTime)
-                    .alpha(show ? 1 : 0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-                        }
-                    });
-
+            .setDuration(shortAnimTime)
+            .alpha(show ? 1 : 0)
+            .setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
             mLoginFormView.setVisibility(View.VISIBLE);
             mLoginFormView.animate()
-                    .setDuration(shortAnimTime)
-                    .alpha(show ? 0 : 1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                        }
-                    });
+            .setDuration(shortAnimTime)
+            .alpha(show ? 0 : 1)
+            .setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
@@ -197,20 +188,17 @@ public class RegisterActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
             try {
                 // Simulate network access.
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 return false;
             }
-
             // Register a new account
             SQLiteHandler handler = new SQLiteHandler(RegisterActivity.this);
             try {
                 handler.addUser(new User(mUsername, mPassword));
-            }
-            catch (SQLiteHandler.InvalidUserException ex) {
+            } catch (SQLiteHandler.InvalidUserException ex) {
                 return false;
             }
             return true;
@@ -220,7 +208,6 @@ public class RegisterActivity extends Activity {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
             if (success) {
                 finish();
             } else {

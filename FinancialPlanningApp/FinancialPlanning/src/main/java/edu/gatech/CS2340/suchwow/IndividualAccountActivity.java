@@ -27,7 +27,8 @@ public class IndividualAccountActivity extends ActionBarActivity {
         if (transactions.isEmpty()) {
             //Some message
         } else {
-            screen.setAdapter(new TransactionArrayAdapter(this, R.layout.transaction_display, transactions));
+            screen.setAdapter(new TransactionArrayAdapter(this,
+                              R.layout.transaction_display, transactions));
         }
     }
 
@@ -37,7 +38,6 @@ public class IndividualAccountActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.individual_account, menu);
         return true;

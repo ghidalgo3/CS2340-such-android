@@ -43,12 +43,12 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "balance=" + balance +
-                ", interestRate=" + interestRate +
-                ", name='" + name + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                '}';
+               "balance=" + balance +
+               ", interestRate=" + interestRate +
+               ", name='" + name + '\'' +
+               ", displayName='" + displayName + '\'' +
+               ", accountNumber='" + accountNumber + '\'' +
+               '}';
     }
 
     public String getName() {
@@ -71,10 +71,18 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public static void setCurrentAccount(Account current) { currentAccount = current; }
-    public static Account getCurrentAccount() { return currentAccount; }
+    public static void setCurrentAccount(Account current) {
+        currentAccount = current;
+    }
+    public static Account getCurrentAccount() {
+        return currentAccount;
+    }
 
-    public void addTransaction(Transaction transaction) { transactions.add(transaction); }
-    public List<Transaction> getTransactions() { return transactions; }
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
 
 }
