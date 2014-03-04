@@ -39,26 +39,26 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new TransactionHolder();
             holder.transactionName = (TextView) row.findViewById(R.id.transactionNameView);
-            holder.transactionAmmount = (TextView) row.findViewById(
-                                            R.id.transactionAmmountView);
+            holder.transactionAmount = (TextView) row.findViewById(
+                                            R.id.transactionAmountView);
             row.setTag(holder);
         } else {
             holder = (TransactionHolder) row.getTag();
         }
         String item1 = data.get(position).getName();
-        float item2 = data.get(position).getAmmount();
+        float item2 = data.get(position).getAmount();
         if (!data.get(position).isDeposit()) {
             item2 = -item2;
         }
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         holder.transactionName.setText(item1);
-        holder.transactionAmmount.setText((data.get(position).isDeposit() ? "+" : "-") +
+        holder.transactionAmount.setText((data.get(position).isDeposit() ? "+" : "-") +
                                           formatter.format(item2));
         return row;
     }
 
     static class TransactionHolder {
         TextView transactionName;
-        TextView transactionAmmount;
+        TextView transactionAmount;
     }
 }

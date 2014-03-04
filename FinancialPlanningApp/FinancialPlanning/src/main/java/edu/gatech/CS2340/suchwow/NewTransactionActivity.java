@@ -13,7 +13,7 @@ import android.widget.EditText;
 import java.util.GregorianCalendar;
 
 public class NewTransactionActivity extends ActionBarActivity {
-    EditText nameView, ammountView;
+    EditText nameView, amountView;
     CheckBox depositView;
     DatePicker userDate;
 
@@ -22,7 +22,7 @@ public class NewTransactionActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
         nameView = (EditText)this.findViewById(R.id.transactionName);
-        ammountView = (EditText)this.findViewById(R.id.transactionAmmount);
+        amountView = (EditText)this.findViewById(R.id.transactionAmount);
         depositView = (CheckBox)this.findViewById(R.id.depositCheckBox);
         userDate = (DatePicker)this.findViewById(R.id.transactionDatePicker);
     }
@@ -41,15 +41,15 @@ public class NewTransactionActivity extends ActionBarActivity {
             nameView.setError("Transaction name missing");
             valid = false;
         }
-        if (ammountView.getText().length() == 0) {
-            ammountView.setError("Transaction ammount missing");
+        if (amountView.getText().length() == 0) {
+            amountView.setError("Transaction amount missing");
             valid = false;
         }
         if (valid) {
             String transactionName = nameView.getText().toString();
-            float transactionAmmount = new Float(ammountView.getText().toString());
-            Transaction transaction = new Transaction(transactionName, transactionAmmount,
-                    depositView.isChecked(),
+            float transactionAmount = new Float(amountView.getText().toString());
+            Transaction transaction = new Transaction(transactionName, transactionAmount,
+                    depositView.isChecked(), "",
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
                     new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
@@ -57,6 +57,7 @@ public class NewTransactionActivity extends ActionBarActivity {
             try {
                 //SQLite code
                 currentAccount.addTransaction(transaction);
+                handler.addTransaction(User.getCurrentUser(), currentAccount, transaction);
                 startActivity(new Intent(this, IndividualAccountActivity.class));
             } catch (/*Some SQL exception*/ Exception ex) {
                 nameView.setError(ex.getMessage());

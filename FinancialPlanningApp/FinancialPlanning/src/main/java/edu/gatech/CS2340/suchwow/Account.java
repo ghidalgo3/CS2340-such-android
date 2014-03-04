@@ -81,12 +81,15 @@ public class Account {
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         if (transaction.isDeposit())
-            balance += transaction.getAmmount();
+            balance += transaction.getAmount();
         else
-            balance -= transaction.getAmmount();
+            balance -= transaction.getAmount();
     }
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+    protected void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
 }

@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/transactionAmmount"
+        android:id="@+id/transactionAmount"
         android:layout_below="@+id/transactionName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -41,12 +41,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ammount:"
-        android:id="@+id/textViewAmmount"
+        android:text="Amount:"
+        android:id="@+id/textViewAmount"
         android:layout_below="@+id/transactionName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/transactionAmmount" />
+        android:layout_alignBottom="@+id/transactionAmount" />
 
     <Button
         android:layout_width="wrap_content"
@@ -63,8 +63,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/depositCheckBox"
         android:checked="false"
-        android:layout_below="@+id/transactionAmmount"
-        android:layout_toRightOf="@+id/textViewAmmount" />
+        android:layout_below="@+id/transactionAmount"
+        android:layout_toRightOf="@+id/textViewAmount" />
 
     <TextView
         android:layout_width="wrap_content"

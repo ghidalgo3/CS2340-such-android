@@ -7,24 +7,31 @@ import java.util.GregorianCalendar;
  */
 public class Transaction {
     private String name;
-    private float ammount;
+    private float amount;
     private boolean isDeposit;
+    private long id;
+    private String category;
     private GregorianCalendar userTimeStamp, systemTimeStamp;
-    public Transaction(String name, float ammount, boolean isDeposit, GregorianCalendar userTimeStamp, GregorianCalendar systemTimeStamp) {
+    public Transaction(String name, float amount, boolean isDeposit, String category, GregorianCalendar userTimeStamp, GregorianCalendar systemTimeStamp) {
         this.name = name;
-        this.ammount = ammount;
+        this.amount = amount;
         this.isDeposit = isDeposit;
         this.userTimeStamp = userTimeStamp;
         this.systemTimeStamp = systemTimeStamp;
+        this.category = category;
     }
     public String getName() {
         return name;
     }
-    public float getAmmount() {
-        return ammount;
+    public float getAmount() {
+        return amount;
     }
+    public String getCategory() { return category; }
     public boolean isDeposit() {
         return isDeposit;
+    }
+    protected void setID(long id) {
+        this.id = id;
     }
     public GregorianCalendar getUserTimeStamp() { return userTimeStamp; }
     public GregorianCalendar getSystemTimeStamp() { return systemTimeStamp; }
