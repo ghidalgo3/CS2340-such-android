@@ -80,6 +80,10 @@ public class Account {
 
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+        if (transaction.isDeposit())
+            balance += transaction.getAmmount();
+        else
+            balance -= transaction.getAmmount();
     }
     public List<Transaction> getTransactions() {
         return transactions;
