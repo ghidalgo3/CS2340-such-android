@@ -7,11 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+
+import java.util.GregorianCalendar;
 
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, ammountView;
     CheckBox depositView;
+    DatePicker userDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,7 @@ public class NewTransactionActivity extends ActionBarActivity {
         nameView = (EditText)this.findViewById(R.id.transactionName);
         ammountView = (EditText)this.findViewById(R.id.transactionAmmount);
         depositView = (CheckBox)this.findViewById(R.id.depositCheckBox);
+        userDate = (DatePicker)this.findViewById(R.id.transactionDatePicker);
     }
 
 
@@ -44,7 +49,9 @@ public class NewTransactionActivity extends ActionBarActivity {
             String transactionName = nameView.getText().toString();
             float transactionAmmount = new Float(ammountView.getText().toString());
             Transaction transaction = new Transaction(transactionName, transactionAmmount,
-                    depositView.isChecked());
+                    depositView.isChecked(),
+                    new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
+                    new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
             SQLiteHandler handler = new SQLiteHandler(this);
             try {
