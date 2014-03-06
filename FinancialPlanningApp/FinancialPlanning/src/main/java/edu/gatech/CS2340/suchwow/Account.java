@@ -74,6 +74,7 @@ public class Account {
     public static void setCurrentAccount(Account current) {
         currentAccount = current;
     }
+
     public static Account getCurrentAccount() {
         return currentAccount;
     }
