@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Wayne on 2/5/14.
  */
 public class SQLiteHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FinancialDatabase";
 
     // tables and their fields go here in format: TABLE_($NAME), ($NAME)_FIELD
@@ -28,17 +27,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String ACCOUNTS_DISPLAY = "display";
     private static final String ACCOUNTS_BALANCE = "balance";
     private static final String ACCOUNTS_INTEREST = "interest";
-
-    private static final String TABLE_TRANSACTIONS = "transactions";
-    private static final String TRANS_CAT = "category";
-    private static final String TRANS_USER = "user";
-    private static final String TRANS_ACCNAME = "account_name";
-    private static final String TRANS_ACCNUM = "account_number";
-    private static final String TRANS_NAME = "name";
-    private static final String TRANS_AMOUNT = "amount";
-    private static final String TRANS_ISDEPOSIT = "is_deposit";
-    private static final String TRANS_USERTIME = "user_time";
-    private static final String TRANS_SYSTIME = "system_time";
 
     // child constructor
     public SQLiteHandler(Context context) {
@@ -61,14 +49,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                                        ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER, ACCOUNTS_USER, TABLE_USERS,
                                        USERS_NAME);
         db.execSQL(CREATE_ACCOUNTS_TABLE);
-        String CREATE_TRANSACTIONS_TABLE = String.format("CREATE TABLE %s" +
-                "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, " +
-                "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
-                TABLE_TRANSACTIONS, TRANS_CAT, TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM, TRANS_NAME,
-                TRANS_AMOUNT, TRANS_ISDEPOSIT, TRANS_USERTIME, TRANS_SYSTIME,
-                TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM,
-                TABLE_ACCOUNTS, ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.execSQL(CREATE_TRANSACTIONS_TABLE);
         // add default user
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, "admin"); // User name
@@ -126,29 +106,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
-    public void addTransaction(User user, Account account, Transaction transaction) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(TRANS_USER, user.getName());
-        values.put(TRANS_ACCNAME, account.getName());
-        values.put(TRANS_ACCNUM, account.getAccountNumber());
-        values.put(TRANS_CAT, transaction.getCategory());
-        values.put(TRANS_NAME, transaction.getName());
-        values.put(TRANS_AMOUNT, transaction.getAmount());
-        values.put(TRANS_ISDEPOSIT, transaction.isDeposit() ? 1 : 0);
-        values.put(TRANS_USERTIME, transaction.getUserTimeStamp().getTimeInMillis());
-        values.put(TRANS_SYSTIME, transaction.getSystemTimeStamp().getTimeInMillis());
-        transaction.setID(db.insert(TABLE_TRANSACTIONS, null, values));
-
-        // need to update stored account balance too
-        ContentValues account_vals = new ContentValues();
-        account_vals.put(ACCOUNTS_BALANCE, account.getBalance());
-        String whereClause = String.format("%s=? AND %s=? AND %s=?", ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.update(TABLE_ACCOUNTS, account_vals, whereClause, new String[] {user.getName(), account.getName(), account.getAccountNumber()});
-
-        db.close();
-    }
-
     public User getUser(String username,
                         String password) throws InvalidUserException, InvalidPasswordException {
         // get database
@@ -186,8 +143,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = String.format("%s=?", ACCOUNTS_USER);
         String[] fields = {ACCOUNTS_NAME, ACCOUNTS_NUMBER, ACCOUNTS_DISPLAY, ACCOUNTS_BALANCE, ACCOUNTS_INTEREST};
-        Cursor cursor = db.query(TABLE_ACCOUNTS, fields, whereClause, new String[]{user.getName()},
-                null, null, null);
+        Cursor cursor = db.query(TABLE_ACCOUNTS, fields, whereClause, new String[] {user.getName()},
+                                 null, null, null);
         cursor.moveToFirst();
         ArrayList<Account> accounts = new ArrayList<Account>();
         while (!cursor.isAfterLast()) {
@@ -195,38 +152,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             currentAccount.setAccountNumber(cursor.getString(1));
             currentAccount.setDisplayName(cursor.getString(2));
             currentAccount.setInterestRate(cursor.getFloat(4));
-            currentAccount.setTransactions(getTransactions(user, currentAccount));
             accounts.add(currentAccount);
             cursor.moveToNext();
         }
         return accounts;
-    }
-
-    public ArrayList<Transaction> getTransactions(User user, Account account) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String whereClause = String.format("%s=? AND %s=? AND %s=?", TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM);
-        String[] fields = {TRANS_NAME, TRANS_CAT, TRANS_AMOUNT, TRANS_ISDEPOSIT, TRANS_USERTIME, TRANS_SYSTIME, "rowid"};
-        Cursor cursor = db.query(TABLE_TRANSACTIONS, fields, whereClause, new String[]{user.getName(), account.getName(), account.getAccountNumber()},
-                null, null, null);
-        cursor.moveToFirst();
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        while (!cursor.isAfterLast()) {
-            String name = cursor.getString(0);
-            String category = cursor.getString(1);
-            float amount = cursor.getFloat(2);
-            boolean isDeposit = cursor.getInt(3) == 1;
-            GregorianCalendar userTime = new GregorianCalendar();
-            userTime.setTimeInMillis(cursor.getLong(4));
-            GregorianCalendar sysTime = new GregorianCalendar();
-            sysTime.setTimeInMillis((cursor.getLong(5)));
-            long id = cursor.getLong(6);
-            Transaction newTransaction = new Transaction(name, amount, isDeposit, category, userTime, sysTime);
-            newTransaction.setID(id);
-
-            transactions.add(newTransaction);
-            cursor.moveToNext();
-        }
-        return transactions;
     }
 
     public class InvalidUserException extends Exception {

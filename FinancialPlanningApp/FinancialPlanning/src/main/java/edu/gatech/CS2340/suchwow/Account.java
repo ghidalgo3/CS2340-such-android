@@ -74,7 +74,6 @@ public class Account {
     public static void setCurrentAccount(Account current) {
         currentAccount = current;
     }
-
     public static Account getCurrentAccount() {
         return currentAccount;
     }
@@ -82,15 +81,12 @@ public class Account {
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         if (transaction.isDeposit())
-            balance += transaction.getAmount();
+            balance += transaction.getAmmount();
         else
-            balance -= transaction.getAmount();
+            balance -= transaction.getAmmount();
     }
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-    protected void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
 }
