@@ -14,73 +14,85 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Transaction Name:"
-        android:id="@+id/textViewName"
+        android:id="@+id/transactionNameLabel"
         android:layout_alignParentTop="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/transactionName"
+        android:id="@+id/transactionNameTextBox"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/textViewName" />
+        android:layout_toRightOf="@+id/transactionNameLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount:"
+        android:id="@+id/amountLabel"
+        android:layout_below="@+id/transactionNameTextBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/transactionAmountTextBox" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/transactionAmount"
-        android:layout_below="@+id/transactionName"
+        android:id="@+id/transactionAmountTextBox"
+        android:layout_below="@+id/transactionNameTextBox"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/transactionName"
-        android:layout_alignStart="@+id/transactionName" />
+        android:layout_alignLeft="@+id/transactionNameTextBox"
+        android:layout_alignStart="@+id/transactionNameTextBox" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amount:"
-        android:id="@+id/textViewAmount"
-        android:layout_below="@+id/transactionName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/transactionAmount" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/TransactionDone"
-        android:onClick="donePressed"
-        android:layout_below="@+id/transactionDatePicker"
-        android:layout_alignRight="@+id/transactionDatePicker"
-        android:layout_alignEnd="@+id/transactionDatePicker" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/depositCheckBox"
-        android:checked="false"
-        android:layout_below="@+id/transactionAmount"
-        android:layout_toRightOf="@+id/textViewAmount" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deposit:"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/depositCheckBox"
+        android:text="Category:"
+        android:id="@+id/categoryLabel"
+        android:layout_below="@+id/transactionAmountTextBox"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/transactionAmountTextBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:entries="@array/transaction_categories"
+        android:layout_toRightOf="@+id/transactionNameLabel" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/radioButtons"
+        android:layout_below="@+id/category_spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RadioButton android:id="@+id/radio_deposit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deposit"
+            android:checked="true"/>
+        <RadioButton android:id="@+id/radio_withdrawal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Withdrawal"/>
+    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date:"
-        android:id="@+id/transactionDate"
-        android:layout_below="@+id/depositCheckBox"
+        android:id="@+id/transactionDateLabel"
+        android:layout_below="@+id/radioButtons"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -88,6 +100,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/transactionDatePicker"
-        android:layout_alignTop="@+id/transactionDate" />
+        android:layout_alignTop="@+id/transactionDateLabel"
+        android:calendarViewShown="false"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/doneButton"
+        android:onClick="donePressed"
+        android:layout_below="@+id/transactionDatePicker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 
 </RelativeLayout>

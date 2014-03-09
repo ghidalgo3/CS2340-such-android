@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  * Created by Wayne on 2/5/14.
  */
 public class SQLiteHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "FinancialDatabase";
 
     // tables and their fields go here in format: TABLE_($NAME), ($NAME)_FIELD
@@ -82,6 +82,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older tables if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTIONS);
         // Create tables again
         onCreate(db);
     }

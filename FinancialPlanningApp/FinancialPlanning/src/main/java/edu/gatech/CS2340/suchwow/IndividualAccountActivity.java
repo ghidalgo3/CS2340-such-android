@@ -53,6 +53,10 @@ public class IndividualAccountActivity extends ActionBarActivity {
             Intent newTransaction = new Intent(this, NewTransactionActivity.class);
             startActivity(newTransaction);
         }
+        else if (id == R.id.generate_spending_report) {
+            Intent newReport = new Intent(this, GenerateReportActivity.class);
+            startActivity(newReport);
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by nathan on 2/25/14.
  */
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
     private String name;
     private float amount;
     private boolean isDeposit;
@@ -35,5 +35,9 @@ public class Transaction {
     }
     public GregorianCalendar getUserTimeStamp() { return userTimeStamp; }
     public GregorianCalendar getSystemTimeStamp() { return systemTimeStamp; }
-
+    public int compareTo(Transaction other) {
+        int dateComparison = userTimeStamp.compareTo(other.getUserTimeStamp());
+        int sysComparison = systemTimeStamp.compareTo(other.getSystemTimeStamp());
+        return (dateComparison != 0) ? dateComparison : sysComparison;
+    }
 }

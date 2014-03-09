@@ -20,35 +20,49 @@
             android:name="edu.gatech.CS2340.suchwow.LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName="edu.gatech.CS2340.suchwow.MainActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName="edu.gatech.CS2340.suchwow.MainActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.UserMain"
-            android:label="@string/title_activity_user_main" >
+            android:label="@string/title_activity_user_main"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.AccountsActivity"
-            android:label="@string/title_activity_accounts" >
+            android:label="@string/title_activity_accounts"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.NewAccountActivity"
             android:label="@string/title_activity_new_account"
-            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity" >
+            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.IndividualAccountActivity"
             android:label="@string/title_activity_individual_account"
-            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity" >
+            android:parentActivityName="edu.gatech.CS2340.suchwow.AccountsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
         <activity
             android:name="edu.gatech.CS2340.suchwow.NewTransactionActivity"
-            android:label="@string/title_activity_new_transaction" >
+            android:label="@string/title_activity_new_transaction"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
+        </activity>
+        <activity
+            android:name="edu.gatech.CS2340.suchwow.GenerateReportActivity"
+            android:label="@string/title_activity_generate_report"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name="edu.gatech.CS2340.suchwow.DisplayReportActivity"
+            android:label="@string/title_activity_display_report" >
         </activity>
     </application>
 

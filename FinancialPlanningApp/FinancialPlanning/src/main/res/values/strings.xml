@@ -12,11 +12,27 @@
     <string name="title_activity_accounts">Accounts</string>
     <string name="add_account">Add Account</string>
     <string name="add_transaction">Add Transaction</string>
+    <string name="generate_report">See Reports</string>
     <string name="title_activity_new_account">New Account</string>
 
     <style name="no_accounts">No accounts to display</style>
 
     <string name="title_activity_individual_account">IndividualAccountActivity</string>
     <string name="title_activity_new_transaction">NewTransactionActivity</string>
+
+    <string name="spending_category_report">Spending Category Report</string>
+
+    <string-array name="transaction_categories">
+        <item>Clothing</item>
+        <item>Education</item>
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Income</item>
+        <item>Rent</item>
+        <item>Work</item>
+    </string-array>
+
+    <string name="title_activity_generate_report">Reports</string>
+    <string name="title_activity_display_report">Report</string>
 
 </resources>

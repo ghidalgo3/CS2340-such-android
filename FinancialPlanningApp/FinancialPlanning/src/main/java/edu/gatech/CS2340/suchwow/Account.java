@@ -1,6 +1,7 @@
 package edu.gatech.CS2340.suchwow;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,6 +86,7 @@ public class Account {
             balance += transaction.getAmount();
         else
             balance -= transaction.getAmount();
+        Collections.sort(transactions);
     }
     public List<Transaction> getTransactions() {
         return transactions;

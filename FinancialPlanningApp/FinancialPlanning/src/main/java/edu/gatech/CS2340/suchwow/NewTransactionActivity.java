@@ -6,25 +6,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import java.util.GregorianCalendar;
 
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;
-    CheckBox depositView;
     DatePicker userDate;
+    RadioGroup radioButtons;
+    Spinner categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
-        nameView = (EditText)this.findViewById(R.id.transactionName);
-        amountView = (EditText)this.findViewById(R.id.transactionAmount);
-        depositView = (CheckBox)this.findViewById(R.id.depositCheckBox);
+        nameView = (EditText)this.findViewById(R.id.transactionNameTextBox);
+        amountView = (EditText)this.findViewById(R.id.transactionAmountTextBox);
         userDate = (DatePicker)this.findViewById(R.id.transactionDatePicker);
+        radioButtons = (RadioGroup)this.findViewById(R.id.radioButtons);
+        categories = (Spinner)this.findViewById(R.id.category_spinner);
     }
 
 
@@ -48,8 +51,11 @@ public class NewTransactionActivity extends ActionBarActivity {
         if (valid) {
             String transactionName = nameView.getText().toString();
             float transactionAmount = new Float(amountView.getText().toString());
+            int selectedRadio = radioButtons.getCheckedRadioButtonId();
+            boolean isDeposit = selectedRadio == R.id.radio_deposit;
+            String category = (String)categories.getSelectedItem();
             Transaction transaction = new Transaction(transactionName, transactionAmount,
-                    depositView.isChecked(), "",
+                    isDeposit, category,
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
                     new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
