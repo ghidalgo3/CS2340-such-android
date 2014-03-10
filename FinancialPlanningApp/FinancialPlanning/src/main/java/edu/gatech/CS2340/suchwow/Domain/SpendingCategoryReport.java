@@ -1,9 +1,12 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Domain;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import edu.gatech.CS2340.suchwow.Domain.Report;
+import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
 /**
  * Created by Wayne on 3/8/14.

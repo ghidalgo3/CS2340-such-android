@@ -1,8 +1,7 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Dictionary;
 import java.util.List;
 
 /**

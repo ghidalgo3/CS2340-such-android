@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 import java.util.List;
+
+import edu.gatech.CS2340.suchwow.Domain.Transaction;
+import edu.gatech.CS2340.suchwow.R;
+
 /**
  * Created by nathan on 2/25/14.
  */

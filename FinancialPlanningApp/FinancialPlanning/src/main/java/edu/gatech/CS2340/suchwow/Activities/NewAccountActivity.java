@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.Domain.User;
 
 public class NewAccountActivity extends ActionBarActivity {
 

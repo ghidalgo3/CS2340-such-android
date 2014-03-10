@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +12,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.GregorianCalendar;
+
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.Domain.Transaction;
+import edu.gatech.CS2340.suchwow.Domain.User;
 
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;

@@ -1,16 +1,10 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Activities;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +12,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Domain.Report;
+import edu.gatech.CS2340.suchwow.Adapters.ReportFieldAdapter;
+import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
+import edu.gatech.CS2340.suchwow.Domain.Transaction;
+import edu.gatech.CS2340.suchwow.Domain.User;
 
 public class DisplayReportActivity extends ActionBarActivity {
     private TextView reportName;
@@ -36,7 +38,7 @@ public class DisplayReportActivity extends ActionBarActivity {
         reportRange = (TextView)this.findViewById(R.id.dateRangeLabel);
 
         List<Transaction> transactions = new ArrayList<Transaction>();
-        for(Account acc : User.currentUser.getAccounts()) {
+        for(Account acc : User.getCurrentUser().getAccounts()) {
             transactions.addAll(acc.getTransactions());
         }
         Bundle b = getIntent().getExtras();

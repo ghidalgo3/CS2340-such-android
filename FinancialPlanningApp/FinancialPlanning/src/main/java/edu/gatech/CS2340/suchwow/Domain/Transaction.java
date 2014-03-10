@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Domain;
 
 import java.util.GregorianCalendar;
 
@@ -30,7 +30,7 @@ public class Transaction implements Comparable<Transaction> {
     public boolean isDeposit() {
         return isDeposit;
     }
-    protected void setID(long id) {
+    public void setID(long id) {
         this.id = id;
     }
     public GregorianCalendar getUserTimeStamp() { return userTimeStamp; }

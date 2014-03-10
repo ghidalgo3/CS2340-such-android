@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.Adapters.AccountArrayAdapter;
+import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Domain.User;
 
 public class AccountsActivity extends ActionBarActivity {
 

@@ -1,6 +1,6 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="edu.gatech.CS2340.suchwow.RegisterActivity"
+    tools:context="edu.gatech.CS2340.suchwow.Activities.RegisterActivity"
     style="@style/AppTheme">
 
     <!-- Login progress -->

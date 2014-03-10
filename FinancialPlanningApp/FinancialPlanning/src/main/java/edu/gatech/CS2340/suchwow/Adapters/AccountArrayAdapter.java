@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,17 +11,18 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.List;
 
-/**
- * Created by Wayne on 3/8/14.
- */
-public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.R;
+
+//gustavo
+public class AccountArrayAdapter extends ArrayAdapter<Account> {
 
     private int layoutResourceId;
     private Context context;
-    private List<Report.ReportField> data;
+    private List<Account> data;
 
-    public ReportFieldAdapter(Context context, int layoutResourceId,
-                               List<Report.ReportField> data) {
+    public AccountArrayAdapter(Context context, int layoutResourceId,
+                               List<Account> data) {
         super(context, layoutResourceId, data);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
@@ -31,27 +32,27 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        ReportFieldHolder holder = null;
+        AccountHolder holder = null;
         if (row == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
-            holder = new ReportFieldHolder();
-            holder.fieldName = (TextView) row.findViewById(R.id.reportFieldNameView);
-            holder.fieldAmount = (TextView) row.findViewById(R.id.reportFieldValueView);
+            holder = new AccountHolder();
+            holder.accountName = (TextView) row.findViewById(R.id.accountNameView);
+            holder.balance = (TextView) row.findViewById(R.id.accountBalanceView);
             row.setTag(holder);
         } else {
-            holder = (ReportFieldHolder) row.getTag();
+            holder = (AccountHolder) row.getTag();
         }
-        String item1 = data.get(position).getFieldName();
-        float item2 = data.get(position).getFieldValue();
+        String item1 = data.get(position).getName();
+        float item2 = data.get(position).getBalance();
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        holder.fieldName.setText(item1);
-        holder.fieldAmount.setText(formatter.format(item2));
+        holder.accountName.setText(item1);
+        holder.balance.setText(formatter.format(item2));
         return row;
     }
 
-    static class ReportFieldHolder {
-        TextView fieldName;
-        TextView fieldAmount;
+    static class AccountHolder {
+        TextView accountName;
+        TextView balance;
     }
 }

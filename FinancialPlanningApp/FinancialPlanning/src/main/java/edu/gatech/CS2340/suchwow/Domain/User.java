@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Domain;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class User {
 
-    protected static User currentUser;
+    private static User currentUser;
     private ArrayList<Account> accounts;
     private String name;
     private String password;
@@ -46,7 +46,7 @@ public class User {
         return accounts;
     }
 
-    protected void setAccounts(ArrayList<Account> newAccounts) {
+    public void setAccounts(ArrayList<Account> newAccounts) {
         accounts = newAccounts;
     }
 

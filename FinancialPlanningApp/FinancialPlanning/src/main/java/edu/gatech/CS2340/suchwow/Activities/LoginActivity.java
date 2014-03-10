@@ -1,4 +1,4 @@
-package edu.gatech.CS2340.suchwow;
+package edu.gatech.CS2340.suchwow.Activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,6 +15,10 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
