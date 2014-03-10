@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -34,7 +35,10 @@ public class DisplayReportActivity extends ActionBarActivity {
         reportName = (TextView)this.findViewById(R.id.reportNameLabel);
         reportRange = (TextView)this.findViewById(R.id.dateRangeLabel);
 
-        List<Transaction> transactions = Account.getCurrentAccount().getTransactions();
+        List<Transaction> transactions = new ArrayList<Transaction>();
+        for(Account acc : User.currentUser.getAccounts()) {
+            transactions.addAll(acc.getTransactions());
+        }
         Bundle b = getIntent().getExtras();
         int startYear = b.getInt("startYear");
         int startMonth = b.getInt("startMonth");

@@ -64,6 +64,10 @@ public class AccountsActivity extends ActionBarActivity {
             Intent newAccount = new Intent(this, NewAccountActivity.class);
             startActivity(newAccount);
         }
+        else if (id == R.id.generate_spending_report) {
+            Intent newReport = new Intent(this, GenerateReportActivity.class);
+            startActivity(newReport);
+        }
         return super.onOptionsItemSelected(item);
     }
 

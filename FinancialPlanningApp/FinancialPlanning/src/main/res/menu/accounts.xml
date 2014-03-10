@@ -7,4 +7,8 @@
         android:title="@string/add_account"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/generate_spending_report"
+        android:title="@string/generate_report"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>
