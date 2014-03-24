@@ -20,12 +20,19 @@ public abstract  class Report {
         reportFields = new ArrayList<ReportField>();
     }
 
+    /**
+     *
+     */
     protected abstract void generateReport();
 
     public ArrayList<ReportField> getReportFields() {
         return reportFields;
     }
 
+    /**
+     *
+     * @param reportFields
+     */
     public void setReportFields(ArrayList<ReportField> reportFields) {
         this.reportFields = reportFields;
     }
@@ -34,10 +41,18 @@ public abstract  class Report {
         return startDate;
     }
 
+    /**
+     *
+     * @param startDate
+     */
     public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Calendar getEndDate() {
         return endDate;
     }
