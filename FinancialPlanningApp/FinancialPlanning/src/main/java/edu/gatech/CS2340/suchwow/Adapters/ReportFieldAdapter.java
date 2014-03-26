@@ -15,7 +15,7 @@ import edu.gatech.CS2340.suchwow.Domain.Report;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Created by Wayne on 3/8/14.
+ * An adapter for displaying ReportField in a ListView
  */
 public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
 
@@ -31,6 +31,13 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
         this.data = data;
     }
 
+    /**
+     * Creates a View from the ReportField using report_field_display
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;

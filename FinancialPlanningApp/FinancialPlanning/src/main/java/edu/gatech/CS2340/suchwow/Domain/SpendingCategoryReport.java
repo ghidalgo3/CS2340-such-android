@@ -9,7 +9,8 @@ import edu.gatech.CS2340.suchwow.Domain.Report;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
 /**
- * Created by Wayne on 3/8/14.
+ * A report which aggregates withdrawal transactions into their categories
+ * for transactions within a given date range
  */
 public class SpendingCategoryReport extends Report {
 
@@ -18,6 +19,9 @@ public class SpendingCategoryReport extends Report {
         generateReport();
     }
 
+    /**
+     * Iterates through transactions and aggregates transaction data by category
+     */
     @Override
     protected void generateReport() {
         float total = 0;

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Wayne on 3/8/14.
+ * Abstract class to represent a report which can be generated from a given list of transactions
  */
 public abstract  class Report {
     protected Calendar startDate;
@@ -20,6 +20,10 @@ public abstract  class Report {
         reportFields = new ArrayList<ReportField>();
     }
 
+    /**
+     * Uses the transactions to populate the report fields, which
+     * are then displayed in a ListView
+     */
     protected abstract void generateReport();
 
     public ArrayList<ReportField> getReportFields() {
@@ -54,6 +58,10 @@ public abstract  class Report {
         this.transactions = transactions;
     }
 
+    /**
+     * A single row of the report which contains a string to label the row and
+     * a float value for the monetary amount associated with the row
+     */
     public class ReportField {
         private String fieldName;
         private float fieldValue;

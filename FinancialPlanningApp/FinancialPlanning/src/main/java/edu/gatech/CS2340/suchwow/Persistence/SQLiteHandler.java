@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Persistence;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +15,8 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
 /**
- * Created by Wayne on 2/5/14.
+ * An interfacer between the domain and the SQLite database that
+ * handles as SQLite queries.
  */
 public class SQLiteHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 3;
@@ -44,12 +46,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String TRANS_USERTIME = "user_time";
     private static final String TRANS_SYSTIME = "system_time";
 
-    // child constructor
+    /**
+     * Constructor
+     * @param context The context of the activity which calls the constructor
+     */
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // On database creation
+
+    /**
+     * Run on the creation of the application database. Creates tables and
+     * populates initial admin user.
+     * @param db The created database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create tables
@@ -81,7 +92,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, values);
     }
 
-    // Upgrading database
+    /**
+     * Run when database is upgraded. Drops all data and recreates the tables.
+     * @param db The database being upgraded
+     * @param oldVersion The version number of the old database
+     * @param newVersion The version number of the upgraded database
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older tables if existed
@@ -93,6 +109,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     // SQL operations
+
+    /**
+     * Adds the User instance to the database
+     * @param user The User instance being inserted
+     * @throws InvalidUserException Thrown if the user already exists in the database
+     */
     public void addUser(User user) throws InvalidUserException {
         // get database reference
         SQLiteDatabase db = this.getWritableDatabase();
@@ -110,6 +132,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Adds the Account instance to the database
+     * @param user The User which owns the account
+     * @param account The account being inserted
+     * @throws InvalidAccountException Thrown if identical account exists
+     */
     public void addAccount(User user,
                            Account account) throws InvalidAccountException {
         // get database reference
@@ -132,6 +160,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Adds the Transaction instance to the database. Assigns
+     * the Transaction instance with a unique ID for referencing
+     * within the database
+     * @param user The User instance which made the transaction
+     * @param account The Account instance to which the transaction belongs
+     * @param transaction The Transaction instance being inserted
+     */
     public void addTransaction(User user, Account account, Transaction transaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -155,6 +191,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Retrieves a User instance for the provided credentials and populates all accounts
+     * and transactions.
+     * @param username The user's username
+     * @param password The user's password
+     * @return The User instance matching the credentials
+     * @throws InvalidUserException Thrown if user does not exist
+     * @throws InvalidPasswordException Thrown if password is incorrect
+     */
     public User getUser(String username,
                         String password) throws InvalidUserException, InvalidPasswordException {
         // get database
@@ -188,6 +233,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return user;
     }
 
+    /**
+     * Retrieves the accounts of the User as a list of Account instances. Populates
+     * Account instances with transactions stored in the database
+     * @param user The user which owns the accounts
+     * @return The accounts belonging to the user
+     */
     public ArrayList<Account> getAccounts(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = String.format("%s=?", ACCOUNTS_USER);
@@ -208,6 +259,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return accounts;
     }
 
+    /**
+     * Retrieves the transactions of the given account from the database
+     * @param user The owner of the account
+     * @param account The account to which the transactions belong
+     * @return The transactions belonging to the account
+     */
     public ArrayList<Transaction> getTransactions(User user, Account account) {
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = String.format("%s=? AND %s=? AND %s=?", TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM);
@@ -235,6 +292,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return transactions;
     }
 
+    /**
+     * Indicates an issue with the provided User or username
+     */
     public class InvalidUserException extends Exception {
         public InvalidUserException() {
             super();
@@ -245,6 +305,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Indicates an issue with the provided password credential
+     */
     public class InvalidPasswordException extends Exception {
         public InvalidPasswordException() {
             super();
@@ -255,6 +318,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Indicates an error with the provided Account instance
+     */
     public class InvalidAccountException extends Exception {
         public InvalidAccountException() {
             super();
