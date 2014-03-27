@@ -1,6 +1,10 @@
 package edu.gatech.CS2340.suchwow.Domain;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 
 /**
  * Created by nathan on 2/4/14.
@@ -11,6 +15,7 @@ public class User {
     private ArrayList<Account> accounts;
     private String name;
     private String password;
+    private Context context;
 
     public User(String name, String password) {
         this.name = name;
@@ -50,7 +55,22 @@ public class User {
         accounts = newAccounts;
     }
 
-    public void addAccount(Account newAccount) {
-        accounts.add(newAccount);
+    public void addAccount(Account newAccount) throws SQLiteHandler.InvalidAccountException {
+        SQLiteHandler handler = new SQLiteHandler(context);
+        try {
+            handler.addAccount(this, newAccount);
+            accounts.add(newAccount);
+        }
+        catch (SQLiteHandler.InvalidAccountException ex) {
+            throw ex;
+        }
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

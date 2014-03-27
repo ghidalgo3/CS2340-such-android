@@ -1,5 +1,7 @@
 package edu.gatech.CS2340.suchwow.Domain;
 
+import android.content.Context;
+
 import java.util.GregorianCalendar;
 
 /**
@@ -12,6 +14,8 @@ public class Transaction implements Comparable<Transaction> {
     private long id;
     private String category;
     private GregorianCalendar userTimeStamp, systemTimeStamp;
+    private Context context;
+
     public Transaction(String name, float amount, boolean isDeposit, String category, GregorianCalendar userTimeStamp, GregorianCalendar systemTimeStamp) {
         this.name = name;
         this.amount = amount;
@@ -39,5 +43,13 @@ public class Transaction implements Comparable<Transaction> {
         int dateComparison = userTimeStamp.compareTo(other.getUserTimeStamp());
         int sysComparison = systemTimeStamp.compareTo(other.getSystemTimeStamp());
         return (dateComparison != 0) ? dateComparison : sysComparison;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

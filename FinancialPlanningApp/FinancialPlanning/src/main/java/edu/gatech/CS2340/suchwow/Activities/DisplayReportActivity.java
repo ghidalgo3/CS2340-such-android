@@ -52,7 +52,7 @@ public class DisplayReportActivity extends ActionBarActivity {
         GregorianCalendar endDate = new GregorianCalendar(endYear, endMonth, endDay);
         Log.v("ReportCreation", String.format("%d %d %d %d %d %d", startYear, startMonth,
                 startDay, endYear, endMonth, endDay));
-        dateFormatter = new SimpleDateFormat("MMM F, yyyy");
+        dateFormatter = new SimpleDateFormat("MMM d, yyyy");
         switch (b.getInt("radioButton")) {
             case R.id.spendingCatRadioButton:
                 reportName.setText(R.string.spending_category_report);

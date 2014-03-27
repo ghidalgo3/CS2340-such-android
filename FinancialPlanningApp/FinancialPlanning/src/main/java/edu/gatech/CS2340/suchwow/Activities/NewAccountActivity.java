@@ -105,9 +105,8 @@ public class NewAccountActivity extends ActionBarActivity {
             }
             //LOOK AT US USING THAT SINGLETON DESIGN PATTERN, EXTRA CREDIT POINTS PLS
             User currentUser = User.getCurrentUser();
-            SQLiteHandler handler = new SQLiteHandler(this);
             try {
-                handler.addAccount(currentUser, newAccount);
+                currentUser.setContext(this);
                 currentUser.addAccount(newAccount);
                 Intent goBack = new Intent(this, AccountsActivity.class);
                 startActivity(goBack);
@@ -117,10 +116,4 @@ public class NewAccountActivity extends ActionBarActivity {
             }
         }
     }
-
-
-
-
-
-
 }

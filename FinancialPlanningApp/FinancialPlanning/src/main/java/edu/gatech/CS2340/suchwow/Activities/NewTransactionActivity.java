@@ -65,11 +65,10 @@ public class NewTransactionActivity extends ActionBarActivity {
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
                     new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
-            SQLiteHandler handler = new SQLiteHandler(this);
             try {
                 //SQLite code
+                currentAccount.setContext(this);
                 currentAccount.addTransaction(transaction);
-                handler.addTransaction(User.getCurrentUser(), currentAccount, transaction);
                 startActivity(new Intent(this, IndividualAccountActivity.class));
             } catch (/*Some SQL exception*/ Exception ex) {
                 nameView.setError(ex.getMessage());

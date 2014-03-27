@@ -75,8 +75,4 @@ public class AccountsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }

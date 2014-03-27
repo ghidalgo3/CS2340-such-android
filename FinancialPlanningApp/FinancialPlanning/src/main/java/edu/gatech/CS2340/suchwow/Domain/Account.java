@@ -1,8 +1,12 @@
 package edu.gatech.CS2340.suchwow.Domain;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 
 /**
  * Created by Gustavo on 2/19/14.
@@ -13,7 +17,7 @@ public class Account {
     private float balance, interestRate;
     private String name, displayName, accountNumber;
     private ArrayList<Transaction> transactions;
-
+    private Context context;
 
     public Account(float bal, String name) {
         balance = bal;
@@ -81,12 +85,14 @@ public class Account {
     }
 
     public void addTransaction(Transaction transaction) {
+        SQLiteHandler handler = new SQLiteHandler(context);
         transactions.add(transaction);
         if (transaction.isDeposit())
             balance += transaction.getAmount();
         else
             balance -= transaction.getAmount();
         Collections.sort(transactions);
+        handler.addTransaction(User.getCurrentUser(), this, transaction);
     }
     public List<Transaction> getTransactions() {
         return transactions;
@@ -95,4 +101,11 @@ public class Account {
         this.transactions = transactions;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }
