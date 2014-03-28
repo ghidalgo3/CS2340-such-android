@@ -60,11 +60,14 @@ public class DisplayReportActivity extends ActionBarActivity {
                         " to " + dateFormatter.format(endDate.getTime()));
                 report = new SpendingCategoryReport(startDate, endDate, transactions);
                 break;
+            //Other buttons
+            default:
+                reportName.setText(R.string.invalid_report);
+                break;
+
         }
 
-        if (report == null) {
-            //Some message
-        } else {
+        if (report != null) {
             reportFields.setAdapter(new ReportFieldAdapter(this,
                     R.layout.report_field_display, report.getReportFields()));
         }

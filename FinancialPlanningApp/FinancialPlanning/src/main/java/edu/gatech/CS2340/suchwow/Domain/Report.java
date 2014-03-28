@@ -62,7 +62,7 @@ public abstract  class Report {
      * A single row of the report which contains a string to label the row and
      * a float value for the monetary amount associated with the row
      */
-    public class ReportField {
+    public static class ReportField {
         private String fieldName;
         private float fieldValue;
 

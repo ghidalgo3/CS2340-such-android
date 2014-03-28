@@ -15,7 +15,7 @@ import edu.gatech.CS2340.suchwow.Domain.Report;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * An adapter for displaying ReportField in a ListView
+ * An adapter for displaying ReportField in a ListView.
  */
 public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
 
@@ -23,20 +23,20 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
     private Context context;
     private List<Report.ReportField> data;
 
-    public ReportFieldAdapter(Context context, int layoutResourceId,
-                               List<Report.ReportField> data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        this.data = data;
+    public ReportFieldAdapter(Context contextIn, int layoutResourceIdIn,
+                               List<Report.ReportField> dataIn) {
+        super(contextIn, layoutResourceIdIn, dataIn);
+        this.context = contextIn;
+        this.layoutResourceId = layoutResourceIdIn;
+        this.data = dataIn;
     }
 
     /**
-     * Creates a View from the ReportField using report_field_display
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     * Creates a View from the ReportField using report_field_display.
+     * @param position The position of the view
+     * @param convertView The convert View
+     * @param parent The ViewGroup parent
+     * @return the view
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

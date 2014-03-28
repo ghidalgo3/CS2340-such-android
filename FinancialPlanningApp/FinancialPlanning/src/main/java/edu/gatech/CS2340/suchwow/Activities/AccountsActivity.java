@@ -40,9 +40,7 @@ public class AccountsActivity extends ActionBarActivity {
         currentUser = User.getCurrentUser();
         //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
-        if (accounts.isEmpty()) {
-            //display some message later
-        } else {
+        if (!accounts.isEmpty()) {
             screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
                               accounts));
         }

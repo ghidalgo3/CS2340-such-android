@@ -48,7 +48,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     /**
      * Constructor
-     * @param context The context of the activity which calls the constructor
+     * @param context The context of the activity which calls the constructor.
      */
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -64,10 +64,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create tables
-        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
+        String createUsersTable = "CREATE TABLE " + TABLE_USERS + "("
                                     + USERS_NAME + " TEXT PRIMARY KEY," + USERS_PASSWORD + " TEXT NOT NULL)";
-        db.execSQL(CREATE_USERS_TABLE);
-        String CREATE_ACCOUNTS_TABLE = String.format("CREATE TABLE %s " +
+        db.execSQL(createUsersTable);
+        String createAccountsTable = String.format("CREATE TABLE %s " +
                                        "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, " +
                                        "PRIMARY KEY (%s, %s, %s), " +
                                        "FOREIGN KEY (%s) REFERENCES %s(%s))", TABLE_ACCOUNTS, ACCOUNTS_USER,
@@ -75,15 +75,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                                        ACCOUNTS_NUMBER, ACCOUNTS_DISPLAY, ACCOUNTS_BALANCE, ACCOUNTS_INTEREST,
                                        ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER, ACCOUNTS_USER, TABLE_USERS,
                                        USERS_NAME);
-        db.execSQL(CREATE_ACCOUNTS_TABLE);
-        String CREATE_TRANSACTIONS_TABLE = String.format("CREATE TABLE %s" +
+        db.execSQL(createAccountsTable);
+        String createTransactionsTable = String.format("CREATE TABLE %s" +
                 "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, " +
                 "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
                 TABLE_TRANSACTIONS, TRANS_CAT, TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM, TRANS_NAME,
                 TRANS_AMOUNT, TRANS_ISDEPOSIT, TRANS_USERTIME, TRANS_SYSTIME,
                 TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM,
                 TABLE_ACCOUNTS, ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.execSQL(CREATE_TRANSACTIONS_TABLE);
+        db.execSQL(createTransactionsTable);
         // add default user
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, "admin"); // User name
@@ -281,7 +281,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             GregorianCalendar userTime = new GregorianCalendar();
             userTime.setTimeInMillis(cursor.getLong(4));
             GregorianCalendar sysTime = new GregorianCalendar();
-            sysTime.setTimeInMillis((cursor.getLong(5)));
+            sysTime.setTimeInMillis(cursor.getLong(5));
             long id = cursor.getLong(6);
             Transaction newTransaction = new Transaction(name, amount, isDeposit, category, userTime, sysTime);
             newTransaction.setID(id);
@@ -295,7 +295,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Indicates an issue with the provided User or username
      */
-    public class InvalidUserException extends Exception {
+    public static class InvalidUserException extends Exception {
         public InvalidUserException() {
             super();
         }
@@ -308,7 +308,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Indicates an issue with the provided password credential
      */
-    public class InvalidPasswordException extends Exception {
+    public static class InvalidPasswordException extends Exception {
         public InvalidPasswordException() {
             super();
         }
@@ -321,7 +321,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Indicates an error with the provided Account instance
      */
-    public class InvalidAccountException extends Exception {
+    public static class InvalidAccountException extends Exception {
         public InvalidAccountException() {
             super();
         }

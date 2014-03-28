@@ -29,9 +29,7 @@ public class IndividualAccountActivity extends ActionBarActivity {
         //Singleton pattern
         currentAccount = Account.getCurrentAccount();
         List<Transaction> transactions = currentAccount.getTransactions();
-        if (transactions.isEmpty()) {
-            //Some message
-        } else {
+        if (!transactions.isEmpty()) {
             screen.setAdapter(new TransactionArrayAdapter(this,
                               R.layout.transaction_display, transactions));
         }

@@ -30,12 +30,12 @@ public class NewAccountActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        nameView = (EditText)this.findViewById(R.id.accountName);
-        displayNameView = (EditText)this.findViewById(R.id.accountDisplayName);
-        accountNumberView = (EditText)this.findViewById(R.id.accountName);
-        accountBalanceView = (EditText)this.findViewById(R.id.accountBalance);
-        hasInterestView = (CheckBox)this.findViewById(R.id.hasInterest);
-        interestRateView = (EditText)this.findViewById(R.id.interestRate);
+        nameView = (EditText) this.findViewById(R.id.accountName);
+        displayNameView = (EditText) this.findViewById(R.id.accountDisplayName);
+        accountNumberView = (EditText) this.findViewById(R.id.accountName);
+        accountBalanceView = (EditText) this.findViewById(R.id.accountBalance);
+        hasInterestView = (CheckBox) this.findViewById(R.id.hasInterest);
+        interestRateView = (EditText) this.findViewById(R.id.interestRate);
     }
 
 
@@ -84,7 +84,7 @@ public class NewAccountActivity extends ActionBarActivity {
             valid = false;
         } else if (hasInterestView.isChecked()
                    && interestRateView.getText().length() == 0) {
-            interestRateView.setError("Account name missing");
+            interestRateView.setError("Intrest checked, but no value entered");
             interestRateView.requestFocus();
             valid = false;
         }

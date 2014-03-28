@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.gatech.CS2340.suchwow.Domain.Report;
-import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
 /**
  * A report which aggregates withdrawal transactions into their categories
@@ -39,8 +37,8 @@ public class SpendingCategoryReport extends Report {
                 total += t.getAmount();
             }
         }
-        for(String key : fields.keySet()) {
-            reportFields.add(new ReportField(key, fields.get(key)));
+        for(Map.Entry<String, Float> entry : fields.entrySet()) {
+            reportFields.add(new ReportField(entry.getKey(), entry.getValue()));
         }
         reportFields.add(new ReportField("Total", total));
     }

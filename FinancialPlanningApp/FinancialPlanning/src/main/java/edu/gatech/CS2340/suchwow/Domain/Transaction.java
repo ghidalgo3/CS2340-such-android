@@ -34,11 +34,20 @@ public class Transaction implements Comparable<Transaction> {
     public boolean isDeposit() {
         return isDeposit;
     }
-    public void setID(long id) {
-        this.id = id;
-    }
+    public long getID() { return id; }
+    public void setID(long idIn) { id = idIn; }
     public GregorianCalendar getUserTimeStamp() { return userTimeStamp; }
     public GregorianCalendar getSystemTimeStamp() { return systemTimeStamp; }
+    public int hashCode() {
+        return userTimeStamp.hashCode() + systemTimeStamp.hashCode();
+    }
+    public boolean equals(Object other) {
+        if (!(other instanceof Transaction)) {
+            return false;
+        }
+        Transaction otherTransaction = (Transaction) other;
+        return userTimeStamp.equals(otherTransaction.getUserTimeStamp()) && systemTimeStamp.equals(otherTransaction.getSystemTimeStamp());
+    }
     public int compareTo(Transaction other) {
         int dateComparison = userTimeStamp.compareTo(other.getUserTimeStamp());
         int sysComparison = systemTimeStamp.compareTo(other.getSystemTimeStamp());

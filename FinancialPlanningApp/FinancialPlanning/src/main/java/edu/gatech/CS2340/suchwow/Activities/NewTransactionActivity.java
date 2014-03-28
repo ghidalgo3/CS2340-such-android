@@ -15,9 +15,8 @@ import java.util.GregorianCalendar;
 
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
-import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
-import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler.InvalidPasswordException;
 
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;
@@ -29,11 +28,11 @@ public class NewTransactionActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
-        nameView = (EditText)this.findViewById(R.id.transactionNameTextBox);
-        amountView = (EditText)this.findViewById(R.id.transactionAmountTextBox);
-        userDate = (DatePicker)this.findViewById(R.id.transactionDatePicker);
-        radioButtons = (RadioGroup)this.findViewById(R.id.radioButtons);
-        categories = (Spinner)this.findViewById(R.id.category_spinner);
+        nameView = (EditText) this.findViewById(R.id.transactionNameTextBox);
+        amountView = (EditText) this.findViewById(R.id.transactionAmountTextBox);
+        userDate = (DatePicker) this.findViewById(R.id.transactionDatePicker);
+        radioButtons = (RadioGroup) this.findViewById(R.id.radioButtons);
+        categories = (Spinner) this.findViewById(R.id.category_spinner);
     }
 
 
@@ -65,15 +64,11 @@ public class NewTransactionActivity extends ActionBarActivity {
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
                     new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
-            try {
-                //SQLite code
-                currentAccount.setContext(this);
-                currentAccount.addTransaction(transaction);
-                startActivity(new Intent(this, IndividualAccountActivity.class));
-            } catch (/*Some SQL exception*/ Exception ex) {
-                nameView.setError(ex.getMessage());
-                nameView.requestFocus();
-            }
+
+            currentAccount.setContext(this);
+            currentAccount.addTransaction(transaction);
+            startActivity(new Intent(this, IndividualAccountActivity.class));
+
         }
     }
 

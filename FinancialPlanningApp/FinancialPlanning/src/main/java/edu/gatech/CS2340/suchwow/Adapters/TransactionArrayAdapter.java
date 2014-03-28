@@ -26,12 +26,12 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     private Context context;
     private List<Transaction> data;
 
-    public TransactionArrayAdapter(Context context, int layoutResourceId,
-                                   List<Transaction> data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        this.data = data;
+    public TransactionArrayAdapter(Context contextIn, int layoutResourceIdIn,
+                                   List<Transaction> dataIn) {
+        super(contextIn, layoutResourceIdIn, dataIn);
+        this.context = contextIn;
+        this.layoutResourceId = layoutResourceIdIn;
+        this.data = dataIn;
     }
 
     @Override

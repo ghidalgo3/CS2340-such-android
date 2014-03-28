@@ -11,14 +11,10 @@ import edu.gatech.CS2340.suchwow.R;
 
 public class MainActivity extends ActionBarActivity {
 
-    private Button login, register;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login = (Button)this.findViewById(R.id.login);
-        register = (Button)this.findViewById(R.id.register);
     }
 
 
