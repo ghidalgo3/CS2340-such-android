@@ -37,7 +37,7 @@ public class SpendingCategoryReport extends Report {
                 total += t.getAmount();
             }
         }
-        for(Map.Entry<String, Float> entry : fields.entrySet()) {
+        for (Map.Entry<String, Float> entry : fields.entrySet()) {
             reportFields.add(new ReportField(entry.getKey(), entry.getValue()));
         }
         reportFields.add(new ReportField("Total", total));

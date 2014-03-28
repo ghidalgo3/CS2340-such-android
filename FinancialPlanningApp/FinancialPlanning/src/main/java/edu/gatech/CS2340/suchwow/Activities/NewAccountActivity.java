@@ -58,13 +58,7 @@ public class NewAccountActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void donePressed(View view) {
-        Log.i("Check", "Made it to done pressed!!");
-        nameView.setError(null);
-        displayNameView.setError(null);
-        accountNumberView.setError(null);
-        accountBalanceView.setError(null);
-        interestRateView.setError(null);
+    private boolean validateInput() {
         boolean valid = true;
         if (nameView.getText().length() == 0) {
             nameView.setError("Account name missing");
@@ -83,12 +77,22 @@ public class NewAccountActivity extends ActionBarActivity {
             accountBalanceView.requestFocus();
             valid = false;
         } else if (hasInterestView.isChecked()
-                   && interestRateView.getText().length() == 0) {
+                && interestRateView.getText().length() == 0) {
             interestRateView.setError("Intrest checked, but no value entered");
             interestRateView.requestFocus();
             valid = false;
         }
-        if (valid) {
+        return valid;
+    }
+
+    public void donePressed(View view) {
+        Log.i("Check", "Made it to done pressed!!");
+        nameView.setError(null);
+        displayNameView.setError(null);
+        accountNumberView.setError(null);
+        accountBalanceView.setError(null);
+        interestRateView.setError(null);
+        if (validateInput()) {
             name = nameView.getText().toString();
             displayName = displayNameView.getText().toString();
             accountNumber = accountNumberView.getText().toString();

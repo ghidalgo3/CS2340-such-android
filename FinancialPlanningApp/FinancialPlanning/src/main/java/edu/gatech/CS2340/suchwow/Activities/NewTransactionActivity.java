@@ -16,7 +16,6 @@ import java.util.GregorianCalendar;
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
-import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler.InvalidPasswordException;
 
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;
