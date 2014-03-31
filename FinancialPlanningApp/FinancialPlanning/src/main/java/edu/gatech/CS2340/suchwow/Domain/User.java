@@ -13,10 +13,25 @@ import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
  */
 public class User {
 
+    /**
+     * Reference to singleton User.
+     */
     private static User currentUser;
+    /**
+     * Accounts collection.
+     */
     private ArrayList<Account> accounts;
+    /**
+     * User name.
+     */
     private String name;
+    /**
+     * User password.
+     */
     private String password;
+    /**
+     * Context.
+     */
     private Context context;
 
     /**
