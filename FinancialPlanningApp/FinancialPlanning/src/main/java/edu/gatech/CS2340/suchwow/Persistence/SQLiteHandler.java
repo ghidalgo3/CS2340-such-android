@@ -309,10 +309,17 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * Indicates an issue with the provided password credential
      */
     public static class InvalidPasswordException extends Exception {
+        /**
+         * Constructor
+         */
         public InvalidPasswordException() {
             super();
         }
 
+        /**
+         * Constructor with message
+         * @param message The message of the exception
+         */
         public InvalidPasswordException(String message) {
             super(message);
         }
@@ -322,10 +329,17 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * Indicates an error with the provided Account instance
      */
     public static class InvalidAccountException extends Exception {
+        /**
+         * Constructor
+         */
         public InvalidAccountException() {
             super();
         }
 
+        /**
+         * Constructor with message
+         * @param message The message of the exception
+         */
         public InvalidAccountException(String message) {
             super(message);
         }

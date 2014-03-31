@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public class SpendingCategoryReport extends Report {
 
+    /**
+     * Constructor
+     * @param start The start date of the report
+     * @param end The end date of the report
+     * @param transactions The transactions to be processed
+     */
     public SpendingCategoryReport(Calendar start, Calendar end, List<Transaction> transactions) {
         super(start, end, transactions);
         generateReport();
