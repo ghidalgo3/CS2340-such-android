@@ -9,7 +9,9 @@ import java.util.List;
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 
 /**
- * Created by Gustavo on 2/19/14.
+ * Represents a financial Account.
+ * @author Gustavo
+ * @version 1.0
  */
 public class Account {
     private static Account currentAccount;

@@ -58,6 +58,9 @@ public class RegisterActivity extends Activity {
     private TextView mRegisterStatusMessageView;
 
     @Override
+    /**
+     * Lifecycle method.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -91,6 +94,10 @@ public class RegisterActivity extends Activity {
 
 
     @Override
+    /**
+     * Inflates the Menu in this activity.
+     * @return always return true
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.register, menu);
@@ -197,6 +204,10 @@ public class RegisterActivity extends Activity {
      */
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
         @Override
+        /**
+         * Animation start method.
+         * @param Void varargs
+         */
         protected Boolean doInBackground(Void... params) {
             try {
                 // Simulate network access.
@@ -215,6 +226,10 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
+        /**
+         * Animation end method.
+         * @param boolean success
+         */
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
@@ -227,6 +242,9 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
+        /**
+         * Called if animation is cancelled.
+         */
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
