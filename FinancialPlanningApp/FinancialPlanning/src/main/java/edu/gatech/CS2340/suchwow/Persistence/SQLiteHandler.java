@@ -19,31 +19,97 @@ import edu.gatech.CS2340.suchwow.Domain.User;
  * handles as SQLite queries.
  */
 public class SQLiteHandler extends SQLiteOpenHelper {
+    /**
+     * Current version of the database
+     */
     private static final int DATABASE_VERSION = 3;
+    /**
+     * The name of the database
+     */
     private static final String DATABASE_NAME = "FinancialDatabase";
 
     // tables and their fields go here in format: TABLE_($NAME), ($NAME)_FIELD
+    /**
+     * Name of the Users table
+     */
     private static final String TABLE_USERS = "users";
+    /**
+     * Column name of the name column in the Users table
+     */
     private static final String USERS_NAME = "name";
+    /**
+     * Column name of the password column in the Users table
+     */
     private static final String USERS_PASSWORD = "password";
 
+    /**
+     * Name of the Accounts table
+     */
     private static final String TABLE_ACCOUNTS = "accounts";
+    /**
+     * Column name of the user column in the Accounts table
+     */
     private static final String ACCOUNTS_USER = "user";
+    /**
+     * Column name of the account name column in the Accounts table
+     */
     private static final String ACCOUNTS_NAME = "name";
+    /**
+     * Column name of the account number column in the Accounts table
+     */
     private static final String ACCOUNTS_NUMBER = "number";
+    /**
+     * Column name of the display name column in the Accounts table
+     */
     private static final String ACCOUNTS_DISPLAY = "display";
+    /**
+     * Column name of the account balance column in the Accounts table
+     */
     private static final String ACCOUNTS_BALANCE = "balance";
+    /**
+     * Column name of the account interest rate column in the Accounts table
+     */
     private static final String ACCOUNTS_INTEREST = "interest";
 
+    /**
+     * Name of the Transactions table
+     */
     private static final String TABLE_TRANSACTIONS = "transactions";
+    /**
+     * Column name of the transaction category column in the Transactions table
+     */
     private static final String TRANS_CAT = "category";
+    /**
+     * Column name of the user column in the Transactions table
+     */
     private static final String TRANS_USER = "user";
+    /**
+     * Column name of the account name column in the Transactions table
+     */
     private static final String TRANS_ACCNAME = "account_name";
+    /**
+     * Column name of the account number column in the Transactions table
+     */
     private static final String TRANS_ACCNUM = "account_number";
+    /**
+     * Column name of the transaction name column in the Transactions table
+     */
     private static final String TRANS_NAME = "name";
+    /**
+     * Column name of the transaction amount column in the Transactions table
+     */
     private static final String TRANS_AMOUNT = "amount";
+    /**
+     * Column name of the is deposit column in the Transactions table
+     */
     private static final String TRANS_ISDEPOSIT = "is_deposit";
+    /**
+     * Column name of the user defined transaction time column in the Transactions table
+     */
     private static final String TRANS_USERTIME = "user_time";
+    /**
+     * Column number of the system transaction time column in the Transactions table
+     */
     private static final String TRANS_SYSTIME = "system_time";
 
     /**

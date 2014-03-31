@@ -11,32 +11,43 @@ import edu.gatech.CS2340.suchwow.Activities.DisplayReportActivity;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Created by Wayne on 3/30/14.
+ * Unit testing for the DisplayReportActivity class
  */
 public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivity> {
-    DisplayReportActivity activity;
-    Bundle bundle;
-    Intent activityIntent;
 
+    /**
+     * Constructor
+     */
     public DisplayReportTest() {
         super(DisplayReportActivity.class);
     }
 
+    /**
+     * Setups up testing framework
+     * @throws Exception
+     */
     @Override
     protected void setUp() throws Exception {
         super.setUp();
     }
 
+    /**
+     * Tears down testing framework
+     * @throws Exception
+     */
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }
 
+    /**
+     * Tests if activity correctly recognizes an invalid report request
+     */
     @SmallTest
     public void testInvalidReport(){
         // Set up a bundle and intent
-        activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
-        bundle = new Bundle();
+        Intent activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
+        Bundle bundle = new Bundle();
         bundle.putInt("startMonth", 0);
         bundle.putInt("startDay", 1);
         bundle.putInt("startYear", 2002);
@@ -50,7 +61,7 @@ public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivit
         startActivity(activityIntent, null, null);
 
         // Getting a reference to the MainActivity of the target application
-        activity = (DisplayReportActivity)getActivity();
+        DisplayReportActivity activity = (DisplayReportActivity)getActivity();
 
         // The expected text to be displayed in the textview
         String expected = "Invalid Report";
@@ -61,11 +72,14 @@ public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivit
         assertEquals(expected, actual );
     }
 
+    /**
+     * Tests if activity correctly recognizes a spending category report request
+     */
     @SmallTest
     public void testSpendingCategoryRecognition(){
         // Set up a bundle and intent
-        activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
-        bundle = new Bundle();
+        Intent activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
+        Bundle bundle = new Bundle();
         bundle.putInt("startMonth", 0);
         bundle.putInt("startDay", 1);
         bundle.putInt("startYear", 2002);
@@ -79,7 +93,7 @@ public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivit
         startActivity(activityIntent, null, null);
 
         // Getting a reference to the MainActivity of the target application
-        activity = (DisplayReportActivity)getActivity();
+        DisplayReportActivity activity = (DisplayReportActivity)getActivity();
 
         // The expected text to be displayed in the textview
         String expected = "Spending Category Report";
@@ -90,11 +104,14 @@ public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivit
         assertEquals(expected, actual );
     }
 
+    /**
+     * Tests that the date range is correctly parsed and displayed
+     */
     @SmallTest
     public void testDateRange(){
         // Set up a bundle and intent
-        activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
-        bundle = new Bundle();
+        Intent activityIntent = new Intent(getInstrumentation().getTargetContext(), DisplayReportActivity.class);
+        Bundle bundle = new Bundle();
         bundle.putInt("startMonth", 0);
         bundle.putInt("startDay", 1);
         bundle.putInt("startYear", 2002);
@@ -108,7 +125,7 @@ public class DisplayReportTest extends ActivityUnitTestCase<DisplayReportActivit
         startActivity(activityIntent, null, null);
 
         // Getting a reference to the MainActivity of the target application
-        activity = (DisplayReportActivity)getActivity();
+        DisplayReportActivity activity = (DisplayReportActivity)getActivity();
 
         // The expected text to be displayed in the textview
         String expected = "Jan 1, 2002 to Apr 4, 2005";

@@ -8,9 +8,21 @@ import java.util.List;
  * Abstract class to represent a report which can be generated from a given list of transactions
  */
 public abstract  class Report {
+    /**
+     * The start date of the report
+     */
     protected Calendar startDate;
+    /**
+     * The end date of the report
+     */
     protected Calendar endDate;
+    /**
+     * The transactions processed by the request
+     */
     protected List<Transaction> transactions;
+    /**
+     * The report fields to be displayed by the UI
+     */
     protected ArrayList<ReportField> reportFields;
 
     /**

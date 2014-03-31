@@ -19,8 +19,17 @@ import edu.gatech.CS2340.suchwow.R;
  */
 public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
 
+    /**
+     * The resource ID for a layout file containing a TextView to use when instantiating views.
+     */
     private int layoutResourceId;
+    /**
+     * The current context
+     */
     private Context context;
+    /**
+     * The ReportFields to be displayed by the ListView
+     */
     private List<Report.ReportField> data;
 
     /**
