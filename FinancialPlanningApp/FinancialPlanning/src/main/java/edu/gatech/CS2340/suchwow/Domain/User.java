@@ -2,6 +2,8 @@ package edu.gatech.CS2340.suchwow.Domain;
 
 import android.content.Context;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;

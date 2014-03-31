@@ -33,7 +33,7 @@ public class NewAccountActivity extends Activity {
         setContentView(R.layout.activity_new_account);
         nameView = (EditText) this.findViewById(R.id.accountName);
         displayNameView = (EditText) this.findViewById(R.id.accountDisplayName);
-        accountNumberView = (EditText) this.findViewById(R.id.accountName);
+        accountNumberView = (EditText) this.findViewById(R.id.accountNumber);
         accountBalanceView = (EditText) this.findViewById(R.id.accountBalance);
         hasInterestView = (CheckBox) this.findViewById(R.id.hasInterest);
         interestRateView = (EditText) this.findViewById(R.id.interestRate);
@@ -59,8 +59,14 @@ public class NewAccountActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean validateInput() {
+    //This is only public so that the test can call it
+    public boolean validateInput() {
         boolean valid = true;
+        nameView.setError(null);
+        displayNameView.setError(null);
+        accountNumberView.setError(null);
+        accountBalanceView.setError(null);
+        interestRateView.setError(null);
         if (nameView.getText().length() == 0) {
             nameView.setError("Account name missing");
             nameView.requestFocus();
@@ -70,8 +76,8 @@ public class NewAccountActivity extends Activity {
             displayNameView.requestFocus();
             valid = false;
         } else if (accountNumberView.getText().length() == 0) {
-            displayNameView.setError("Display name name missing");
-            displayNameView.requestFocus();
+            accountNumberView.setError("Account number missing");
+            accountNumberView.requestFocus();
             valid = false;
         } else if (accountBalanceView.getText().length() == 0) {
             accountBalanceView.setError("Account balance missing");
@@ -79,7 +85,7 @@ public class NewAccountActivity extends Activity {
             valid = false;
         } else if (hasInterestView.isChecked()
                 && interestRateView.getText().length() == 0) {
-            interestRateView.setError("Intrest checked, but no value entered");
+            interestRateView.setError("Interest checked, but no value entered");
             interestRateView.requestFocus();
             valid = false;
         }
@@ -88,11 +94,6 @@ public class NewAccountActivity extends Activity {
 
     public void donePressed(View view) {
         Log.i("Check", "Made it to done pressed!!");
-        nameView.setError(null);
-        displayNameView.setError(null);
-        accountNumberView.setError(null);
-        accountBalanceView.setError(null);
-        interestRateView.setError(null);
         if (validateInput()) {
             name = nameView.getText().toString();
             displayName = displayNameView.getText().toString();

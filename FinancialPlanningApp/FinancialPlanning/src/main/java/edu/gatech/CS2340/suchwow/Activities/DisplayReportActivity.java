@@ -21,15 +21,12 @@ import edu.gatech.CS2340.suchwow.Adapters.ReportFieldAdapter;
 import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
-<<<<<<< HEAD
+
 /**
- * An Activity that displays the report selected byt the user
+ * An Activity that displays the report selected by the user
  */
-public class DisplayReportActivity extends ActionBarActivity {
-=======
 
 public class DisplayReportActivity extends Activity {
->>>>>>> FETCH_HEAD
     private TextView reportName;
     private TextView reportRange;
     private ListView reportFields;
