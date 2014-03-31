@@ -15,12 +15,21 @@ import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Adapters.TransactionArrayAdapter;
 
+/**
+ * The activity that handles a single account.
+ */
+
 public class IndividualAccountActivity extends ActionBarActivity {
 
     Account currentAccount;
-    TextView welcomeMessage;
     ListView screen;
 
+    /**
+     * This function gets the currentAccount and screen, and sets up the adapter to display
+     * transactions.
+     * @param savedInstanceState What android passes in. We don't deal with it except for the super
+     *                           call.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +44,11 @@ public class IndividualAccountActivity extends ActionBarActivity {
         }
     }
 
-    private void addTransactionView(Transaction transaction) {
-    }
-
-
+    /**
+     * Sets up the options menu.
+     * @param menu Used to inflate the menu (action bar stuff)
+     * @return Sucess. Always sucess!
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -46,6 +56,11 @@ public class IndividualAccountActivity extends ActionBarActivity {
         return true;
     }
 
+    /**
+     * If someone clicks on add transaction, we fire up and start a NewTransactionActivity activity.
+     * @param item The item clicked on
+     * @return The result of our super call of onOptionsItemSelected.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

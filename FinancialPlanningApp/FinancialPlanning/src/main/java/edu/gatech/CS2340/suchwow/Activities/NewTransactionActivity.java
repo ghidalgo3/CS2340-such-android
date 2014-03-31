@@ -17,12 +17,19 @@ import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
+/**
+ * The NewTransactionActivity handles the creation of new transactions.
+ */
 public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;
     DatePicker userDate;
     RadioGroup radioButtons;
     Spinner categories;
 
+    /**
+     * Set's up our variables with the fields we need.
+     * @param savedInstanceState We just pass this to our superclass.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +41,11 @@ public class NewTransactionActivity extends ActionBarActivity {
         categories = (Spinner) this.findViewById(R.id.category_spinner);
     }
 
-
+    /**
+     * Set up the action bar
+     * @param menu Passed to inflate
+     * @return Always success!
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -42,6 +53,10 @@ public class NewTransactionActivity extends ActionBarActivity {
         return true;
     }
 
+    /**
+     * Validate the user input and create a new Transaction, add it to the current Account.
+     * @param view We don't use it.
+     */
     public void donePressed(View view) {
         boolean valid = true;
         if (nameView.getText().length() == 0) {
@@ -71,6 +86,11 @@ public class NewTransactionActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Handle action bar item clicks.
+     * @param item The item clicked
+     * @return Success, or the result of our super call.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
