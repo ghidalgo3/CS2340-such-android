@@ -8,12 +8,12 @@ import java.util.Map;
 
 /**
  * A report which aggregates withdrawal transactions into their categories
- * for transactions within a given date range
+ * for transactions within a given date range.
  */
 public class SpendingCategoryReport extends Report {
 
     /**
-     * Constructor
+     * Constructor.
      * @param start The start date of the report
      * @param end The end date of the report
      * @param transactions The transactions to be processed
@@ -24,7 +24,7 @@ public class SpendingCategoryReport extends Report {
     }
 
     /**
-     * Iterates through transactions and aggregates transaction data by category
+     * Iterates through transactions and aggregates transaction data by category.
      */
     @Override
     protected void generateReport() {
