@@ -23,6 +23,12 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
     private Context context;
     private List<Report.ReportField> data;
 
+    /**
+     * Constructor
+     * @param contextIn The current context
+     * @param layoutResourceIdIn The resource ID for a layout file containing a TextView to use when instantiating views.
+     * @param dataIn The ReportFields to be displayed by the ListView
+     */
     public ReportFieldAdapter(Context contextIn, int layoutResourceIdIn,
                                List<Report.ReportField> dataIn) {
         super(contextIn, layoutResourceIdIn, dataIn);
@@ -60,6 +66,9 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
         return row;
     }
 
+    /**
+     * Used to display information about a ReportField
+     */
     static class ReportFieldHolder {
         TextView fieldName;
         TextView fieldAmount;
