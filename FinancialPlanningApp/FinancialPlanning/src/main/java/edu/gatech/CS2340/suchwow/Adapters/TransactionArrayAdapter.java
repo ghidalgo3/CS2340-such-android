@@ -73,7 +73,7 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     }
 
     /**
-     * Simple class that holds a transaction's name and ammount
+     * Simple class that holds a transaction's name and amount
      */
     static class TransactionHolder {
         TextView transactionName;
