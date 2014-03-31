@@ -2,12 +2,10 @@ package edu.gatech.CS2340.suchwow.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,12 +14,17 @@ import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Adapters.TransactionArrayAdapter;
 
-public class IndividualAccountActivity extends Activity {
 /**
  * The activity that handles a single account.
  */
-
+public class IndividualAccountActivity extends Activity {
+    /**
+     * The account we're working with.
+     */
     Account currentAccount;
+    /**
+     * The ListView that we setup with a TransactionArrayAdapter.
+     */
     ListView screen;
 
     /**
@@ -34,7 +37,7 @@ public class IndividualAccountActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_account);
-        screen = (ListView)this.findViewById(R.id.transactionsListView);
+        screen = (ListView) this.findViewById(R.id.transactionsListView);
         //Singleton pattern
         currentAccount = Account.getCurrentAccount();
         List<Transaction> transactions = currentAccount.getTransactions();

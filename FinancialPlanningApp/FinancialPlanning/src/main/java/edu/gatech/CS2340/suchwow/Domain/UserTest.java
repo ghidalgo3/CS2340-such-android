@@ -2,13 +2,13 @@ package edu.gatech.CS2340.suchwow.Domain;
 
 import junit.framework.Assert;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 /**
  * Created by Gustavo on 3/27/14.
  */
 public class UserTest {
-    @Test
+    //@Test
     public void testSetCurrentUser() throws Exception {
         Assert.assertNotNull(User.getCurrentUser());
         User whatever = new User("User","Password");
@@ -16,7 +16,7 @@ public class UserTest {
         Assert.assertNotNull(User.getCurrentUser());
     }
 
-    @Test
+    //@Test
     public void testGetCurrentUser() throws Exception {
 
     }

@@ -2,7 +2,6 @@ package edu.gatech.CS2340.suchwow.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,13 +17,25 @@ import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
-public class NewTransactionActivity extends Activity {
 /**
  * The NewTransactionActivity handles the creation of new transactions.
  */
+public class NewTransactionActivity extends Activity {
+    /**
+     * Name and Amount views allow entering the name and amount.
+     */
     EditText nameView, amountView;
+    /**
+     * The date the user enters.
+     */
     DatePicker userDate;
+    /**
+     * The radio buttons for type.
+     */
     RadioGroup radioButtons;
+    /**
+     * For transaction category.
+     */
     Spinner categories;
 
     /**
@@ -43,7 +54,7 @@ public class NewTransactionActivity extends Activity {
     }
 
     /**
-     * Set up the action bar
+     * Set up the action bar.
      * @param menu Passed to inflate
      * @return Always success!
      */
@@ -73,7 +84,7 @@ public class NewTransactionActivity extends Activity {
             float transactionAmount = new Float(amountView.getText().toString());
             int selectedRadio = radioButtons.getCheckedRadioButtonId();
             boolean isDeposit = selectedRadio == R.id.radio_deposit;
-            String category = (String)categories.getSelectedItem();
+            String category = (String) categories.getSelectedItem();
             Transaction transaction = new Transaction(transactionName, transactionAmount,
                     isDeposit, category,
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),

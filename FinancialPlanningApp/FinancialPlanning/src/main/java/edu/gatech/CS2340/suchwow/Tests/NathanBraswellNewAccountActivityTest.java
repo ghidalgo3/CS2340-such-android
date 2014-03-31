@@ -1,6 +1,5 @@
 package edu.gatech.CS2340.suchwow.Tests;
 
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -9,23 +8,31 @@ import edu.gatech.CS2340.suchwow.Activities.NewAccountActivity;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Test the validateInput function from NewAccountActivity
+ * Test the validateInput function from NewAccountActivity.
  */
 public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentationTestCase2<NewAccountActivity> {
+    /**
+     * The account activity we're testing.
+     */
     NewAccountActivity accountActivity;
-    EditText nameView, displayNameView, accountNumberView, accountBalanceView,
-            interestRateView;
+    /**
+     * All the views we put data in and pull errors from.
+     */
+    EditText nameView, displayNameView, accountNumberView, accountBalanceView, interestRateView;
+    /**
+     * Same as above, but a check box.
+     */
     CheckBox hasInterestView;
 
     /**
-     * Set up the ActivityUnitTestCase with the class we're testing
+     * Set up the ActivityUnitTestCase with the class we're testing.
      */
     public NathanBraswellNewAccountActivityTest() {
         super(NewAccountActivity.class);
     }
 
     /**
-     * Get all the fields we'll be using and start the activity
+     * Get all the fields we'll be using and start the activity.
      * @throws Exception super.setUp throws Exception
      */
     @Override
@@ -42,7 +49,7 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
     }
 
     /**
-     * Just call super.tearDown()
+     * Just call super.tearDown().
      * @throws Exception super.tearDown() throws Exception
      */
     @Override
@@ -63,25 +70,19 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
         };
 
         //Account name
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals("Account name missing", nameView.getError());
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(new Runnable() {
             @Override
-            public void run() {
-                nameView.setText("Bob's Account");
-            }
+            public void run() { nameView.setText("Bob's Account"); }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, nameView.getError());
 
 
         //Short name
-        android.os.SystemClock.sleep(1000);
         assertEquals("Short name missing", displayNameView.getError());
         accountActivity.runOnUiThread(new Runnable() {
             @Override
@@ -89,13 +90,11 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
                 displayNameView.setText("For mah cookies");
             }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, displayNameView.getError());
 
         //Account number
-        android.os.SystemClock.sleep(1000);
         assertEquals("Account number missing", accountNumberView.getError());
         accountActivity.runOnUiThread(new Runnable() {
             @Override
@@ -103,14 +102,12 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
                 accountNumberView.setText("1337");
             }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, accountNumberView.getError());
 
 
         //Account balance
-        android.os.SystemClock.sleep(1000);
         assertEquals("Account balance missing", accountBalanceView.getError());
         accountActivity.runOnUiThread(new Runnable() {
             @Override
@@ -118,21 +115,18 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
                 accountBalanceView.setText("5237");
             }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, accountBalanceView.getError());
 
 
         //Interest rate
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 hasInterestView.setChecked(true);
             }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals("Interest checked, but no value entered", interestRateView.getError());
@@ -142,7 +136,6 @@ public class NathanBraswellNewAccountActivityTest extends ActivityInstrumentatio
                 interestRateView.setText("19.14159");
             }
         });
-        android.os.SystemClock.sleep(1000);
         accountActivity.runOnUiThread(doValidate);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, interestRateView.getError());

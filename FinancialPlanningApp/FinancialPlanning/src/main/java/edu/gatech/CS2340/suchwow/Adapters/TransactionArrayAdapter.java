@@ -15,17 +15,25 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * TansactionArrayAdapter sets up the list of Transactions
+ * TansactionArrayAdapter sets up the list of Transactions.
  */
-
 public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
 
+    /**
+     * Used by the inflater.
+     */
     private int layoutResourceId;
+    /**
+     * Also used by the inflater.
+     */
     private Context context;
+    /**
+     * The list of transactions we're turning into a list users can see.
+     */
     private List<Transaction> data;
 
     /**
-     * Set up our context, id, and data
+     * Set up our context, id, and data.
      * @param contextIn The context we're using
      * @param layoutResourceIdIn It's id
      * @param dataIn The list of transactions
@@ -67,16 +75,22 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         }
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         holder.transactionName.setText(item1);
-        holder.transactionAmount.setText((data.get(position).isDeposit() ? "+" : "-") +
-                                          formatter.format(item2));
+        holder.transactionAmount.setText((data.get(position).isDeposit() ? "+" : "-")
+                                          + formatter.format(item2));
         return row;
     }
 
     /**
-     * Simple class that holds a transaction's name and ammount
+     * Simple class that holds a transaction's name and amount.
      */
     static class TransactionHolder {
+        /**
+         * The name of the transaction.
+         */
         TextView transactionName;
+        /**
+         * The amount of the transaction.
+         */
         TextView transactionAmount;
     }
 }
