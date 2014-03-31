@@ -21,8 +21,6 @@ public class IndividualAccountActivity extends Activity {
  * The activity that handles a single account.
  */
 
-public class IndividualAccountActivity extends ActionBarActivity {
-
     Account currentAccount;
     ListView screen;
 
