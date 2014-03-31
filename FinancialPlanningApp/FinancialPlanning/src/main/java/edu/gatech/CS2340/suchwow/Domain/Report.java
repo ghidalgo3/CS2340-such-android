@@ -5,16 +5,28 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Abstract class to represent a report which can be generated from a given list of transactions
+ * Abstract class to represent a report which can be generated from a given list of transactions.
  */
 public abstract  class Report {
+    /**
+     * The start date of the report.
+     */
     protected Calendar startDate;
+    /**
+     * The end date of the report.
+     */
     protected Calendar endDate;
+    /**
+     * The transactions processed by the request.
+     */
     protected List<Transaction> transactions;
+    /**
+     * The report fields to be displayed by the UI.
+     */
     protected ArrayList<ReportField> reportFields;
 
     /**
-     * Constructor
+     * Constructor.
      * @param start Start date of the report
      * @param end End date of the report
      * @param transactions Transactions to be processed by the report
@@ -28,12 +40,12 @@ public abstract  class Report {
 
     /**
      * Uses the transactions to populate the report fields, which
-     * are then displayed in a ListView
+     * are then displayed in a ListView.
      */
     protected abstract void generateReport();
 
     /**
-     * Returns the fields of the report
+     * Returns the fields of the report.
      * @return The fields of the report
      */
     public ArrayList<ReportField> getReportFields() {
@@ -41,7 +53,7 @@ public abstract  class Report {
     }
 
     /**
-     * Sets the fields of the report
+     * Sets the fields of the report.
      * @param reportFields The fields of the report
      */
     public void setReportFields(ArrayList<ReportField> reportFields) {
@@ -49,7 +61,7 @@ public abstract  class Report {
     }
 
     /**
-     * Returns the report's start date
+     * Returns the report's start date.
      * @return The report's start date
      */
     public Calendar getStartDate() {
@@ -57,7 +69,7 @@ public abstract  class Report {
     }
 
     /**
-     * Sets the report's start date
+     * Sets the report's start date.
      * @param startDate The report's new start date
      */
     public void setStartDate(Calendar startDate) {
@@ -65,7 +77,7 @@ public abstract  class Report {
     }
 
     /**
-     * Returns the report's end date
+     * Returns the report's end date.
      * @return The report's end date
      */
     public Calendar getEndDate() {
@@ -73,7 +85,7 @@ public abstract  class Report {
     }
 
     /**
-     * Sets the report's end date
+     * Sets the report's end date.
      * @param endDate The report's new end date
      */
     public void setEndDate(Calendar endDate) {
@@ -81,7 +93,7 @@ public abstract  class Report {
     }
 
     /**
-     * Returns the transactions processed by the report
+     * Returns the transactions processed by the report.
      * @return The transactions processed by the report
      */
     public List<Transaction> getTransactions() {
@@ -89,7 +101,7 @@ public abstract  class Report {
     }
 
     /**
-     * Sets the transactions processed by the report
+     * Sets the transactions processed by the report.
      * @param transactions The transactions processed by the report
      */
     public void setTransactions(List<Transaction> transactions) {
@@ -98,14 +110,14 @@ public abstract  class Report {
 
     /**
      * A single row of the report which contains a string to label the row and
-     * a float value for the monetary amount associated with the row
+     * a float value for the monetary amount associated with the row.
      */
     public static class ReportField {
         private String fieldName;
         private float fieldValue;
 
         /**
-         * Constructor
+         * Constructor.
          * @param name The name of the report field
          * @param value The value to be displayed with the field
          */
@@ -115,7 +127,7 @@ public abstract  class Report {
         }
 
         /**
-         * Returns the value of the report field
+         * Returns the value of the report field.
          * @return The value of the report field
          */
         public float getFieldValue() {
@@ -123,7 +135,7 @@ public abstract  class Report {
         }
 
         /**
-         * Sets the value of the report field
+         * Sets the value of the report field.
          * @param fieldValue The value of the report field
          */
         public void setFieldValue(float fieldValue) {
@@ -131,7 +143,7 @@ public abstract  class Report {
         }
 
         /**
-         * Returns the name of the report field
+         * Returns the name of the report field.
          * @return The name of the report field
          */
         public String getFieldName() {
@@ -139,7 +151,7 @@ public abstract  class Report {
         }
 
         /**
-         * Sets the name of the report field
+         * Sets the name of the report field.
          * @param fieldName The name of the report field
          */
         public void setFieldName(String fieldName) {

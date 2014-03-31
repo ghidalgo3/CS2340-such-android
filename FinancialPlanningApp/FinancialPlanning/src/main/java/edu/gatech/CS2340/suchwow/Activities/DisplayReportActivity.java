@@ -23,17 +23,31 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
 /**
- * An Activity that displays the report selected by the user
+ * An Activity that processes the parameters from GenerateReportActivity.
  */
 
 public class DisplayReportActivity extends Activity {
+    /**
+     * Name of report in text view.
+     */
     private TextView reportName;
+    /**
+     * Report range in text view.
+     */
     private TextView reportRange;
+    /**
+     * Report fields in list view.
+     */
     private ListView reportFields;
+    /**
+     * An Activity that processes the parameters from GenerateReportActivity.
+     */
     private SimpleDateFormat dateFormatter;
     Report report;
     /**
-     *
+     * This function creates the menu that the user sees before generating the report.
+     * @param savedInstanceState What android passes in. We don't deal with it except for the super
+     *                           call.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +95,9 @@ public class DisplayReportActivity extends Activity {
     }
 
     /**
-     *
+     * Sets up the options menu.
+     * @param menu Used to inflate the menu.
+     * @return True, successful.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +107,9 @@ public class DisplayReportActivity extends Activity {
         return true;
     }
     /**
-     *
+     * If someone clicks Display Report, then it will show the appropriate report.
+     * @param item The item clicked on
+     * @return The result of our super call of onOptionsItemSelected.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

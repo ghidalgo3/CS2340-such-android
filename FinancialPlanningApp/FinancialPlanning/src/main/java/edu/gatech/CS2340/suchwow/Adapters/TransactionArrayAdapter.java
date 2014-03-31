@@ -50,8 +50,8 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
      * Modify and get the view for this position.
      * @param position The position of the item
      * @param convertView The row
-     * @param parent Used for the inflator
-     * @return The view we modifieds
+     * @param parent Used for the inflater
+     * @return The view we modifies
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
