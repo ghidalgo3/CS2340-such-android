@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,10 +18,10 @@ import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
+public class NewTransactionActivity extends Activity {
 /**
  * The NewTransactionActivity handles the creation of new transactions.
  */
-public class NewTransactionActivity extends ActionBarActivity {
     EditText nameView, amountView;
     DatePicker userDate;
     RadioGroup radioButtons;

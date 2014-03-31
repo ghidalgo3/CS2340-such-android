@@ -14,7 +14,10 @@ import java.util.List;
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
 
-//gustavo
+/**
+ * An interfacer between the domain and the SQLite database that
+ * handles as SQLite queries.
+ */
 public class AccountArrayAdapter extends ArrayAdapter<Account> {
 
     private int layoutResourceId;

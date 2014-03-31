@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,11 +16,10 @@ import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Adapters.TransactionArrayAdapter;
 
+public class IndividualAccountActivity extends Activity {
 /**
  * The activity that handles a single account.
  */
-
-public class IndividualAccountActivity extends ActionBarActivity {
 
     Account currentAccount;
     ListView screen;

@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +21,23 @@ import edu.gatech.CS2340.suchwow.Adapters.ReportFieldAdapter;
 import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
-
+<<<<<<< HEAD
+/**
+ * An Activity that displays the report selected byt the user
+ */
 public class DisplayReportActivity extends ActionBarActivity {
+=======
+
+public class DisplayReportActivity extends Activity {
+>>>>>>> FETCH_HEAD
     private TextView reportName;
     private TextView reportRange;
     private ListView reportFields;
     private SimpleDateFormat dateFormatter;
     Report report;
-
+    /**
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +83,9 @@ public class DisplayReportActivity extends ActionBarActivity {
         }
     }
 
-
+    /**
+     *
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -81,7 +93,9 @@ public class DisplayReportActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.display_report, menu);
         return true;
     }
-
+    /**
+     *
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
