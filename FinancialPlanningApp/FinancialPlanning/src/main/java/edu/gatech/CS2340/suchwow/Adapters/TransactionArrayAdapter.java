@@ -15,17 +15,21 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Created by nathan on 2/25/14.
+ * TansactionArrayAdapter sets up the list of Transactions
  */
 
-
-//gustavo
 public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
 
     private int layoutResourceId;
     private Context context;
     private List<Transaction> data;
 
+    /**
+     * Set up our context, id, and data
+     * @param contextIn The context we're using
+     * @param layoutResourceIdIn It's id
+     * @param dataIn The list of transactions
+     */
     public TransactionArrayAdapter(Context contextIn, int layoutResourceIdIn,
                                    List<Transaction> dataIn) {
         super(contextIn, layoutResourceIdIn, dataIn);
@@ -34,6 +38,13 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         this.data = dataIn;
     }
 
+    /**
+     * Modify and get the view for this position.
+     * @param position The position of the item
+     * @param convertView The row
+     * @param parent Used for the inflator
+     * @return The view we modifieds
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -61,6 +72,9 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         return row;
     }
 
+    /**
+     * Simple class that holds a transaction's name and ammount
+     */
     static class TransactionHolder {
         TextView transactionName;
         TextView transactionAmount;
