@@ -12,13 +12,21 @@ import android.widget.RadioGroup;
 
 import edu.gatech.CS2340.suchwow.R;
 /**
- * An Activity that generates a report that has been accumulated by the user.
+ * An Activity that gathers all parameters from the user such as dates.
  */
 
 public class GenerateReportActivity extends Activity {
-
+    /**
+     * Date picker for start date.
+     */
     DatePicker startPicker;
+    /**
+     * Date picker for end date.
+     */
     DatePicker endPicker;
+    /**
+     * Radio group for report choice.
+     */
     RadioGroup reportChoices;
 
     @Override
@@ -31,7 +39,7 @@ public class GenerateReportActivity extends Activity {
     }
 
     /**
-     * Boolean method that creates the menu
+     * Boolean method that creates the menu using an inflater
      * @return boolean true
      */
     @Override
@@ -42,7 +50,8 @@ public class GenerateReportActivity extends Activity {
         return true;
     }
     /**
-     * Creates the buttons in the menu
+     * Creates the buttons in the menu that the user can use to select the date boundaries.
+     * @param view
      */
     public void generatePress(View view) {
         Intent reportDisplayIntent = new Intent(this, DisplayReportActivity.class);
@@ -58,7 +67,9 @@ public class GenerateReportActivity extends Activity {
         startActivity(reportDisplayIntent);
     }
     /**
-     * Determines the pressed button and carries out the necessary action
+     * If someone clicks Generate Report this will generate the report with the chosen boundaries.
+     * @param item The item clicked on
+     * @return The result of our super call of onOptionsItemSelected.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
