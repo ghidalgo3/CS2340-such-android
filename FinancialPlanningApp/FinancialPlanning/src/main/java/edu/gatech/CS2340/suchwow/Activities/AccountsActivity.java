@@ -25,8 +25,17 @@ import edu.gatech.CS2340.suchwow.Domain.User;
  */
 public class AccountsActivity extends Activity {
 
+    /**
+     * Singleton user.
+     */
     User currentUser;
+    /**
+     * TextView that displays a welcome message.
+     */
     TextView welcomeMessage;
+    /**
+     * List of accounts.
+     */
     ListView screen;
 
     @Override
@@ -60,7 +69,8 @@ public class AccountsActivity extends Activity {
 
     @Override
     /**
-     * Inflates the Menu in this activity
+     * Inflates the Menu in this activity.
+     * @return always return true
      */
     public boolean onCreateOptionsMenu(Menu menu) { //DO NOT DELETE
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -70,7 +80,8 @@ public class AccountsActivity extends Activity {
 
     @Override
     /**
-     * Lifecycle method for selecting a menu button
+     * Lifecycle method for selecting a menu button.
+     * @return boolean of option selection
      */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

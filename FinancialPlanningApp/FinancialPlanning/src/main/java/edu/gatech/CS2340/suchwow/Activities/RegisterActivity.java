@@ -39,15 +39,22 @@ public class RegisterActivity extends Activity {
      */
     private UserRegisterTask mAuthTask = null;
 
-    // Values for email and password at the time of the login attempt.
-    private String mUsername;
-    private String mPassword;
+    /**
+     *  Values for email and password at the time of the login attempt.
+     */
+    private String mUsername, mPassword;
 
-    // UI references.
-    private EditText mUsernameView;
-    private EditText mPasswordView;
-    private View mRegisterFormView;
-    private View mRegisterStatusView;
+    /**
+     * Input EditText Views.
+     */
+    private EditText mUsernameView, mPasswordView;
+    /**
+     * Animation views.
+     */
+    private View mRegisterFormView, mRegisterStatusView;
+    /**
+     * Status message display.
+     */
     private TextView mRegisterStatusMessageView;
 
     @Override
@@ -191,7 +198,6 @@ public class RegisterActivity extends Activity {
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             try {
                 // Simulate network access.
                 Thread.sleep(1000);
