@@ -11,8 +11,12 @@ import android.widget.DatePicker;
 import android.widget.RadioGroup;
 
 import edu.gatech.CS2340.suchwow.R;
+/**
+ * An Activity that generates a report that has been accumulated by the user.
+ */
 
 public class GenerateReportActivity extends Activity {
+
     DatePicker startPicker;
     DatePicker endPicker;
     RadioGroup reportChoices;
@@ -26,7 +30,10 @@ public class GenerateReportActivity extends Activity {
         reportChoices = (RadioGroup)this.findViewById(R.id.reportChoiceRadioGroup);
     }
 
-
+    /**
+     * Boolean method that creates the menu
+     * @return boolean true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -34,7 +41,9 @@ public class GenerateReportActivity extends Activity {
         getMenuInflater().inflate(R.menu.generate_report, menu);
         return true;
     }
-
+    /**
+     * Creates the buttons in the menu
+     */
     public void generatePress(View view) {
         Intent reportDisplayIntent = new Intent(this, DisplayReportActivity.class);
         Bundle b = new Bundle();
@@ -48,7 +57,9 @@ public class GenerateReportActivity extends Activity {
         reportDisplayIntent.putExtras(b);
         startActivity(reportDisplayIntent);
     }
-
+    /**
+     * Determines the pressed button and carries out the necessary action
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

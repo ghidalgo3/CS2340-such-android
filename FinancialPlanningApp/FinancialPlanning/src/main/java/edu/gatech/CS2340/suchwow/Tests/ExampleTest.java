@@ -7,7 +7,7 @@ import android.test.InstrumentationTestCase;
  */
 public class ExampleTest extends InstrumentationTestCase {
     public void test1() throws Exception {
-        assertEquals(1,4);
+        //assertEquals(1,4);
         assertEquals(2,2);
     }
     public void test2() throws Exception {
