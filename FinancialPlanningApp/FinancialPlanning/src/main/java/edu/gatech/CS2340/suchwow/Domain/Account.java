@@ -9,18 +9,38 @@ import java.util.List;
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 
 /**
- * Represents a financial Account.
+ * Represents a financial Account. This is a Singleton class.
  * @author Gustavo
  * @version 1.0
  */
 public class Account {
+    /**
+     * Reference to the current account.
+     */
     private static Account currentAccount;
 
+    /**
+     * Financial variables
+     */
     private float balance, interestRate;
+    /**
+     * Account name and number.
+     */
     private String name, displayName, accountNumber;
+    /**
+     * List of account Transactions
+     */
     private ArrayList<Transaction> transactions;
+    /**
+     * Current context.
+     */
     private Context context;
 
+    /**
+     * Constructor initializes with a balance and a name.
+     * @param bal
+     * @param name
+     */
     public Account(float bal, String name) {
         balance = bal;
         this.name = name;
