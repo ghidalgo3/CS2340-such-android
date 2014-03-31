@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,7 @@ import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class DisplayReportActivity extends ActionBarActivity {
+public class DisplayReportActivity extends Activity {
     private TextView reportName;
     private TextView reportRange;
     private ListView reportFields;

@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.RadioGroup;
 
 import edu.gatech.CS2340.suchwow.R;
 
-public class GenerateReportActivity extends ActionBarActivity {
+public class GenerateReportActivity extends Activity {
     DatePicker startPicker;
     DatePicker endPicker;
     RadioGroup reportChoices;

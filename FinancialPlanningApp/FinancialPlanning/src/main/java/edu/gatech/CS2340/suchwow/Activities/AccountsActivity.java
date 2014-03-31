@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,7 +18,7 @@ import edu.gatech.CS2340.suchwow.Adapters.AccountArrayAdapter;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class AccountsActivity extends ActionBarActivity {
+public class AccountsActivity extends Activity {
 
     User currentUser;
     TextView welcomeMessage;
