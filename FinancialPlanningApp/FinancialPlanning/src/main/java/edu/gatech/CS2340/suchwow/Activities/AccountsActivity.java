@@ -18,6 +18,11 @@ import edu.gatech.CS2340.suchwow.Adapters.AccountArrayAdapter;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
+/**
+ * Activity displays a list of current accounts, each account is clickable.
+ * @author Gustavo Hidalgo
+ * @version 1.0
+ */
 public class AccountsActivity extends Activity {
 
     User currentUser;
@@ -25,6 +30,11 @@ public class AccountsActivity extends Activity {
     ListView screen;
 
     @Override
+    /**
+     * Lifecycle method. Creates views and sets action listener.
+     * @param savedInstanceState activity state
+     *
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
@@ -47,11 +57,11 @@ public class AccountsActivity extends Activity {
         }
     }
 
-    private void addAccountView(Account account) {
-    }
-
 
     @Override
+    /**
+     * Inflates the Menu in this activity
+     */
     public boolean onCreateOptionsMenu(Menu menu) { //DO NOT DELETE
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.accounts, menu);
@@ -59,6 +69,9 @@ public class AccountsActivity extends Activity {
     }
 
     @Override
+    /**
+     * Lifecycle method for selecting a menu button
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
