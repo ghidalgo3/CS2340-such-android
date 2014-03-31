@@ -1,11 +1,9 @@
 package edu.gatech.CS2340.suchwow.Tests;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import edu.gatech.CS2340.suchwow.Activities.LoginActivity;
-import edu.gatech.CS2340.suchwow.Activities.NewloginActivity;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
@@ -46,11 +44,11 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
     }
 
     /**
-     * The actual function that tests our validateInput() function.
+     * The actual function that tests login input validation.
      */
     public void testValidateInput() {
         // Tests
-        Runnable doValidate = new Runnable() {
+        Runnable attemptLogin = new Runnable() {
             @Override
             public void run() {
                 loginActivity.attemptLogin();
@@ -59,20 +57,50 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
 
         //Account name
         android.os.SystemClock.sleep(1000);
-        loginActivity.runOnUiThread(doValidate);
+        loginActivity.runOnUiThread(attemptLogin);
         android.os.SystemClock.sleep(1000);
-        assertEquals("Account name missing", nameView.getError());
+        assertEquals(loginActivity.getString(R.string.error_field_required), mUsernameView.getError());
         android.os.SystemClock.sleep(1000);
         loginActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                nameView.setText("Bob's Account");
+                mUsernameView.setText("Gary Oak");
             }
         });
         android.os.SystemClock.sleep(1000);
-        loginActivity.runOnUiThread(doValidate);
+        loginActivity.runOnUiThread(attemptLogin);
         android.os.SystemClock.sleep(1000);
-        assertEquals(null, nameView.getError());
+        assertEquals(null, mUsernameView.getError());
+        loginActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mPasswordView.setText("");
+            }
+        });
+        android.os.SystemClock.sleep(1000);
+        loginActivity.runOnUiThread(attemptLogin);
+        android.os.SystemClock.sleep(1000);
+        assertEquals(loginActivity.getString(R.string.error_field_required), mPasswordView.getError());
+        loginActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mPasswordView.setText("pas");
+            }
+        });
+        android.os.SystemClock.sleep(1000);
+        loginActivity.runOnUiThread(attemptLogin);
+        android.os.SystemClock.sleep(1000);
+        assertEquals(loginActivity.getString(R.string.error_invalid_password), mPasswordView.getError());
+        loginActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mPasswordView.setText("password");
+            }
+        });
+        android.os.SystemClock.sleep(1000);
+        loginActivity.runOnUiThread(attemptLogin);
+        android.os.SystemClock.sleep(1000);
+        assertEquals(null, mPasswordView.getError());
 
     }
 
