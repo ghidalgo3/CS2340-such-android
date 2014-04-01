@@ -20,7 +20,7 @@ public class Account {
     private static Account currentAccount;
 
     /**
-     * Financial variables
+     * Financial variables.
      */
     private float balance, interestRate;
     /**
@@ -28,7 +28,7 @@ public class Account {
      */
     private String name, displayName, accountNumber;
     /**
-     * List of account Transactions
+     * List of account Transactions.
      */
     private ArrayList<Transaction> transactions;
     /**
@@ -38,8 +38,8 @@ public class Account {
 
     /**
      * Constructor initializes with a balance and a name.
-     * @param bal
-     * @param name
+     * @param bal account balance
+     * @param name account name
      */
     public Account(float bal, String name) {
         balance = bal;
