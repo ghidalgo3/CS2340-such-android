@@ -93,13 +93,13 @@ public class Account {
      * @return String rep of this object
      */
     public String toString() {
-        return "Account{" +
-               "balance=" + balance +
-               ", interestRate=" + interestRate +
-               ", name='" + name + '\'' +
-               ", displayName='" + displayName + '\'' +
-               ", accountNumber='" + accountNumber + '\'' +
-               '}';
+        return "Account{"
+               + "balance=" + balance
+               + ", interestRate=" + interestRate
+               + ", name='" + name + '\''
+               + ", displayName='" + displayName + '\''
+               + ", accountNumber='" + accountNumber + '\''
+               + '}';
     }
 
     /**
@@ -128,18 +128,18 @@ public class Account {
 
     /**
      * Setter for the account display name.
-     * @param displayName account display name
+     * @param aDisplayName account display name
      */
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setDisplayName(String aDisplayName) {
+        displayName = aDisplayName;
     }
 
     /**
      * Setter for the account number.
-     * @param accountNumber new account number
+     * @param nAccountNumber new account number
      */
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccountNumber(String nAccountNumber) {
+        accountNumber = nAccountNumber;
     }
 
     /**
@@ -165,10 +165,11 @@ public class Account {
     public void addTransaction(Transaction transaction) {
         SQLiteHandler handler = new SQLiteHandler(context);
         transactions.add(transaction);
-        if (transaction.isDeposit())
+        if (transaction.isDeposit()) {
             balance += transaction.getAmount();
-        else
+        } else {
             balance -= transaction.getAmount();
+        }
         Collections.sort(transactions);
         handler.addTransaction(User.getCurrentUser(), this, transaction);
     }
@@ -183,15 +184,15 @@ public class Account {
 
     /**
      * Sets the list of Transactions for this account.
-     * @param transactions new trnasaction list
+     * @param aTransactions new transactions list
      */
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setTransactions(ArrayList<Transaction> aTransactions) {
+        transactions = aTransactions;
     }
 
     /**
      * Gets the context for this account.
-     * @return
+     * @return current context
      */
     public Context getContext() {
         return context;
@@ -199,9 +200,9 @@ public class Account {
 
     /**
      * Sets the context for this account.
-     * @param context
+     * @param cContext new context
      */
-    public void setContext(Context context) {
-        this.context = context;
+    public void setContext(Context cContext) {
+        context = cContext;
     }
 }

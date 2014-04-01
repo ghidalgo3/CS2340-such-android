@@ -15,14 +15,14 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
     private EditText mPasswordView;
 
     /**
-     * Set up the ActivityUnitTestCase with the class we're testing
+     * Set up the ActivityUnitTestCase with the class we're testing.
      */
     public GustavoHidalgoLoginActivityTest() {
         super(LoginActivity.class);
     }
 
     /**
-     * Get all the fields we'll be using and start the activity
+     * Get all the fields we'll be using and start the activity.
      * @throws Exception super.setUp throws Exception
      */
     @Override
@@ -35,7 +35,7 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
     }
 
     /**
-     * Just call super.tearDown()
+     * Just call super.tearDown().
      * @throws Exception super.tearDown() throws Exception
      */
     @Override
