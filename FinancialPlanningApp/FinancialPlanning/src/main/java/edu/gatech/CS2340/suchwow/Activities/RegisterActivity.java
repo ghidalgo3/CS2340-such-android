@@ -172,9 +172,9 @@ public class RegisterActivity extends Activity {
                                     android.R.integer.config_shortAnimTime);
             mRegisterStatusView.setVisibility(View.VISIBLE);
             mRegisterStatusView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 1 : 0)
-            .setListener(new AnimatorListenerAdapter() {
+                .setDuration(shortAnimTime)
+                .alpha(show ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     mRegisterStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -182,9 +182,9 @@ public class RegisterActivity extends Activity {
             });
             mRegisterFormView.setVisibility(View.VISIBLE);
             mRegisterFormView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 0 : 1)
-            .setListener(new AnimatorListenerAdapter() {
+                .setDuration(shortAnimTime)
+                .alpha(show ? 0 : 1)
+                .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
