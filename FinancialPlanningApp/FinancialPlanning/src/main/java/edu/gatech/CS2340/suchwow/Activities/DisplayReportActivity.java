@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +22,33 @@ import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class DisplayReportActivity extends ActionBarActivity {
+/**
+ * An Activity that processes the parameters from GenerateReportActivity.
+ */
+
+public class DisplayReportActivity extends Activity {
+    /**
+     * Name of report in text view.
+     */
     private TextView reportName;
+    /**
+     * Report range in text view.
+     */
     private TextView reportRange;
+    /**
+     * Report fields in list view.
+     */
     private ListView reportFields;
+    /**
+     * An Activity that processes the parameters from GenerateReportActivity.
+     */
     private SimpleDateFormat dateFormatter;
     Report report;
-
+    /**
+     * This function creates the menu that the user sees before generating the report.
+     * @param savedInstanceState What android passes in. We don't deal with it except for the super
+     *                           call.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +73,7 @@ public class DisplayReportActivity extends ActionBarActivity {
         GregorianCalendar endDate = new GregorianCalendar(endYear, endMonth, endDay);
         Log.v("ReportCreation", String.format("%d %d %d %d %d %d", startYear, startMonth,
                 startDay, endYear, endMonth, endDay));
-        dateFormatter = new SimpleDateFormat("MMM F, yyyy");
+        dateFormatter = new SimpleDateFormat("MMM d, yyyy");
         switch (b.getInt("radioButton")) {
             case R.id.spendingCatRadioButton:
                 reportName.setText(R.string.spending_category_report);
@@ -60,17 +81,24 @@ public class DisplayReportActivity extends ActionBarActivity {
                         " to " + dateFormatter.format(endDate.getTime()));
                 report = new SpendingCategoryReport(startDate, endDate, transactions);
                 break;
+            //Other buttons
+            default:
+                reportName.setText(R.string.invalid_report);
+                break;
+
         }
 
-        if (report == null) {
-            //Some message
-        } else {
+        if (report != null) {
             reportFields.setAdapter(new ReportFieldAdapter(this,
                     R.layout.report_field_display, report.getReportFields()));
         }
     }
 
-
+    /**
+     * Sets up the options menu.
+     * @param menu Used to inflate the menu.
+     * @return True, successful.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
@@ -78,7 +106,11 @@ public class DisplayReportActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.display_report, menu);
         return true;
     }
-
+    /**
+     * If someone clicks Display Report, then it will show the appropriate report.
+     * @param item The item clicked on
+     * @return The result of our super call of onOptionsItemSelected.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

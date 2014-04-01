@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -17,13 +18,32 @@ import edu.gatech.CS2340.suchwow.Adapters.AccountArrayAdapter;
 import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class AccountsActivity extends ActionBarActivity {
+/**
+ * Activity displays a list of current accounts, each account is clickable.
+ * @author Gustavo Hidalgo
+ * @version 1.0
+ */
+public class AccountsActivity extends Activity {
 
+    /**
+     * Singleton user.
+     */
     User currentUser;
+    /**
+     * TextView that displays a welcome message.
+     */
     TextView welcomeMessage;
+    /**
+     * List of accounts.
+     */
     ListView screen;
 
     @Override
+    /**
+     * Lifecycle method. Creates views and sets action listener.
+     * @param savedInstanceState activity state
+     *
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
@@ -40,19 +60,18 @@ public class AccountsActivity extends ActionBarActivity {
         currentUser = User.getCurrentUser();
         //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
-        if (accounts.isEmpty()) {
-            //display some message later
-        } else {
+        if (!accounts.isEmpty()) {
             screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
                               accounts));
         }
     }
 
-    private void addAccountView(Account account) {
-    }
-
 
     @Override
+    /**
+     * Inflates the Menu in this activity.
+     * @return always return true
+     */
     public boolean onCreateOptionsMenu(Menu menu) { //DO NOT DELETE
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.accounts, menu);
@@ -60,6 +79,10 @@ public class AccountsActivity extends ActionBarActivity {
     }
 
     @Override
+    /**
+     * Lifecycle method for selecting a menu button.
+     * @return boolean of option selection
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -75,8 +98,4 @@ public class AccountsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }

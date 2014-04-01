@@ -15,25 +15,44 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Created by nathan on 2/25/14.
+ * TansactionArrayAdapter sets up the list of Transactions.
  */
-
-
-//gustavo
 public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
 
+    /**
+     * Used by the inflater.
+     */
     private int layoutResourceId;
+    /**
+     * Also used by the inflater.
+     */
     private Context context;
+    /**
+     * The list of transactions we're turning into a list users can see.
+     */
     private List<Transaction> data;
 
-    public TransactionArrayAdapter(Context context, int layoutResourceId,
-                                   List<Transaction> data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        this.data = data;
+    /**
+     * Set up our context, id, and data.
+     * @param contextIn The context we're using
+     * @param layoutResourceIdIn It's id
+     * @param dataIn The list of transactions
+     */
+    public TransactionArrayAdapter(Context contextIn, int layoutResourceIdIn,
+                                   List<Transaction> dataIn) {
+        super(contextIn, layoutResourceIdIn, dataIn);
+        this.context = contextIn;
+        this.layoutResourceId = layoutResourceIdIn;
+        this.data = dataIn;
     }
 
+    /**
+     * Modify and get the view for this position.
+     * @param position The position of the item
+     * @param convertView The row
+     * @param parent Used for the inflater
+     * @return The view we modifies
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -56,13 +75,22 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         }
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         holder.transactionName.setText(item1);
-        holder.transactionAmount.setText((data.get(position).isDeposit() ? "+" : "-") +
-                                          formatter.format(item2));
+        holder.transactionAmount.setText((data.get(position).isDeposit() ? "+" : "-")
+                                          + formatter.format(item2));
         return row;
     }
 
+    /**
+     * Simple class that holds a transaction's name and amount.
+     */
     static class TransactionHolder {
+        /**
+         * The name of the transaction.
+         */
         TextView transactionName;
+        /**
+         * The amount of the transaction.
+         */
         TextView transactionAmount;
     }
 }

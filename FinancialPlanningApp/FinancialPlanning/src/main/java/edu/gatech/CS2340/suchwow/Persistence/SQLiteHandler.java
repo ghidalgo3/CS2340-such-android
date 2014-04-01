@@ -3,6 +3,7 @@ package edu.gatech.CS2340.suchwow.Persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -14,65 +15,141 @@ import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
 /**
- * Created by Wayne on 2/5/14.
+ * An interfacer between the domain and the SQLite database that
+ * handles as SQLite queries.
  */
 public class SQLiteHandler extends SQLiteOpenHelper {
+    /**
+     * Current version of the database.
+     */
     private static final int DATABASE_VERSION = 3;
+    /**
+     * The name of the database.
+     */
     private static final String DATABASE_NAME = "FinancialDatabase";
 
     // tables and their fields go here in format: TABLE_($NAME), ($NAME)_FIELD
+    /**
+     * Name of the Users table.
+     */
     private static final String TABLE_USERS = "users";
+    /**
+     * Column name of the name column in the Users table.
+     */
     private static final String USERS_NAME = "name";
+    /**
+     * Column name of the password column in the Users table.
+     */
     private static final String USERS_PASSWORD = "password";
 
+    /**
+     * Name of the Accounts table.
+     */
     private static final String TABLE_ACCOUNTS = "accounts";
+    /**
+     * Column name of the user column in the Accounts table.
+     */
     private static final String ACCOUNTS_USER = "user";
+    /**
+     * Column name of the account name column in the Accounts table.
+     */
     private static final String ACCOUNTS_NAME = "name";
+    /**
+     * Column name of the account number column in the Accounts table.
+     */
     private static final String ACCOUNTS_NUMBER = "number";
+    /**
+     * Column name of the display name column in the Accounts table.
+     */
     private static final String ACCOUNTS_DISPLAY = "display";
+    /**
+     * Column name of the account balance column in the Accounts table.
+     */
     private static final String ACCOUNTS_BALANCE = "balance";
+    /**
+     * Column name of the account interest rate column in the Accounts table.
+     */
     private static final String ACCOUNTS_INTEREST = "interest";
 
+    /**
+     * Name of the Transactions table.
+     */
     private static final String TABLE_TRANSACTIONS = "transactions";
+    /**
+     * Column name of the transaction category column in the Transactions table.
+     */
     private static final String TRANS_CAT = "category";
+    /**
+     * Column name of the user column in the Transactions table.
+     */
     private static final String TRANS_USER = "user";
+    /**
+     * Column name of the account name column in the Transactions table.
+     */
     private static final String TRANS_ACCNAME = "account_name";
+    /**
+     * Column name of the account number column in the Transactions table.
+     */
     private static final String TRANS_ACCNUM = "account_number";
+    /**
+     * Column name of the transaction name column in the Transactions table.
+     */
     private static final String TRANS_NAME = "name";
+    /**
+     * Column name of the transaction amount column in the Transactions table.
+     */
     private static final String TRANS_AMOUNT = "amount";
+    /**
+     * Column name of the is deposit column in the Transactions table.
+     */
     private static final String TRANS_ISDEPOSIT = "is_deposit";
+    /**
+     * Column name of the user defined transaction time column in the Transactions table.
+     */
     private static final String TRANS_USERTIME = "user_time";
+    /**
+     * Column number of the system transaction time column in the Transactions table.
+     */
     private static final String TRANS_SYSTIME = "system_time";
 
-    // child constructor
+    /**
+     * Constructor for the handler.
+     * @param context The context of the activity which calls the constructor.
+     */
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     // On database creation
+
+    /**
+     * Run on the creation of the application database. Creates tables and
+     * populates initial admin user.
+     * @param db The created database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create tables
-        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
+        String createUsersTable = "CREATE TABLE " + TABLE_USERS + "("
                                     + USERS_NAME + " TEXT PRIMARY KEY," + USERS_PASSWORD + " TEXT NOT NULL)";
-        db.execSQL(CREATE_USERS_TABLE);
-        String CREATE_ACCOUNTS_TABLE = String.format("CREATE TABLE %s " +
-                                       "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, " +
-                                       "PRIMARY KEY (%s, %s, %s), " +
-                                       "FOREIGN KEY (%s) REFERENCES %s(%s))", TABLE_ACCOUNTS, ACCOUNTS_USER,
+        db.execSQL(createUsersTable);
+        String createAccountsTable = String.format("CREATE TABLE %s "
+                                       + "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, "
+                                       + "PRIMARY KEY (%s, %s, %s), "
+                                       + "FOREIGN KEY (%s) REFERENCES %s(%s))", TABLE_ACCOUNTS, ACCOUNTS_USER,
                                        ACCOUNTS_NAME,
                                        ACCOUNTS_NUMBER, ACCOUNTS_DISPLAY, ACCOUNTS_BALANCE, ACCOUNTS_INTEREST,
                                        ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER, ACCOUNTS_USER, TABLE_USERS,
                                        USERS_NAME);
-        db.execSQL(CREATE_ACCOUNTS_TABLE);
-        String CREATE_TRANSACTIONS_TABLE = String.format("CREATE TABLE %s" +
-                "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, " +
-                "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
+        db.execSQL(createAccountsTable);
+        String createTransactionsTable = String.format("CREATE TABLE %s"
+                + "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, "
+                + "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
                 TABLE_TRANSACTIONS, TRANS_CAT, TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM, TRANS_NAME,
                 TRANS_AMOUNT, TRANS_ISDEPOSIT, TRANS_USERTIME, TRANS_SYSTIME,
                 TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM,
                 TABLE_ACCOUNTS, ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.execSQL(CREATE_TRANSACTIONS_TABLE);
+        db.execSQL(createTransactionsTable);
         // add default user
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, "admin"); // User name
@@ -81,7 +158,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, values);
     }
 
-    // Upgrading database
+    /**
+     * Run when database is upgraded. Drops all data and recreates the tables.
+     * @param db The database being upgraded
+     * @param oldVersion The version number of the old database
+     * @param newVersion The version number of the upgraded database
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older tables if existed
@@ -93,6 +175,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     // SQL operations
+
+    /**
+     * Adds the User instance to the database.
+     * @param user The User instance being inserted
+     * @throws InvalidUserException Thrown if the user already exists in the database
+     */
     public void addUser(User user) throws InvalidUserException {
         // get database reference
         SQLiteDatabase db = this.getWritableDatabase();
@@ -103,13 +191,19 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // insert username and password into table
         try {
             db.insertOrThrow(TABLE_USERS, null, values);
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new InvalidUserException("User already exists in database");
         } finally {
             db.close(); // Closing database connection
         }
     }
 
+    /**
+     * Adds the Account instance to the database.
+     * @param user The User which owns the account
+     * @param account The account being inserted
+     * @throws InvalidAccountException Thrown if identical account exists
+     */
     public void addAccount(User user,
                            Account account) throws InvalidAccountException {
         // get database reference
@@ -125,13 +219,21 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // insert username and password into table
         try {
             db.insertOrThrow(TABLE_ACCOUNTS, null, values);
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new InvalidAccountException("Identical account already exists for user");
         } finally {
             db.close(); // Closing database connection
         }
     }
 
+    /**
+     * Adds the Transaction instance to the database. Assigns
+     * the Transaction instance with a unique ID for referencing
+     * within the database.
+     * @param user The User instance which made the transaction
+     * @param account The Account instance to which the transaction belongs
+     * @param transaction The Transaction instance being inserted
+     */
     public void addTransaction(User user, Account account, Transaction transaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -147,14 +249,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         transaction.setID(db.insert(TABLE_TRANSACTIONS, null, values));
 
         // need to update stored account balance too
-        ContentValues account_vals = new ContentValues();
-        account_vals.put(ACCOUNTS_BALANCE, account.getBalance());
+        ContentValues accountVals = new ContentValues();
+        accountVals.put(ACCOUNTS_BALANCE, account.getBalance());
         String whereClause = String.format("%s=? AND %s=? AND %s=?", ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.update(TABLE_ACCOUNTS, account_vals, whereClause, new String[] {user.getName(), account.getName(), account.getAccountNumber()});
+        db.update(TABLE_ACCOUNTS, accountVals, whereClause, new String[] {user.getName(), account.getName(), account.getAccountNumber()});
 
         db.close();
     }
 
+    /**
+     * Retrieves a User instance for the provided credentials and populates all accounts
+     * and transactions.
+     * @param username The user's username
+     * @param password The user's password
+     * @return The User instance matching the credentials
+     * @throws InvalidUserException Thrown if user does not exist
+     * @throws InvalidPasswordException Thrown if password is incorrect
+     */
     public User getUser(String username,
                         String password) throws InvalidUserException, InvalidPasswordException {
         // get database
@@ -188,6 +299,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return user;
     }
 
+    /**
+     * Retrieves the accounts of the User as a list of Account instances. Populates
+     * Account instances with transactions stored in the database.
+     * @param user The user which owns the accounts
+     * @return The accounts belonging to the user
+     */
     public ArrayList<Account> getAccounts(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = String.format("%s=?", ACCOUNTS_USER);
@@ -208,6 +325,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return accounts;
     }
 
+    /**
+     * Retrieves the transactions of the given account from the database.
+     * @param user The owner of the account
+     * @param account The account to which the transactions belong
+     * @return The transactions belonging to the account
+     */
     public ArrayList<Transaction> getTransactions(User user, Account account) {
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = String.format("%s=? AND %s=? AND %s=?", TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM);
@@ -224,7 +347,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             GregorianCalendar userTime = new GregorianCalendar();
             userTime.setTimeInMillis(cursor.getLong(4));
             GregorianCalendar sysTime = new GregorianCalendar();
-            sysTime.setTimeInMillis((cursor.getLong(5)));
+            sysTime.setTimeInMillis(cursor.getLong(5));
             long id = cursor.getLong(6);
             Transaction newTransaction = new Transaction(name, amount, isDeposit, category, userTime, sysTime);
             newTransaction.setID(id);
@@ -235,31 +358,61 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         return transactions;
     }
 
-    public class InvalidUserException extends Exception {
+    /**
+     * Indicates an issue with the provided User or username.
+     */
+    public static class InvalidUserException extends Exception {
+        /**
+         * Constructor
+         */
         public InvalidUserException() {
             super();
         }
 
+        /**
+         * Constructor with message
+         * @param message The message of the exception
+         */
         public InvalidUserException(String message) {
             super(message);
         }
     }
 
-    public class InvalidPasswordException extends Exception {
+    /**
+     * Indicates an issue with the provided password credential.
+     */
+    public static class InvalidPasswordException extends Exception {
+        /**
+         * Constructor.
+         */
         public InvalidPasswordException() {
             super();
         }
 
+        /**
+         * Constructor with message.
+         * @param message The message of the exception
+         */
         public InvalidPasswordException(String message) {
             super(message);
         }
     }
 
-    public class InvalidAccountException extends Exception {
+    /**
+     * Indicates an error with the provided Account instance.
+     */
+    public static class InvalidAccountException extends Exception {
+        /**
+         * Constructor.
+         */
         public InvalidAccountException() {
             super();
         }
 
+        /**
+         * Constructor with message.
+         * @param message The message of the exception
+         */
         public InvalidAccountException(String message) {
             super(message);
         }

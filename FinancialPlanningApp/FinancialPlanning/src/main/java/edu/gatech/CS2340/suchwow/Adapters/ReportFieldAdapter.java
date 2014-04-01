@@ -15,22 +15,44 @@ import edu.gatech.CS2340.suchwow.Domain.Report;
 import edu.gatech.CS2340.suchwow.R;
 
 /**
- * Created by Wayne on 3/8/14.
+ * An adapter for displaying ReportField in a ListView.
  */
 public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
 
+    /**
+     * The resource ID for a layout file containing a TextView to use when instantiating views.
+     */
     private int layoutResourceId;
+    /**
+     * The current context.
+     */
     private Context context;
+    /**
+     * The ReportFields to be displayed by the ListView.
+     */
     private List<Report.ReportField> data;
 
-    public ReportFieldAdapter(Context context, int layoutResourceId,
-                               List<Report.ReportField> data) {
-        super(context, layoutResourceId, data);
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
-        this.data = data;
+    /**
+     * Constructor.
+     * @param contextIn The current context
+     * @param layoutResourceIdIn The resource ID for a layout file containing a TextView to use when instantiating views.
+     * @param dataIn The ReportFields to be displayed by the ListView
+     */
+    public ReportFieldAdapter(Context contextIn, int layoutResourceIdIn,
+                               List<Report.ReportField> dataIn) {
+        super(contextIn, layoutResourceIdIn, dataIn);
+        this.context = contextIn;
+        this.layoutResourceId = layoutResourceIdIn;
+        this.data = dataIn;
     }
 
+    /**
+     * Creates a View from the ReportField using report_field_display.
+     * @param position The position of the view
+     * @param convertView The convert View
+     * @param parent The ViewGroup parent
+     * @return the view
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -53,8 +75,17 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
         return row;
     }
 
+    /**
+     * Used to display information about a ReportField.
+     */
     static class ReportFieldHolder {
+        /**
+         * Text view for report field name
+         */
         TextView fieldName;
+        /**
+         * Text view for report field value
+         */
         TextView fieldAmount;
     }
 }

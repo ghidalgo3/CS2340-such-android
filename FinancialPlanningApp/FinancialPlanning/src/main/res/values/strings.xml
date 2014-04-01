@@ -21,6 +21,7 @@
     <string name="title_activity_new_transaction">NewTransactionActivity</string>
 
     <string name="spending_category_report">Spending Category Report</string>
+    <string name="invalid_report">Invalid Report</string>
 
     <string-array name="transaction_categories">
         <item>Clothing</item>

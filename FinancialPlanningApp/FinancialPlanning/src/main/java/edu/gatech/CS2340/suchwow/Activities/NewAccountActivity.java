@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,7 +16,7 @@ import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class NewAccountActivity extends ActionBarActivity {
+public class NewAccountActivity extends Activity {
 
 
     EditText nameView, displayNameView, accountNumberView, accountBalanceView,
@@ -30,12 +31,12 @@ public class NewAccountActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        nameView = (EditText)this.findViewById(R.id.accountName);
-        displayNameView = (EditText)this.findViewById(R.id.accountDisplayName);
-        accountNumberView = (EditText)this.findViewById(R.id.accountName);
-        accountBalanceView = (EditText)this.findViewById(R.id.accountBalance);
-        hasInterestView = (CheckBox)this.findViewById(R.id.hasInterest);
-        interestRateView = (EditText)this.findViewById(R.id.interestRate);
+        nameView = (EditText) this.findViewById(R.id.accountName);
+        displayNameView = (EditText) this.findViewById(R.id.accountDisplayName);
+        accountNumberView = (EditText) this.findViewById(R.id.accountNumber);
+        accountBalanceView = (EditText) this.findViewById(R.id.accountBalance);
+        hasInterestView = (CheckBox) this.findViewById(R.id.hasInterest);
+        interestRateView = (EditText) this.findViewById(R.id.interestRate);
     }
 
 
@@ -58,14 +59,14 @@ public class NewAccountActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void donePressed(View view) {
-        Log.i("Check", "Made it to done pressed!!");
+    //This is only public so that the test can call it
+    public boolean validateInput() {
+        boolean valid = true;
         nameView.setError(null);
         displayNameView.setError(null);
         accountNumberView.setError(null);
         accountBalanceView.setError(null);
         interestRateView.setError(null);
-        boolean valid = true;
         if (nameView.getText().length() == 0) {
             nameView.setError("Account name missing");
             nameView.requestFocus();
@@ -75,20 +76,25 @@ public class NewAccountActivity extends ActionBarActivity {
             displayNameView.requestFocus();
             valid = false;
         } else if (accountNumberView.getText().length() == 0) {
-            displayNameView.setError("Display name name missing");
-            displayNameView.requestFocus();
+            accountNumberView.setError("Account number missing");
+            accountNumberView.requestFocus();
             valid = false;
         } else if (accountBalanceView.getText().length() == 0) {
             accountBalanceView.setError("Account balance missing");
             accountBalanceView.requestFocus();
             valid = false;
         } else if (hasInterestView.isChecked()
-                   && interestRateView.getText().length() == 0) {
-            interestRateView.setError("Account name missing");
+                && interestRateView.getText().length() == 0) {
+            interestRateView.setError("Interest checked, but no value entered");
             interestRateView.requestFocus();
             valid = false;
         }
-        if (valid) {
+        return valid;
+    }
+
+    public void donePressed(View view) {
+        Log.i("Check", "Made it to done pressed!!");
+        if (validateInput()) {
             name = nameView.getText().toString();
             displayName = displayNameView.getText().toString();
             accountNumber = accountNumberView.getText().toString();
@@ -105,9 +111,8 @@ public class NewAccountActivity extends ActionBarActivity {
             }
             //LOOK AT US USING THAT SINGLETON DESIGN PATTERN, EXTRA CREDIT POINTS PLS
             User currentUser = User.getCurrentUser();
-            SQLiteHandler handler = new SQLiteHandler(this);
             try {
-                handler.addAccount(currentUser, newAccount);
+                currentUser.setContext(this);
                 currentUser.addAccount(newAccount);
                 Intent goBack = new Intent(this, AccountsActivity.class);
                 startActivity(goBack);
@@ -117,10 +122,4 @@ public class NewAccountActivity extends ActionBarActivity {
             }
         }
     }
-
-
-
-
-
-
 }

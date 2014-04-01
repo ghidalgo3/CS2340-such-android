@@ -37,20 +37,30 @@ public class RegisterActivity extends Activity {
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private UserRegisterTask mAuthTask = null;
 
-    // Values for email and password at the time of the login attempt.
-    private String mUsername;
-    private String mPassword;
+    /**
+     *  Values for email and password at the time of the login attempt.
+     */
+    private String mUsername, mPassword;
 
-    // UI references.
-    private EditText mUsernameView;
-    private EditText mPasswordView;
-    private View mLoginFormView;
-    private View mLoginStatusView;
+    /**
+     * Input EditText Views.
+     */
+    private EditText mUsernameView, mPasswordView;
+    /**
+     * Animation views.
+     */
+    private View mRegisterFormView, mRegisterStatusView;
+    /**
+     * Status message display.
+     */
     private TextView mRegisterStatusMessageView;
 
     @Override
+    /**
+     * Lifecycle method.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -63,27 +73,31 @@ public class RegisterActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptRegister();
                     return true;
                 }
                 return false;
             }
         });
-        mLoginFormView = findViewById(R.id.login_form);
-        mLoginStatusView = findViewById(R.id.login_status);
+        mRegisterFormView = findViewById(R.id.login_form);
+        mRegisterStatusView = findViewById(R.id.login_status);
         mRegisterStatusMessageView = (TextView) findViewById(
                                          R.id.register_status_message);
         findViewById(R.id.sign_in_button).setOnClickListener(new
         View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptRegister();
             }
         });
     }
 
 
     @Override
+    /**
+     * Inflates the Menu in this activity.
+     * @return always return true
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.register, menu);
@@ -95,7 +109,7 @@ public class RegisterActivity extends Activity {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptLogin() {
+    public void attemptRegister() {
         if (mAuthTask != null) {
             return;
         }
@@ -140,7 +154,7 @@ public class RegisterActivity extends Activity {
             // perform the user login attempt.
             mRegisterStatusMessageView.setText(R.string.register_progress_registering);
             showProgress(true);
-            mAuthTask = new UserLoginTask();
+            mAuthTask = new UserRegisterTask();
             mAuthTask.execute((Void) null);
         }
     }
@@ -156,31 +170,31 @@ public class RegisterActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(
                                     android.R.integer.config_shortAnimTime);
-            mLoginStatusView.setVisibility(View.VISIBLE);
-            mLoginStatusView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 1 : 0)
-            .setListener(new AnimatorListenerAdapter() {
+            mRegisterStatusView.setVisibility(View.VISIBLE);
+            mRegisterStatusView.animate()
+                .setDuration(shortAnimTime)
+                .alpha(show ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    mRegisterStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
-            mLoginFormView.setVisibility(View.VISIBLE);
-            mLoginFormView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 0 : 1)
-            .setListener(new AnimatorListenerAdapter() {
+            mRegisterFormView.setVisibility(View.VISIBLE);
+            mRegisterFormView.animate()
+                .setDuration(shortAnimTime)
+                .alpha(show ? 0 : 1)
+                .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mRegisterStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -188,10 +202,13 @@ public class RegisterActivity extends Activity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
         @Override
+        /**
+         * Animation start method.
+         * @param Void varargs
+         */
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             try {
                 // Simulate network access.
                 Thread.sleep(1000);
@@ -209,6 +226,10 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
+        /**
+         * Animation end method.
+         * @param boolean success
+         */
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
@@ -221,6 +242,9 @@ public class RegisterActivity extends Activity {
         }
 
         @Override
+        /**
+         * Called if animation is cancelled.
+         */
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);

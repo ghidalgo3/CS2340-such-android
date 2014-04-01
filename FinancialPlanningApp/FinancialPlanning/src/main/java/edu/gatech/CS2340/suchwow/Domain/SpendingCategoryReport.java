@@ -5,19 +5,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.gatech.CS2340.suchwow.Domain.Report;
-import edu.gatech.CS2340.suchwow.Domain.Transaction;
 
 /**
- * Created by Wayne on 3/8/14.
+ * A report which aggregates withdrawal transactions into their categories
+ * for transactions within a given date range.
  */
 public class SpendingCategoryReport extends Report {
 
+    /**
+     * Constructor.
+     * @param start The start date of the report
+     * @param end The end date of the report
+     * @param transactions The transactions to be processed
+     */
     public SpendingCategoryReport(Calendar start, Calendar end, List<Transaction> transactions) {
         super(start, end, transactions);
         generateReport();
     }
 
+    /**
+     * Iterates through transactions and aggregates transaction data by category.
+     */
     @Override
     protected void generateReport() {
         float total = 0;
@@ -35,8 +43,8 @@ public class SpendingCategoryReport extends Report {
                 total += t.getAmount();
             }
         }
-        for(String key : fields.keySet()) {
-            reportFields.add(new ReportField(key, fields.get(key)));
+        for (Map.Entry<String, Float> entry : fields.entrySet()) {
+            reportFields.add(new ReportField(entry.getKey(), entry.getValue()));
         }
         reportFields.add(new ReportField("Total", total));
     }

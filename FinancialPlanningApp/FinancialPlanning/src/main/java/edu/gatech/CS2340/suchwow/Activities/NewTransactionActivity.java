@@ -1,7 +1,7 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,28 +15,49 @@ import java.util.GregorianCalendar;
 
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.R;
-import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
-import edu.gatech.CS2340.suchwow.Domain.User;
 
-public class NewTransactionActivity extends ActionBarActivity {
+/**
+ * The NewTransactionActivity handles the creation of new transactions.
+ */
+public class NewTransactionActivity extends Activity {
+    /**
+     * Name and Amount views allow entering the name and amount.
+     */
     EditText nameView, amountView;
+    /**
+     * The date the user enters.
+     */
     DatePicker userDate;
+    /**
+     * The radio buttons for type.
+     */
     RadioGroup radioButtons;
+    /**
+     * For transaction category.
+     */
     Spinner categories;
 
+    /**
+     * Set's up our variables with the fields we need.
+     * @param savedInstanceState We just pass this to our superclass.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
-        nameView = (EditText)this.findViewById(R.id.transactionNameTextBox);
-        amountView = (EditText)this.findViewById(R.id.transactionAmountTextBox);
-        userDate = (DatePicker)this.findViewById(R.id.transactionDatePicker);
-        radioButtons = (RadioGroup)this.findViewById(R.id.radioButtons);
-        categories = (Spinner)this.findViewById(R.id.category_spinner);
+        nameView = (EditText) this.findViewById(R.id.transactionNameTextBox);
+        amountView = (EditText) this.findViewById(R.id.transactionAmountTextBox);
+        userDate = (DatePicker) this.findViewById(R.id.transactionDatePicker);
+        radioButtons = (RadioGroup) this.findViewById(R.id.radioButtons);
+        categories = (Spinner) this.findViewById(R.id.category_spinner);
     }
 
-
+    /**
+     * Set up the action bar.
+     * @param menu Passed to inflate
+     * @return Always success!
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -44,6 +65,10 @@ public class NewTransactionActivity extends ActionBarActivity {
         return true;
     }
 
+    /**
+     * Validate the user input and create a new Transaction, add it to the current Account.
+     * @param view We don't use it.
+     */
     public void donePressed(View view) {
         boolean valid = true;
         if (nameView.getText().length() == 0) {
@@ -59,25 +84,25 @@ public class NewTransactionActivity extends ActionBarActivity {
             float transactionAmount = new Float(amountView.getText().toString());
             int selectedRadio = radioButtons.getCheckedRadioButtonId();
             boolean isDeposit = selectedRadio == R.id.radio_deposit;
-            String category = (String)categories.getSelectedItem();
+            String category = (String) categories.getSelectedItem();
             Transaction transaction = new Transaction(transactionName, transactionAmount,
                     isDeposit, category,
                     new GregorianCalendar(userDate.getYear(), userDate.getMonth(), userDate.getDayOfMonth()),
                     new GregorianCalendar());
             Account currentAccount = Account.getCurrentAccount();
-            SQLiteHandler handler = new SQLiteHandler(this);
-            try {
-                //SQLite code
-                currentAccount.addTransaction(transaction);
-                handler.addTransaction(User.getCurrentUser(), currentAccount, transaction);
-                startActivity(new Intent(this, IndividualAccountActivity.class));
-            } catch (/*Some SQL exception*/ Exception ex) {
-                nameView.setError(ex.getMessage());
-                nameView.requestFocus();
-            }
+
+            currentAccount.setContext(this);
+            currentAccount.addTransaction(transaction);
+            startActivity(new Intent(this, IndividualAccountActivity.class));
+
         }
     }
 
+    /**
+     * Handle action bar item clicks.
+     * @param item The item clicked
+     * @return Success, or the result of our super call.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

@@ -1,5 +1,6 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,16 +10,12 @@ import android.widget.Button;
 
 import edu.gatech.CS2340.suchwow.R;
 
-public class MainActivity extends ActionBarActivity {
-
-    private Button login, register;
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login = (Button)this.findViewById(R.id.login);
-        register = (Button)this.findViewById(R.id.register);
     }
 
 
