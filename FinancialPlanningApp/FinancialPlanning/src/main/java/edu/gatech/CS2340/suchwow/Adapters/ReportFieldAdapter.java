@@ -79,7 +79,13 @@ public class ReportFieldAdapter extends ArrayAdapter<Report.ReportField> {
      * Used to display information about a ReportField.
      */
     static class ReportFieldHolder {
+        /**
+         * Text view for report field name
+         */
         TextView fieldName;
+        /**
+         * Text view for report field value
+         */
         TextView fieldAmount;
     }
 }

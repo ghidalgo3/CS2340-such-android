@@ -1,9 +1,9 @@
 package edu.gatech.CS2340.suchwow.Persistence;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -133,18 +133,18 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         String createUsersTable = "CREATE TABLE " + TABLE_USERS + "("
                                     + USERS_NAME + " TEXT PRIMARY KEY," + USERS_PASSWORD + " TEXT NOT NULL)";
         db.execSQL(createUsersTable);
-        String createAccountsTable = String.format("CREATE TABLE %s " +
-                                       "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, " +
-                                       "PRIMARY KEY (%s, %s, %s), " +
-                                       "FOREIGN KEY (%s) REFERENCES %s(%s))", TABLE_ACCOUNTS, ACCOUNTS_USER,
+        String createAccountsTable = String.format("CREATE TABLE %s "
+                                       + "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, "
+                                       + "PRIMARY KEY (%s, %s, %s), "
+                                       + "FOREIGN KEY (%s) REFERENCES %s(%s))", TABLE_ACCOUNTS, ACCOUNTS_USER,
                                        ACCOUNTS_NAME,
                                        ACCOUNTS_NUMBER, ACCOUNTS_DISPLAY, ACCOUNTS_BALANCE, ACCOUNTS_INTEREST,
                                        ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER, ACCOUNTS_USER, TABLE_USERS,
                                        USERS_NAME);
         db.execSQL(createAccountsTable);
-        String createTransactionsTable = String.format("CREATE TABLE %s" +
-                "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, " +
-                "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
+        String createTransactionsTable = String.format("CREATE TABLE %s"
+                + "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s INTEGER, %s INTEGER, %s INTEGER, "
+                + "FOREIGN KEY (%s, %s, %s) REFERENCES %s(%s, %s, %s))",
                 TABLE_TRANSACTIONS, TRANS_CAT, TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM, TRANS_NAME,
                 TRANS_AMOUNT, TRANS_ISDEPOSIT, TRANS_USERTIME, TRANS_SYSTIME,
                 TRANS_USER, TRANS_ACCNAME, TRANS_ACCNUM,
@@ -191,7 +191,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // insert username and password into table
         try {
             db.insertOrThrow(TABLE_USERS, null, values);
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new InvalidUserException("User already exists in database");
         } finally {
             db.close(); // Closing database connection
@@ -219,7 +219,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // insert username and password into table
         try {
             db.insertOrThrow(TABLE_ACCOUNTS, null, values);
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new InvalidAccountException("Identical account already exists for user");
         } finally {
             db.close(); // Closing database connection
@@ -249,10 +249,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         transaction.setID(db.insert(TABLE_TRANSACTIONS, null, values));
 
         // need to update stored account balance too
-        ContentValues account_vals = new ContentValues();
-        account_vals.put(ACCOUNTS_BALANCE, account.getBalance());
+        ContentValues accountVals = new ContentValues();
+        accountVals.put(ACCOUNTS_BALANCE, account.getBalance());
         String whereClause = String.format("%s=? AND %s=? AND %s=?", ACCOUNTS_USER, ACCOUNTS_NAME, ACCOUNTS_NUMBER);
-        db.update(TABLE_ACCOUNTS, account_vals, whereClause, new String[] {user.getName(), account.getName(), account.getAccountNumber()});
+        db.update(TABLE_ACCOUNTS, accountVals, whereClause, new String[] {user.getName(), account.getName(), account.getAccountNumber()});
 
         db.close();
     }
@@ -362,10 +362,17 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * Indicates an issue with the provided User or username.
      */
     public static class InvalidUserException extends Exception {
+        /**
+         * Constructor
+         */
         public InvalidUserException() {
             super();
         }
 
+        /**
+         * Constructor with message
+         * @param message The message of the exception
+         */
         public InvalidUserException(String message) {
             super(message);
         }
