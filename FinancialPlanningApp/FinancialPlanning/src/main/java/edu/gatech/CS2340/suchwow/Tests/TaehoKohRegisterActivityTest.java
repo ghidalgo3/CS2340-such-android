@@ -58,7 +58,7 @@ public class TaehoKohRegisterActivityTest extends ActivityInstrumentationTestCas
         android.os.SystemClock.sleep(1000);
         registerActivity.runOnUiThread(attemptRegister);
         android.os.SystemClock.sleep(1000);
-        assertEquals(registerActivity.getString(R.string.error_field_required), mUsernameView.getError());
+        assertEquals("Only alphanumeric characters allowed.", mUsernameView.getError());
         android.os.SystemClock.sleep(1000);
         registerActivity.runOnUiThread(new Runnable() {
             @Override
