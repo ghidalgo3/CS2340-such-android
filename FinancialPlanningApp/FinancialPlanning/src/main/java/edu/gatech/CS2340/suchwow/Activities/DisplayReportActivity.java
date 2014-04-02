@@ -1,9 +1,9 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -71,8 +71,8 @@ public class DisplayReportActivity extends Activity {
         int endDay = b.getInt("endDay");
         GregorianCalendar startDate = new GregorianCalendar(startYear, startMonth, startDay);
         GregorianCalendar endDate = new GregorianCalendar(endYear, endMonth, endDay);
-        Log.v("ReportCreation", String.format("%d %d %d %d %d %d", startYear, startMonth,
-                startDay, endYear, endMonth, endDay));
+//        Log.v("ReportCreation", String.format("%d %d %d %d %d %d", startYear, startMonth,
+//                startDay, endYear, endMonth, endDay));
         dateFormatter = new SimpleDateFormat("MMM d, yyyy");
         switch (b.getInt("radioButton")) {
             case R.id.spendingCatRadioButton:
