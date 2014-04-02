@@ -243,7 +243,7 @@ public class LoginActivity extends Activity {
              * 2: invalid password
              * -1: unknown error
              */
-            userlogintask try {
+            try {
                 // Simulate network access.
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
