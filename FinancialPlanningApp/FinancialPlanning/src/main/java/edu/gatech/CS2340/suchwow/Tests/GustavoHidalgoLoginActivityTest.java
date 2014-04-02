@@ -56,20 +56,20 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
         };
 
         //Account name
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(attemptLogin);
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         assertEquals(loginActivity.getString(R.string.error_field_required), mUsernameView.getError());
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mUsernameView.setText("Gary Oak");
             }
         });
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(attemptLogin);
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         assertEquals(null, mUsernameView.getError());
         loginActivity.runOnUiThread(new Runnable() {
             @Override
@@ -77,9 +77,9 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
                 mPasswordView.setText("");
             }
         });
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(attemptLogin);
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         assertEquals(loginActivity.getString(R.string.error_field_required), mPasswordView.getError());
         loginActivity.runOnUiThread(new Runnable() {
             @Override
@@ -87,9 +87,9 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
                 mPasswordView.setText("pas");
             }
         });
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(attemptLogin);
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         assertEquals(loginActivity.getString(R.string.error_invalid_password), mPasswordView.getError());
         loginActivity.runOnUiThread(new Runnable() {
             @Override
@@ -97,7 +97,7 @@ public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTest
                 mPasswordView.setText("password");
             }
         });
-        android.os.SystemClock.sleep(1000);
+        android.os.SystemClock.sleep(500);
         loginActivity.runOnUiThread(attemptLogin);
         android.os.SystemClock.sleep(1000);
         assertEquals(null, mPasswordView.getError());
