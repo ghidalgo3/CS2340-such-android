@@ -363,14 +363,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      */
     public static class InvalidUserException extends Exception {
         /**
-         * Constructor
+         * Constructor.,
          */
         public InvalidUserException() {
             super();
         }
 
         /**
-         * Constructor with message
+         * Constructor with message.
          * @param message The message of the exception
          */
         public InvalidUserException(String message) {
