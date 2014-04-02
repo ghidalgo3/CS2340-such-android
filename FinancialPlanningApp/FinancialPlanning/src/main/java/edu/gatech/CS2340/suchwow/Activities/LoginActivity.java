@@ -46,17 +46,48 @@ public class LoginActivity extends Activity {
      */
     private UserLoginTask mAuthTask = null;
 
-    // Values for email and password at the time of the login attempt.
+    /**
+     *  Value for username at the time of the login attempt.
+     */
     private String mUsername;
+
+    /**
+     * Value for password at the time of login attempt.
+     */
     private String mPassword;
 
     // UI references.
+    /**
+     *  Displays user input in the Username section
+     */
     private EditText mUsernameView;
+
+    /**
+     * Displays user input in the Password section
+     */
     private EditText mPasswordView;
+
+    /**
+     * The view for the login
+     */
     private View mLoginFormView;
+
+    /**
+     * The view showing login status
+     */
     private View mLoginStatusView;
+
+    /**
+     * Displayed text of the login status
+     */
     private TextView mLoginStatusMessageView;
 
+    /**
+     *
+     * Set's up our variables with the fields we need.
+     *
+     * @param savedInstanceState This is passed to the superclass
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +121,12 @@ public class LoginActivity extends Activity {
         });
     }
 
-
+    /**
+     *
+     * Sets up action bar
+     * @param menu passed to inflate
+     * @return Always success
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -147,6 +183,7 @@ public class LoginActivity extends Activity {
 
     /**
      * Shows the progress UI and hides the login form.
+     * @param show determines whether or not to show progress
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -190,6 +227,12 @@ public class LoginActivity extends Activity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 
+        /**
+         * Verifies if user information entered is valid
+         *
+         * @param params information for logging in
+         * @return Integer that describes result
+         */
         @Override
         protected Integer doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -200,7 +243,7 @@ public class LoginActivity extends Activity {
              * 2: invalid password
              * -1: unknown error
              */
-            try {
+            userlogintask try {
                 // Simulate network access.
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -220,6 +263,13 @@ public class LoginActivity extends Activity {
             // TODO: register the new account here.
             //            return true;
         }
+
+        /**
+         *
+         * Displays status regarding attempted login
+         *
+         * @param returnCode Result from doInBackground()
+         */
 
         @Override
         protected void onPostExecute(final Integer returnCode) {
@@ -241,6 +291,11 @@ public class LoginActivity extends Activity {
             }
         }
 
+        /**
+         *
+         * Ends log in attempt and progress animation.
+         *
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;
