@@ -44,7 +44,10 @@ public class DisplayReportActivity extends Activity {
      * An Activity that processes the parameters from GenerateReportActivity.
      */
     private SimpleDateFormat dateFormatter;
-    Report report;
+    /**
+     * Report reference that is going to be generated.
+     */
+    private Report report;
 
     /**
      * This function creates the menu that the user sees before generating the report.

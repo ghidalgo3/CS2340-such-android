@@ -10,9 +10,15 @@ import edu.gatech.CS2340.suchwow.R;
  * Created by Gustavo on 3/31/14.
  */
 public class GustavoHidalgoLoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
-    LoginActivity loginActivity;
-    private EditText mUsernameView;
-    private EditText mPasswordView;
+
+    /**
+     * Reference to Activity to test
+     */
+    private LoginActivity loginActivity;
+    /**
+     * References for views used for testing
+     */
+    private EditText mUsernameView, mPasswordView;
 
     /**
      * Set up the ActivityUnitTestCase with the class we're testing.

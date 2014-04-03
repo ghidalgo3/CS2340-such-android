@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Abstract class to represent a report which can be generated from a given list of transactions.
  */
-public abstract  class Report {
+public abstract class Report {
     /**
      * The start date of the report.
      */

@@ -2,8 +2,6 @@ package edu.gatech.CS2340.suchwow.Tests;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
-
-import edu.gatech.CS2340.suchwow.Activities.LoginActivity;
 import edu.gatech.CS2340.suchwow.Activities.RegisterActivity;
 import edu.gatech.CS2340.suchwow.R;
 
@@ -60,7 +58,7 @@ public class EvanMoscosoRegisterActivityTest extends ActivityInstrumentationTest
         android.os.SystemClock.sleep(1000);
         registerActivity.runOnUiThread(attemptRegister);
         android.os.SystemClock.sleep(1000);
-        assertEquals(registerActivity.getString(R.string.error_field_required), mUsernameView.getError());
+        assertEquals("Only alphanumeric characters allowed.", mUsernameView.getError());
         android.os.SystemClock.sleep(1000);
         registerActivity.runOnUiThread(new Runnable() {
             @Override
@@ -71,7 +69,7 @@ public class EvanMoscosoRegisterActivityTest extends ActivityInstrumentationTest
         android.os.SystemClock.sleep(1000);
         registerActivity.runOnUiThread(attemptRegister);
         android.os.SystemClock.sleep(1000);
-        assertEquals(null, mUsernameView.getError());
+        assertEquals("Only alphanumeric characters allowed.", mUsernameView.getError());
         registerActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

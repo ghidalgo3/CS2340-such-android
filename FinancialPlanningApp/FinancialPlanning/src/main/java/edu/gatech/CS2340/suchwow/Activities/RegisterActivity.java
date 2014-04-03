@@ -84,8 +84,7 @@ public class RegisterActivity extends Activity {
         mRegisterStatusMessageView = (TextView) findViewById(
                 R.id.register_status_message);
         findViewById(R.id.sign_in_button)
-                .setOnClickListener(new
-                                            View.OnClickListener() {
+                .setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
                                                     attemptRegister();
