@@ -3,8 +3,6 @@ package edu.gatech.CS2340.suchwow.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +10,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import edu.gatech.CS2340.suchwow.Domain.Account;
-import edu.gatech.CS2340.suchwow.R;
-import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.R;
+
+//import android.util.Log;
 
 /**
  * The NewAccountActivity handles the creation of new accounts.
@@ -24,10 +24,8 @@ public class NewAccountActivity extends Activity {
 
     /**
      * Views that allow user entering name,display name, account number, account balance, and interest rate.
-     *
      */
-    EditText nameView, displayNameView, accountNumberView, accountBalanceView,
-             interestRateView;
+    EditText nameView, displayNameView, accountNumberView, accountBalanceView, interestRateView;
 
     /**
      * A check box that enables interest.
@@ -35,7 +33,7 @@ public class NewAccountActivity extends Activity {
     CheckBox hasInterestView;
 
     /**
-     *  These hold the name, display name, and account number.
+     * These hold the name, display name, and account number.
      */
     String name, displayName, accountNumber;
 
@@ -50,7 +48,7 @@ public class NewAccountActivity extends Activity {
     boolean hasInterest;
 
     /**
-     * Sets up variables with the fields we need
+     * Sets up variables with the fields we need.
      *
      * @param savedInstanceState Passed into superclass
      */
@@ -68,6 +66,7 @@ public class NewAccountActivity extends Activity {
 
     /**
      * Sets up action bar.
+     *
      * @param menu Passed to inflate.
      * @return Always success.
      */
@@ -79,8 +78,8 @@ public class NewAccountActivity extends Activity {
     }
 
     /**
+     * Handles action bar item clicks.
      *
-     * Handles action bar item clicks
      * @param item item that is clicked.
      * @return Always success(eventually)
      */
@@ -97,8 +96,10 @@ public class NewAccountActivity extends Activity {
     }
 
     //This is only public so that the test can call it
-     /**
+
+    /**
      * This validates input.
+     *
      * @return true or false depending on errors.
      */
     public boolean validateInput() {
@@ -135,6 +136,7 @@ public class NewAccountActivity extends Activity {
 
     /**
      * Validate user input and create new account, add it to the current User.
+     *
      * @param view We don't use it.
      */
     public void donePressed(View view) {

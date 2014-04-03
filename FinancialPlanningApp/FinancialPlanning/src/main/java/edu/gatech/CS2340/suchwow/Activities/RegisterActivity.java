@@ -18,9 +18,9 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import edu.gatech.CS2340.suchwow.R;
-import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.R;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -32,7 +32,7 @@ public class RegisterActivity extends Activity {
      * The default email to populate the email field with.
      */
     public static final String EXTRA_EMAIL =
-        "com.example.android.authenticatordemo.extra.EMAIL";
+            "com.example.android.authenticatordemo.extra.EMAIL";
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -40,7 +40,7 @@ public class RegisterActivity extends Activity {
     private UserRegisterTask mAuthTask = null;
 
     /**
-     *  Values for email and password at the time of the login attempt.
+     * Values for email and password at the time of the login attempt.
      */
     private String mUsername, mPassword;
 
@@ -82,14 +82,15 @@ public class RegisterActivity extends Activity {
         mRegisterFormView = findViewById(R.id.login_form);
         mRegisterStatusView = findViewById(R.id.login_status);
         mRegisterStatusMessageView = (TextView) findViewById(
-                                         R.id.register_status_message);
-        findViewById(R.id.sign_in_button).setOnClickListener(new
-        View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptRegister();
-            }
-        });
+                R.id.register_status_message);
+        findViewById(R.id.sign_in_button)
+                .setOnClickListener(new
+                                            View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    attemptRegister();
+                                                }
+                                            });
     }
 
 
@@ -161,6 +162,8 @@ public class RegisterActivity extends Activity {
 
     /**
      * Shows the progress UI and hides the login form.
+     *
+     * @param show show the progress
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -169,27 +172,27 @@ public class RegisterActivity extends Activity {
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(
-                                    android.R.integer.config_shortAnimTime);
+                    android.R.integer.config_shortAnimTime);
             mRegisterStatusView.setVisibility(View.VISIBLE);
             mRegisterStatusView.animate()
-                .setDuration(shortAnimTime)
-                .alpha(show ? 1 : 0)
-                .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mRegisterStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
+                    .setDuration(shortAnimTime)
+                    .alpha(show ? 1 : 0)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mRegisterStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+                        }
+                    });
             mRegisterFormView.setVisibility(View.VISIBLE);
             mRegisterFormView.animate()
-                .setDuration(shortAnimTime)
-                .alpha(show ? 0 : 1)
-                .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+                    .setDuration(shortAnimTime)
+                    .alpha(show ? 0 : 1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                        }
+                    });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.

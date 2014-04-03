@@ -9,10 +9,10 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import edu.gatech.CS2340.suchwow.Domain.Account;
-import edu.gatech.CS2340.suchwow.R;
-import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Adapters.TransactionArrayAdapter;
+import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.Domain.Transaction;
+import edu.gatech.CS2340.suchwow.R;
 
 /**
  * The activity that handles a single account.
@@ -30,6 +30,7 @@ public class IndividualAccountActivity extends Activity {
     /**
      * This function gets the currentAccount and screen, and sets up the adapter to display
      * transactions.
+     *
      * @param savedInstanceState What android passes in. We don't deal with it except for the super
      *                           call.
      */
@@ -43,12 +44,13 @@ public class IndividualAccountActivity extends Activity {
         List<Transaction> transactions = currentAccount.getTransactions();
         if (!transactions.isEmpty()) {
             screen.setAdapter(new TransactionArrayAdapter(this,
-                              R.layout.transaction_display, transactions));
+                    R.layout.transaction_display, transactions));
         }
     }
 
     /**
      * Sets up the options menu.
+     *
      * @param menu Used to inflate the menu (action bar stuff)
      * @return Sucess. Always sucess!
      */
@@ -61,6 +63,7 @@ public class IndividualAccountActivity extends Activity {
 
     /**
      * If someone clicks on add transaction, we fire up and start a NewTransactionActivity activity.
+     *
      * @param item The item clicked on
      * @return The result of our super call of onOptionsItemSelected.
      */

@@ -17,12 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.gatech.CS2340.suchwow.Domain.User;
-import edu.gatech.CS2340.suchwow.R;
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.R;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
+ *
  * @author Gustavo Hidalgo
  */
 public class LoginActivity extends Activity {
@@ -39,7 +40,7 @@ public class LoginActivity extends Activity {
      * The default email to populate the email field with.
      */
     public static final String EXTRA_EMAIL =
-        "com.example.android.authenticatordemo.extra.EMAIL";
+            "com.example.android.authenticatordemo.extra.EMAIL";
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -47,7 +48,7 @@ public class LoginActivity extends Activity {
     private UserLoginTask mAuthTask = null;
 
     /**
-     *  Value for username at the time of the login attempt.
+     * Value for username at the time of the login attempt.
      */
     private String mUsername;
 
@@ -58,32 +59,31 @@ public class LoginActivity extends Activity {
 
     // UI references.
     /**
-     *  Displays user input in the Username section
+     * Displays user input in the Username section.
      */
     private EditText mUsernameView;
 
     /**
-     * Displays user input in the Password section
+     * Displays user input in the Password section.
      */
     private EditText mPasswordView;
 
     /**
-     * The view for the login
+     * The view for the login.
      */
     private View mLoginFormView;
 
     /**
-     * The view showing login status
+     * The view showing login status.
      */
     private View mLoginStatusView;
 
     /**
-     * Displayed text of the login status
+     * Displayed text of the login status.
      */
     private TextView mLoginStatusMessageView;
 
     /**
-     *
      * Set's up our variables with the fields we need.
      *
      * @param savedInstanceState This is passed to the superclass
@@ -96,7 +96,7 @@ public class LoginActivity extends Activity {
         mUsername = getIntent().getStringExtra(EXTRA_EMAIL); //returns null, pretty sure
         mUsernameView = (EditText) findViewById(R.id.email);
         mUsernameView.setText(
-            mUsername); //because mUsername returns null, change nothing
+                mUsername); //because mUsername returns null, change nothing
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -112,18 +112,20 @@ public class LoginActivity extends Activity {
         mLoginFormView = findViewById(R.id.login_form);
         mLoginStatusView = findViewById(R.id.login_status);
         mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-        findViewById(R.id.sign_in_button).setOnClickListener(new
-        View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        findViewById(R.id.sign_in_button)
+                .setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                attemptLogin();
+                            }
+                        }
+                );
     }
 
     /**
+     * Sets up action bar.
      *
-     * Sets up action bar
      * @param menu passed to inflate
      * @return Always success
      */
@@ -183,6 +185,7 @@ public class LoginActivity extends Activity {
 
     /**
      * Shows the progress UI and hides the login form.
+     *
      * @param show determines whether or not to show progress
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -192,27 +195,27 @@ public class LoginActivity extends Activity {
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(
-                                    android.R.integer.config_shortAnimTime);
+                    android.R.integer.config_shortAnimTime);
             mLoginStatusView.setVisibility(View.VISIBLE);
             mLoginStatusView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 1 : 0)
-            .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
+                    .setDuration(shortAnimTime)
+                    .alpha(show ? 1 : 0)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+                        }
+                    });
             mLoginFormView.setVisibility(View.VISIBLE);
             mLoginFormView.animate()
-            .setDuration(shortAnimTime)
-            .alpha(show ? 0 : 1)
-            .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+                    .setDuration(shortAnimTime)
+                    .alpha(show ? 0 : 1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                        }
+                    });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
@@ -228,7 +231,7 @@ public class LoginActivity extends Activity {
     public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 
         /**
-         * Verifies if user information entered is valid
+         * Verifies if user information entered is valid.
          *
          * @param params information for logging in
          * @return Integer that describes result
@@ -265,8 +268,7 @@ public class LoginActivity extends Activity {
         }
 
         /**
-         *
-         * Displays status regarding attempted login
+         * Displays status regarding attempted login.
          *
          * @param returnCode Result from doInBackground()
          */
@@ -292,9 +294,7 @@ public class LoginActivity extends Activity {
         }
 
         /**
-         *
          * Ends log in attempt and progress animation.
-         *
          */
         @Override
         protected void onCancelled() {

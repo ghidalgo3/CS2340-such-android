@@ -3,7 +3,6 @@ package edu.gatech.CS2340.suchwow.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +12,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.Adapters.AccountArrayAdapter;
-import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.R;
 
 /**
  * Activity displays a list of current accounts, each account is clickable.
+ *
  * @author Gustavo Hidalgo
  * @version 1.0
  */
@@ -47,13 +47,13 @@ public class AccountsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
-        screen = (ListView)this.findViewById(R.id.accountsListView);
+        screen = (ListView) this.findViewById(R.id.accountsListView);
         screen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Account.setCurrentAccount(User.getCurrentUser().getAccounts().get(i));
                 startActivity(new Intent(AccountsActivity.this,
-                                         IndividualAccountActivity.class));
+                        IndividualAccountActivity.class));
             }
         });
         //        welcomeMessage = (TextView)this.findViewById(R.id.welcomeMessage);
@@ -62,7 +62,7 @@ public class AccountsActivity extends Activity {
         List<Account> accounts = currentUser.getAccounts();
         if (!accounts.isEmpty()) {
             screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
-                              accounts));
+                    accounts));
         }
     }
 
@@ -91,8 +91,7 @@ public class AccountsActivity extends Activity {
         if (id == R.id.add_account) {
             Intent newAccount = new Intent(this, NewAccountActivity.class);
             startActivity(newAccount);
-        }
-        else if (id == R.id.generate_spending_report) {
+        } else if (id == R.id.generate_spending_report) {
             Intent newReport = new Intent(this, GenerateReportActivity.class);
             startActivity(newReport);
         }

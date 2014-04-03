@@ -5,10 +5,12 @@ import android.widget.EditText;
 
 import edu.gatech.CS2340.suchwow.Activities.RegisterActivity;
 import edu.gatech.CS2340.suchwow.R;
+
 /**
  * Created by John Taeho Koh on 3/31/14.
  */
-public class TaehoKohRegisterActivityTest extends ActivityInstrumentationTestCase2<RegisterActivity>{
+public class TaehoKohRegisterActivityTest
+        extends ActivityInstrumentationTestCase2<RegisterActivity> {
     RegisterActivity registerActivity;
     private EditText mUsernameView;
     private EditText mPasswordView;
@@ -22,6 +24,7 @@ public class TaehoKohRegisterActivityTest extends ActivityInstrumentationTestCas
 
     /**
      * Get all the fields we'll be using and start the activity.
+     *
      * @throws Exception super.setUp throws Exception
      */
     @Override
@@ -35,6 +38,7 @@ public class TaehoKohRegisterActivityTest extends ActivityInstrumentationTestCas
 
     /**
      * Just call super.tearDown().
+     *
      * @throws Exception super.tearDown() throws Exception
      */
     @Override
