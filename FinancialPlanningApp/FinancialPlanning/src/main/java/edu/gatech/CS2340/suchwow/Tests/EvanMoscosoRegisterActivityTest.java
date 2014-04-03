@@ -55,11 +55,6 @@ public class EvanMoscosoRegisterActivityTest extends ActivityInstrumentationTest
                 registerActivity.attemptRegister();
             }
         };
-            @Override
-            public void run() {
-                registerActivity.attemptRegister();
-            }
-        };
 
         //Account name
         android.os.SystemClock.sleep(1000);
