@@ -3,6 +3,7 @@ package edu.gatech.CS2340.suchwow.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ import edu.gatech.CS2340.suchwow.R;
  * @author Gustavo Hidalgo
  * @version 1.0
  */
-public class AccountsActivity extends Activity {
+public class AccountsActivity extends ActionBarActivity {
 
     /**
      * Singleton user.
@@ -75,7 +76,7 @@ public class AccountsActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) { //DO NOT DELETE
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.accounts, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

@@ -6,5 +6,6 @@
     <item android:id="@+id/add_transaction"
         android:title="@string/add_transaction"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_action_new"
+        app:showAsAction="ifRoom" />
 </menu>

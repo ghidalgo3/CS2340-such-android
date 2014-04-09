@@ -1,8 +1,10 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -17,7 +19,7 @@ import edu.gatech.CS2340.suchwow.R;
 /**
  * The activity that handles a single account.
  */
-public class IndividualAccountActivity extends Activity {
+public class IndividualAccountActivity extends ActionBarActivity {
     /**
      * The account we're working with.
      */
@@ -46,6 +48,7 @@ public class IndividualAccountActivity extends Activity {
             screen.setAdapter(new TransactionArrayAdapter(this,
                     R.layout.transaction_display, transactions));
         }
+        this.setTitle(currentAccount.getName());
     }
 
     /**
