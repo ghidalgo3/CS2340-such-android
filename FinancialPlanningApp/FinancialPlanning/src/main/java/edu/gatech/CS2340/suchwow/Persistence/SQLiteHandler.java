@@ -22,7 +22,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Current version of the database.
      */
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     /**
      * The name of the database.
      */
@@ -42,6 +42,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      */
     private static final String USERS_PASSWORD = "password";
 
+    /**
+     * Column name of the salt column in the Users table
+     */
+    private static final String USERS_SALT = "salt";
     /**
      * Name of the Accounts table.
      */
@@ -130,8 +134,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create tables
-        String createUsersTable = "CREATE TABLE " + TABLE_USERS + "("
-                                    + USERS_NAME + " TEXT PRIMARY KEY," + USERS_PASSWORD + " TEXT NOT NULL)";
+        String createUsersTable = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY, %s TEXT NOT NULL, %s TEXT NOT NULL)",
+                TABLE_USERS, USERS_NAME, USERS_PASSWORD, USERS_SALT);
         db.execSQL(createUsersTable);
         String createAccountsTable = String.format("CREATE TABLE %s "
                                        + "(%s TEXT, %s TEXT, %s TEXT, %s TEXT, %s REAL, %s REAL, "
@@ -153,7 +157,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // add default user
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, "admin"); // User name
-        values.put(USERS_PASSWORD, "pass123"); // User password
+        values.put(USERS_PASSWORD, "58cf4714098bb5d6305f876e3d12c55a"); // User password
+        values.put(USERS_SALT, "wowsuchsalt");
         // insert username and password into table
         db.insert(TABLE_USERS, null, values);
     }
@@ -187,7 +192,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // read in username and password
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, user.getName()); // User name
-        values.put(USERS_PASSWORD, user.getPassword()); // User password
+        values.put(USERS_PASSWORD, user.getPasswordHash()); // User password
+        values.put(USERS_SALT, user.getPasswordSalt());
         // insert username and password into table
         try {
             db.insertOrThrow(TABLE_USERS, null, values);
@@ -261,18 +267,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * Retrieves a User instance for the provided credentials and populates all accounts
      * and transactions.
      * @param username The user's username
-     * @param password The user's password
      * @return The User instance matching the credentials
      * @throws InvalidUserException Thrown if user does not exist
      * @throws InvalidPasswordException Thrown if password is incorrect
      */
-    public User getUser(String username,
-                        String password) throws InvalidUserException, InvalidPasswordException {
+    public User getUser(String username) throws InvalidUserException {
         // get database
         SQLiteDatabase db = this.getReadableDatabase();
         // generate query and send it off
         String whereClause = String.format("%s=?", USERS_NAME);
-        Cursor cursor = db.query(TABLE_USERS, new String[] {USERS_NAME, USERS_PASSWORD},
+        Cursor cursor = db.query(TABLE_USERS, new String[] {USERS_NAME, USERS_PASSWORD, USERS_SALT},
                                  whereClause, new String[] {username}, null, null, null);
         cursor.moveToFirst();
         // check query results
@@ -281,17 +285,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         if (cursor.getCount() == 0) {
             throw new InvalidUserException("Username not found in database");
         }
-        // matching username
-        else {
-            // matching password
-            if (cursor.getString(1).equals(password)) {
-                user = new User(cursor.getString(0), cursor.getString(1));
-            }
-            // mismatched password
-            else {
-                throw new InvalidPasswordException("Password is incorrect");
-            }
-        }
+        // matching username, recreate user object
+        user = new User(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+
         // close out and return
         cursor.close();
         db.close();
@@ -322,6 +318,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             accounts.add(currentAccount);
             cursor.moveToNext();
         }
+        cursor.close();
+        db.close();
         return accounts;
     }
 
@@ -355,6 +353,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             transactions.add(newTransaction);
             cursor.moveToNext();
         }
+        cursor.close();
+        db.close();
         return transactions;
     }
 

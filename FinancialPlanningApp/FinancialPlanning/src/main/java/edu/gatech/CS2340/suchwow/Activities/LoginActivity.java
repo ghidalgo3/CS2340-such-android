@@ -19,6 +19,7 @@ import android.widget.TextView;
 import edu.gatech.CS2340.suchwow.Domain.User;
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
 import edu.gatech.CS2340.suchwow.R;
+import edu.gatech.CS2340.suchwow.Security.EncryptionHandler;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -255,16 +256,19 @@ public class LoginActivity extends Activity {
             SQLiteHandler handler = new SQLiteHandler(LoginActivity.this);
             User user;
             try {
-                user = handler.getUser(mUsername, mPassword);
+                user = handler.getUser(mUsername);
                 User.setCurrentUser(user);
-                return 0;
             } catch (SQLiteHandler.InvalidUserException ex) {
                 return 1;
-            } catch (SQLiteHandler.InvalidPasswordException ex) {
+            }
+            // successfully obtained user, need to validate password
+            String attemptHash = EncryptionHandler.hashString(mPassword, user.getPasswordSalt());
+            if (user.getPasswordHash().equals(attemptHash)) {
+                return 0;
+            }
+            else {
                 return 2;
             }
-            // TODO: register the new account here.
-            //            return true;
         }
 
         /**

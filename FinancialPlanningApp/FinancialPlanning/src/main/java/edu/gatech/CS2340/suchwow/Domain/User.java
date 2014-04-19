@@ -1,9 +1,13 @@
 package edu.gatech.CS2340.suchwow.Domain;
 
 import android.content.Context;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import edu.gatech.CS2340.suchwow.Persistence.SQLiteHandler;
+import edu.gatech.CS2340.suchwow.Security.EncryptionHandler;
 
 /**
  * User class represents the current single user using the application.
@@ -26,9 +30,14 @@ public class User {
      */
     private String name;
     /**
-     * User password.
+     * Hashed used password.
      */
-    private String password;
+    private String passwordHash;
+
+    /**
+     * Salt for password encryption
+     */
+    private String passwordSalt;
     /**
      * Context.
      */
@@ -41,7 +50,15 @@ public class User {
      */
     public User(String name, String password) {
         this.name = name;
-        this.password = password;
+        this.passwordSalt = EncryptionHandler.generateSalt();
+        this.passwordHash = EncryptionHandler.hashString(password, passwordSalt);
+        accounts = new ArrayList<>();
+    }
+
+    public User(String name, String passwordHash, String passwordSalt) {
+        this.name = name;
+        this.passwordHash = passwordHash;
+        this.passwordSalt = passwordSalt;
         accounts = new ArrayList<>();
     }
 
@@ -76,8 +93,8 @@ public class User {
      * Gets the User password.
      * @return password
      */
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
@@ -95,6 +112,12 @@ public class User {
     public void setAccounts(ArrayList<Account> newAccounts) {
         accounts = newAccounts;
     }
+
+    /**
+     * Returns the user's password salt
+     * @return The password salt
+     */
+    public String getPasswordSalt() { return passwordSalt; }
 
     /**
      * Adds an account to the user and updates the database.
