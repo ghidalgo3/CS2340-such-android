@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
+import edu.gatech.CS2340.suchwow.Security.EncryptionHandler;
 
 /**
  * An interfacer between the domain and the SQLite database that
@@ -157,7 +158,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // add default user
         ContentValues values = new ContentValues();
         values.put(USERS_NAME, "admin"); // User name
-        values.put(USERS_PASSWORD, "58cf4714098bb5d6305f876e3d12c55a"); // User password
+        values.put(USERS_PASSWORD, "WM9HFAmLtdYwX4duPRLFWg=="); // User password
         values.put(USERS_SALT, "wowsuchsalt");
         // insert username and password into table
         db.insert(TABLE_USERS, null, values);
