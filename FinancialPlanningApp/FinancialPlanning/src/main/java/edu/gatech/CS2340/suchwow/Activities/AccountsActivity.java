@@ -37,7 +37,7 @@ public class AccountsActivity extends ActionBarActivity {
     /**
      * List of accounts.
      */
-    ListView screen;
+    ListView accountsList;
 
     @Override
     /**
@@ -48,8 +48,8 @@ public class AccountsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts);
-        screen = (ListView) this.findViewById(R.id.accountsListView);
-        screen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        accountsList = (ListView) this.findViewById(R.id.accountsListView);
+        accountsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Account.setCurrentAccount(User.getCurrentUser().getAccounts().get(i));
@@ -62,7 +62,7 @@ public class AccountsActivity extends ActionBarActivity {
         //        welcomeMessage.setText("Welcome "+ currentUser.getName());
         List<Account> accounts = currentUser.getAccounts();
         if (!accounts.isEmpty()) {
-            screen.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
+            accountsList.setAdapter(new AccountArrayAdapter(this, R.layout.account_display,
                     accounts));
         }
     }
