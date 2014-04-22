@@ -30,7 +30,7 @@ public class Account {
     /**
      * List of account Transactions.
      */
-    private ArrayList<Transaction> transactions;
+    private List<Transaction> transactions;
     /**
      * Current context.
      */
@@ -186,7 +186,7 @@ public class Account {
      * Sets the list of Transactions for this account.
      * @param aTransactions new transactions list
      */
-    public void setTransactions(ArrayList<Transaction> aTransactions) {
+    public void setTransactions(List<Transaction> aTransactions) {
         transactions = aTransactions;
     }
 

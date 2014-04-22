@@ -5,6 +5,9 @@ android {
     buildToolsVersion "19.0.1"
 
 
+    lintOptions {
+        abortOnError false
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
