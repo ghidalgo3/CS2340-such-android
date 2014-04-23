@@ -13,10 +13,9 @@ public class DepositsReport extends Report{
      * Constructor.
      * @param start The start date of the report
      * @param end The end date of the report
-     * @param transactions The transactions to be processed
      */
-    public DepositsReport(Calendar start, Calendar end, List<Transaction> transactions) {
-        super(start, end, transactions);
+    public DepositsReport(Calendar start, Calendar end) {
+        super(start, end);
         generateReport();
     }
 
@@ -27,17 +26,19 @@ public class DepositsReport extends Report{
     protected void generateReport() {
         float total = 0;
         Map<String, Float> fields = new HashMap<String, Float>();
-        for (Transaction t : transactions) {
-            if (t.isDeposit() && t.getUserTimeStamp().compareTo(endDate) <= 0
-                    && t.getUserTimeStamp().compareTo(startDate) >= 0) {
-                Float amount = fields.get(t.getCategory());
-                if (amount == null) {
-                    fields.put(t.getCategory(), t.getAmount());
+        for (Account acc : User.getCurrentUser().getAccounts()) {
+            for (Transaction t : acc.getTransactions()) {
+                if (t.isDeposit() && t.getUserTimeStamp().compareTo(endDate) <= 0
+                        && t.getUserTimeStamp().compareTo(startDate) >= 0) {
+                    Float amount = fields.get(t.getCategory());
+                    if (amount == null) {
+                        fields.put(t.getCategory(), t.getAmount());
+                    }
+                    else {
+                        fields.put(t.getCategory(), amount + t.getAmount());
+                    }
+                    total += t.getAmount();
                 }
-                else {
-                    fields.put(t.getCategory(), amount + t.getAmount());
-                }
-                total += t.getAmount();
             }
         }
         for (Map.Entry<String, Float> entry : fields.entrySet()) {
