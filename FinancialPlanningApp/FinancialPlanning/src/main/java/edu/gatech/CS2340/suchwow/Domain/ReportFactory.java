@@ -21,15 +21,15 @@ public class ReportFactory {
      * @return The concrete Report instance
      */
     public static Report createReport(int id, GregorianCalendar start, GregorianCalendar end) {
-        if (id == R.id.spendingCatRadioButton) {
-            return new SpendingCategoryReport(start, end);
+        switch (id) {
+            case R.id.spendingCatRadioButton:
+                return new SpendingCategoryReport(start, end);
+            case R.id.DepositsRadioButton:
+                return new DepositsReport(start, end);
+            case R.id.AccountsCashFlowRadioButton:
+                return new AccountsCashFlowReport(start, end);
+            default:
+                return null;
         }
-        if (id == R.id.DepositsRadioButton) {
-            return new DepositsReport(start, end);
-        }
-        /*else if (id == R.id.incomeCatRadioButton) {
-            return new IncomeCategoryReport(start, end, transactions);
-        }*/
-        return null;
     }
 }

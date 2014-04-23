@@ -90,6 +90,15 @@
                     android:layout_below="@+id/reportChoiceLabel"
                     android:layout_toRightOf="@+id/reportChoiceLabel"
                     android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accounts Cash Flow Report"
+                    android:id="@+id/AccountsCashFlowRadioButton"
+                    android:layout_below="@+id/reportChoiceLabel"
+                    android:layout_toRightOf="@+id/reportChoiceLabel"
+                    android:checked="false" />
             </RadioGroup>
 
             <TextView

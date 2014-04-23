@@ -14,10 +14,9 @@ android:padding="15px">
     android:textSize="20dp" />
 
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textAlignment="viewEnd"
     android:text="Medium Textcount"
     android:id="@+id/reportFieldValueView"
     android:layout_weight="1"
