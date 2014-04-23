@@ -1,9 +1,12 @@
 package edu.gatech.CS2340.suchwow.Domain;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.transform.TransformerConfigurationException;
 
 
 /**
@@ -16,10 +19,10 @@ public class SpendingCategoryReport extends Report {
      * Constructor.
      * @param start The start date of the report
      * @param end The end date of the report
-     * @param transactions The transactions to be processed
      */
-    public SpendingCategoryReport(Calendar start, Calendar end, List<Transaction> transactions) {
-        super(start, end, transactions);
+    public SpendingCategoryReport(Calendar start, Calendar end) {
+        super(start, end);
+        name = "Spending Category Report";
         generateReport();
     }
 
@@ -30,19 +33,24 @@ public class SpendingCategoryReport extends Report {
     protected void generateReport() {
         float total = 0;
         Map<String, Float> fields = new HashMap<String, Float>();
-        for (Transaction t : transactions) {
-            if (!t.isDeposit() && t.getUserTimeStamp().compareTo(endDate) <= 0
-                    && t.getUserTimeStamp().compareTo(startDate) >= 0) {
-                Float amount = fields.get(t.getCategory());
-                if (amount == null) {
-                    fields.put(t.getCategory(), t.getAmount());
+
+        // iterate through all the transactions
+        for (Account acc : User.getCurrentUser().getAccounts()) {
+            for (Transaction t : acc.getTransactions()) {
+                if (!t.isDeposit() && t.getUserTimeStamp().compareTo(endDate) <= 0
+                        && t.getUserTimeStamp().compareTo(startDate) >= 0) {
+                    Float amount = fields.get(t.getCategory());
+                    if (amount == null) {
+                        fields.put(t.getCategory(), t.getAmount());
+                    }
+                    else {
+                        fields.put(t.getCategory(), amount + t.getAmount());
+                    }
+                    total += t.getAmount();
                 }
-                else {
-                    fields.put(t.getCategory(), amount + t.getAmount());
-                }
-                total += t.getAmount();
             }
         }
+
         for (Map.Entry<String, Float> entry : fields.entrySet()) {
             reportFields.add(new ReportField(entry.getKey(), entry.getValue()));
         }
