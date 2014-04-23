@@ -15,6 +15,7 @@ import java.util.List;
 import edu.gatech.CS2340.suchwow.Adapters.ReportFieldAdapter;
 import edu.gatech.CS2340.suchwow.Domain.Account;
 import edu.gatech.CS2340.suchwow.Domain.Report;
+import edu.gatech.CS2340.suchwow.Domain.ReportFactory;
 import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
 import edu.gatech.CS2340.suchwow.Domain.User;
@@ -64,10 +65,6 @@ public class DisplayReportActivity extends Activity {
         reportName = (TextView) this.findViewById(R.id.reportNameLabel);
         reportRange = (TextView) this.findViewById(R.id.dateRangeLabel);
 
-        List<Transaction> transactions = new ArrayList<Transaction>();
-        for (Account acc : User.getCurrentUser().getAccounts()) {
-            transactions.addAll(acc.getTransactions());
-        }
         Bundle b = getIntent().getExtras();
         int startYear = b.getInt("startYear");
         int startMonth = b.getInt("startMonth");
@@ -80,23 +77,17 @@ public class DisplayReportActivity extends Activity {
 //        Log.v("ReportCreation", String.format("%d %d %d %d %d %d", startYear, startMonth,
 //                startDay, endYear, endMonth, endDay));
         dateFormatter = new SimpleDateFormat("MMM d, yyyy");
-        switch (b.getInt("radioButton")) {
-            case R.id.spendingCatRadioButton:
-                reportName.setText(R.string.spending_category_report);
-                reportRange.setText(dateFormatter.format(startDate.getTime())
-                        + " to " + dateFormatter.format(endDate.getTime()));
-                report = new SpendingCategoryReport(startDate, endDate, transactions);
-                break;
-            //Other buttons
-            default:
-                reportName.setText(R.string.invalid_report);
-                break;
-
-        }
+        report = ReportFactory.createReport(b.getInt("radioButton"), startDate, endDate);
 
         if (report != null) {
             reportFields.setAdapter(new ReportFieldAdapter(this,
                     R.layout.report_field_display, report.getReportFields()));
+            reportName.setText(report.getName());
+            reportRange.setText(dateFormatter.format(startDate.getTime())
+                    + " to " + dateFormatter.format(endDate.getTime()));
+        }
+        else {
+            reportName.setText("Invalid report");
         }
     }
 

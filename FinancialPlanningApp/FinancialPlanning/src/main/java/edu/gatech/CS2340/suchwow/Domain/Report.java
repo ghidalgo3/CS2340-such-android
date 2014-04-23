@@ -17,24 +17,23 @@ public abstract class Report {
      */
     protected Calendar endDate;
     /**
-     * The transactions processed by the request.
-     */
-    protected List<Transaction> transactions;
-    /**
      * The report fields to be displayed by the UI.
      */
     protected ArrayList<ReportField> reportFields;
 
     /**
+     * The name of the report
+     */
+    protected String name;
+
+    /**
      * Constructor.
      * @param start Start date of the report
      * @param end End date of the report
-     * @param transactions Transactions to be processed by the report
      */
-    public Report(Calendar start, Calendar end, List<Transaction> transactions) {
+    public Report(Calendar start, Calendar end) {
         startDate = start;
         endDate = end;
-        this.transactions = transactions;
         reportFields = new ArrayList<ReportField>();
     }
 
@@ -93,19 +92,11 @@ public abstract class Report {
     }
 
     /**
-     * Returns the transactions processed by the report.
-     * @return The transactions processed by the report
+     * Returns the name of the report
+     * @return The name of the report
      */
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    /**
-     * Sets the transactions processed by the report.
-     * @param transactions The transactions processed by the report
-     */
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public String getName() {
+        return name;
     }
 
     /**
