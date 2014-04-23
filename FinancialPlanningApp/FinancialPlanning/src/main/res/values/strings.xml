@@ -14,6 +14,7 @@
     <string name="add_transaction">Add Transaction</string>
     <string name="generate_report">See Reports</string>
     <string name="title_activity_new_account">New Account</string>
+    <string name="deposit_report">Deposits Report</string>
 
     <style name="no_accounts">No accounts to display</style>
 

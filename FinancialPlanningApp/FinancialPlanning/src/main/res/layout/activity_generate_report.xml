@@ -81,6 +81,15 @@
                     android:layout_below="@+id/reportChoiceLabel"
                     android:layout_toRightOf="@+id/reportChoiceLabel"
                     android:checked="true" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deposits Report"
+                    android:id="@+id/DepositsRadioButton"
+                    android:layout_below="@+id/reportChoiceLabel"
+                    android:layout_toRightOf="@+id/reportChoiceLabel"
+                    android:checked="false" />
             </RadioGroup>
 
             <TextView

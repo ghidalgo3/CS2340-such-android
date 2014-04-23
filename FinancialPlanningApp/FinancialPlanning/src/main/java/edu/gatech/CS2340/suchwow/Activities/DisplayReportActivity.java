@@ -14,6 +14,7 @@ import java.util.List;
 
 import edu.gatech.CS2340.suchwow.Adapters.ReportFieldAdapter;
 import edu.gatech.CS2340.suchwow.Domain.Account;
+import edu.gatech.CS2340.suchwow.Domain.DepositsReport;
 import edu.gatech.CS2340.suchwow.Domain.Report;
 import edu.gatech.CS2340.suchwow.Domain.SpendingCategoryReport;
 import edu.gatech.CS2340.suchwow.Domain.Transaction;
@@ -86,6 +87,12 @@ public class DisplayReportActivity extends Activity {
                 reportRange.setText(dateFormatter.format(startDate.getTime())
                         + " to " + dateFormatter.format(endDate.getTime()));
                 report = new SpendingCategoryReport(startDate, endDate, transactions);
+                break;
+            case R.id.DepositsRadioButton:
+                reportName.setText(R.string.deposit_report);
+                reportRange.setText(dateFormatter.format(startDate.getTime())
+                        + " to " + dateFormatter.format(endDate.getTime()));
+                report = new DepositsReport(startDate, endDate, transactions);
                 break;
             //Other buttons
             default:
