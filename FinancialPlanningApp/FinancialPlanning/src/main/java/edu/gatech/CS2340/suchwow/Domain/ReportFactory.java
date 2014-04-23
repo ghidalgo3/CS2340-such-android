@@ -24,6 +24,9 @@ public class ReportFactory {
         if (id == R.id.spendingCatRadioButton) {
             return new SpendingCategoryReport(start, end);
         }
+        if (id == R.id.DepositsRadioButton) {
+            return new DepositsReport(start, end);
+        }
         /*else if (id == R.id.incomeCatRadioButton) {
             return new IncomeCategoryReport(start, end, transactions);
         }*/

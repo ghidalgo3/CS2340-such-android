@@ -17,6 +17,7 @@ public class DepositsReport extends Report{
     public DepositsReport(Calendar start, Calendar end) {
         super(start, end);
         generateReport();
+        name = "Deposits Report";
     }
 
     /**
