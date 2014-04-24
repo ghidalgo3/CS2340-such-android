@@ -2,5 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="edu.gatech.CS2340.suchwow.Activities.DisplayReportActivity" >
+    <item   android:id="@+id/action_share"
+            android:title="@string/share"
+            android:showAsAction="ifRoom"
+            android:actionProviderClass="android.widget.ShareActionProvider"/>
 
 </menu>

@@ -99,6 +99,13 @@ public abstract class Report {
         return name;
     }
 
+    public String toString() {
+        String toReturn = "";
+        for (ReportField i : reportFields)
+            toReturn += i.toString() + "\n";
+        return toReturn;
+    }
+
     /**
      * A single row of the report which contains a string to label the row and
      * a float value for the monetary amount associated with the row.
@@ -147,6 +154,10 @@ public abstract class Report {
          */
         public void setFieldName(String fieldName) {
             this.fieldName = fieldName;
+        }
+
+        public String toString() {
+            return fieldName + ": " + Float.toString(fieldValue);
         }
     }
 }

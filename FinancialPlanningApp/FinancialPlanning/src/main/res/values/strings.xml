@@ -36,5 +36,6 @@
 
     <string name="title_activity_generate_report">Reports</string>
     <string name="title_activity_display_report">Report</string>
+    <string name="share">Share</string>
 
 </resources>

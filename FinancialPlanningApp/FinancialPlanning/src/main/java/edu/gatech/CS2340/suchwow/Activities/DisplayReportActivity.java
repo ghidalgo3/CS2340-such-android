@@ -1,10 +1,12 @@
 package edu.gatech.CS2340.suchwow.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -90,6 +92,7 @@ public class DisplayReportActivity extends Activity {
         else {
             reportName.setText("Invalid report");
         }
+        shareIntent();
     }
 
     /**
@@ -103,7 +106,23 @@ public class DisplayReportActivity extends Activity {
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.display_report, menu);
+        //Add our share button
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        ShareActionProvider shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        //shareActionProvider.setShareHistoryFileName("custom_share_history.xml");
+        shareActionProvider.setShareIntent(shareIntent());
         return true;
+    }
+
+    private Intent shareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        //Add data to intent
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Report" + report.getName());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, report.toString());
+//        startActivity(Intent.createChooser(shareIntent, "How do you want to share?"));
+        return shareIntent;
     }
 
     /**
