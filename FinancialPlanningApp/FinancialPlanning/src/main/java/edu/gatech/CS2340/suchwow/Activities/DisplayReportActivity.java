@@ -81,7 +81,6 @@ public class DisplayReportActivity extends Activity {
 //                startDay, endYear, endMonth, endDay));
         dateFormatter = new SimpleDateFormat("MMM d, yyyy");
         report = ReportFactory.createReport(b.getInt("radioButton"), startDate, endDate);
-
         if (report != null) {
             reportFields.setAdapter(new ReportFieldAdapter(this,
                     R.layout.report_field_display, report.getReportFields()));

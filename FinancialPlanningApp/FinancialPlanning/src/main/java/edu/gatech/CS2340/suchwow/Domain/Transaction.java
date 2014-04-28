@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
  * Transaction is the domain object for a transaction. (name, amount, etc).
  */
 public class Transaction implements Comparable<Transaction> {
+
     /**
      * The transaction's name.
      */
